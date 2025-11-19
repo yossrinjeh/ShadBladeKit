@@ -6,11 +6,26 @@
     </x-slot>
 
     <div class="space-y-6">
+        <!-- Toast Notifications -->
+        @if (session('status') === 'notification-sent')
+            <x-ui.toast type="success" title="Success" message="Test notification sent!" />
+        @endif
+        
         <!-- Welcome Card -->
         <x-ui.card>
             <div class="p-6">
-                <h3 class="text-lg font-semibold mb-2">{{ __('ui.welcome') }}, {{ Auth::user()->name }}!</h3>
-                <p class="text-muted-foreground">{{ __('You\'re logged in!') }}</p>
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h3 class="text-lg font-semibold mb-2">{{ __('ui.welcome') }}, {{ Auth::user()->name }}!</h3>
+                        <p class="text-muted-foreground">{{ __('You\'re logged in!') }}</p>
+                    </div>
+                    <form method="POST" action="{{ route('notifications.test') }}">
+                        @csrf
+                        <x-ui.button type="submit" variant="outline" size="sm">
+                            Test Notification
+                        </x-ui.button>
+                    </form>
+                </div>
             </div>
         </x-ui.card>
 

@@ -40,6 +40,11 @@ class RoleSeeder extends Seeder
         $testUser = User::where('email', 'test@example.com')->first();
         if ($testUser) {
             $testUser->assignRole('admin');
+            
+            // Send welcome notification if no notifications exist
+            if ($testUser->notifications()->count() === 0) {
+                $testUser->notify(new \App\Notifications\WelcomeNotification('Welcome to Laravel Modern Starter Kit!'));
+            }
         }
     }
 }

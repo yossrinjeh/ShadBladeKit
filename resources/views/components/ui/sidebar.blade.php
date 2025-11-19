@@ -99,6 +99,38 @@
             </div>
             
             <div class="flex items-center space-x-4">
+                <!-- Notifications -->
+                @auth
+                <x-dropdown align="right" width="80">
+                    <x-slot name="trigger">
+                        <button class="relative p-2 rounded-md text-muted-foreground hover:bg-accent">
+                            <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-3.5-3.5a50.002 50.002 0 00-2.5-2.5m0 0a50.002 50.002 0 00-2.5-2.5L7 13H2l5 5 5-5z" />
+                            </svg>
+                            @if(auth()->user()->unreadNotifications->count() > 0)
+                                <span class="absolute -top-1 -right-1 h-4 w-4 bg-red-500 text-white text-xs rounded-full flex items-center justify-center">
+                                    {{ auth()->user()->unreadNotifications->count() }}
+                                </span>
+                            @endif
+                        </button>
+                    </x-slot>
+                    <x-slot name="content">
+                        <div class="p-2">
+                            <h3 class="text-sm font-medium mb-2">{{ __('ui.notifications') }}</h3>
+                            @forelse(auth()->user()->notifications->take(5) as $notification)
+                                <div class="p-2 hover:bg-accent rounded-md mb-1 {{ $notification->read_at ? 'opacity-60' : '' }}">
+                                    <p class="text-sm font-medium">{{ $notification->data['title'] ?? 'Notification' }}</p>
+                                    <p class="text-xs text-muted-foreground">{{ $notification->data['message'] ?? '' }}</p>
+                                    <p class="text-xs text-muted-foreground mt-1">{{ $notification->created_at->diffForHumans() }}</p>
+                                </div>
+                            @empty
+                                <p class="text-sm text-muted-foreground p-2">No notifications</p>
+                            @endforelse
+                        </div>
+                    </x-slot>
+                </x-dropdown>
+                @endauth
+                
                 <x-ui.theme-toggle />
                 <x-ui.lang-switcher />
             </div>

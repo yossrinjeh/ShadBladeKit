@@ -1,0 +1,26 @@
+<?php
+
+return [
+    'dashboard' => 'Dashboard',
+    'profile' => 'Profile',
+    'settings' => 'Settings',
+    'logout' => 'Log Out',
+    'login' => 'Login',
+    'register' => 'Register',
+    'name' => 'Name',
+    'email' => 'Email',
+    'password' => 'Password',
+    'confirm_password' => 'Confirm Password',
+    'remember_me' => 'Remember me',
+    'forgot_password' => 'Forgot your password?',
+    'save' => 'Save',
+    'cancel' => 'Cancel',
+    'edit' => 'Edit',
+    'delete' => 'Delete',
+    'welcome' => 'Welcome',
+    'home' => 'Home',
+    'users' => 'Users',
+    'notifications' => 'Notifications',
+    'theme' => 'Theme',
+    'language' => 'Language',
+];

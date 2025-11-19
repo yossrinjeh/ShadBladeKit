@@ -1,0 +1,26 @@
+<?php
+
+return [
+    'dashboard' => 'Tableau de bord',
+    'profile' => 'Profil',
+    'settings' => 'Paramètres',
+    'logout' => 'Se déconnecter',
+    'login' => 'Connexion',
+    'register' => 'S\'inscrire',
+    'name' => 'Nom',
+    'email' => 'Email',
+    'password' => 'Mot de passe',
+    'confirm_password' => 'Confirmer le mot de passe',
+    'remember_me' => 'Se souvenir de moi',
+    'forgot_password' => 'Mot de passe oublié?',
+    'save' => 'Enregistrer',
+    'cancel' => 'Annuler',
+    'edit' => 'Modifier',
+    'delete' => 'Supprimer',
+    'welcome' => 'Bienvenue',
+    'home' => 'Accueil',
+    'users' => 'Utilisateurs',
+    'notifications' => 'Notifications',
+    'theme' => 'Thème',
+    'language' => 'Langue',
+];

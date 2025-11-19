@@ -1,0 +1,26 @@
+<?php
+
+return [
+    'dashboard' => 'لوحة التحكم',
+    'profile' => 'الملف الشخصي',
+    'settings' => 'الإعدادات',
+    'logout' => 'تسجيل الخروج',
+    'login' => 'تسجيل الدخول',
+    'register' => 'إنشاء حساب',
+    'name' => 'الاسم',
+    'email' => 'البريد الإلكتروني',
+    'password' => 'كلمة المرور',
+    'confirm_password' => 'تأكيد كلمة المرور',
+    'remember_me' => 'تذكرني',
+    'forgot_password' => 'نسيت كلمة المرور؟',
+    'save' => 'حفظ',
+    'cancel' => 'إلغاء',
+    'edit' => 'تعديل',
+    'delete' => 'حذف',
+    'welcome' => 'مرحباً',
+    'home' => 'الرئيسية',
+    'users' => 'المستخدمون',
+    'notifications' => 'الإشعارات',
+    'theme' => 'المظهر',
+    'language' => 'اللغة',
+];

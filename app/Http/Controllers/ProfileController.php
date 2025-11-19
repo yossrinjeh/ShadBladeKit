@@ -124,13 +124,12 @@ class ProfileController extends Controller
     /**
      * Toggle dark mode
      */
-    public function toggleDarkMode(Request $request): RedirectResponse
+    public function toggleDarkMode(Request $request)
     {
         $user = $request->user();
-        $darkMode = !$user->dark_mode;
+        $darkMode = $request->input('dark_mode', !$user->dark_mode);
         
         $user->update(['dark_mode' => $darkMode]);
-        session(['theme' => $darkMode ? 'dark' : 'light']);
         
         activity()
             ->causedBy($user)
@@ -139,6 +138,10 @@ class ProfileController extends Controller
                 'ip_address' => request()->ip()
             ])
             ->log('Theme changed');
+        
+        if ($request->expectsJson()) {
+            return response()->json(['success' => true, 'dark_mode' => $darkMode]);
+        }
         
         return Redirect::route('profile.edit')->with('status', 'theme-updated');
     }

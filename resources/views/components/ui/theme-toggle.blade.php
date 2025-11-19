@@ -16,22 +16,41 @@ function toggleTheme() {
     const html = document.documentElement;
     const isDark = html.classList.contains('dark');
     
+    // Toggle the class immediately for UI feedback
     if (isDark) {
         html.classList.remove('dark');
-        localStorage.setItem('theme', 'light');
     } else {
         html.classList.add('dark');
-        localStorage.setItem('theme', 'dark');
     }
+    
+    // Send request to update database
+    fetch('{{ route('profile.dark-mode') }}', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+        },
+        body: JSON.stringify({
+            dark_mode: !isDark
+        })
+    });
 }
 
-// Initialize theme on page load
+// Initialize theme on page load from server-side data
 document.addEventListener('DOMContentLoaded', function() {
-    const savedTheme = localStorage.getItem('theme');
+    @auth
+    const userDarkMode = {{ auth()->user()->dark_mode ? 'true' : 'false' }};
+    if (userDarkMode) {
+        document.documentElement.classList.add('dark');
+    } else {
+        document.documentElement.classList.remove('dark');
+    }
+    @else
+    // Fallback for guests
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    
-    if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
+    if (prefersDark) {
         document.documentElement.classList.add('dark');
     }
+    @endauth
 });
 </script>

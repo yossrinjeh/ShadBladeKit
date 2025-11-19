@@ -2,8 +2,8 @@
     <x-ui.card class="w-full max-w-md mx-auto">
         <div class="p-6">
             <div class="mb-6 text-center">
-                <h2 class="text-2xl font-bold">{{ __('ui.forgot_password') }}</h2>
-                <p class="text-muted-foreground mt-2 text-sm">
+                <h2 class="text-2xl font-bold text-gray-900 dark:text-white">{{ __('ui.forgot_password') }}</h2>
+                <p class="text-gray-600 dark:text-gray-300 mt-2 text-sm">
                     {{ __('Forgot your password? No problem. Just let us know your email address and we will email you a password reset link.') }}
                 </p>
             </div>

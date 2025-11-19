@@ -2,8 +2,8 @@
     <x-ui.card class="w-full max-w-md mx-auto">
         <div class="p-6">
             <div class="mb-6 text-center">
-                <h2 class="text-2xl font-bold">{{ __('ui.login') }}</h2>
-                <p class="text-muted-foreground mt-2">{{ __('ui.welcome') }}</p>
+                <h2 class="text-2xl font-bold text-gray-900 dark:text-white">{{ __('ui.login') }}</h2>
+                <p class="text-gray-600 dark:text-gray-300 mt-2">{{ __('ui.welcome') }}</p>
             </div>
 
             <x-auth-session-status class="mb-4" :status="session('status')" />
@@ -25,7 +25,7 @@
 
                 <div class="flex items-center">
                     <input id="remember_me" type="checkbox" class="rounded border-input" name="remember">
-                    <label for="remember_me" class="ml-2 text-sm text-muted-foreground">{{ __('ui.remember_me') }}</label>
+                    <label for="remember_me" class="ml-2 text-sm text-gray-600 dark:text-gray-300">{{ __('ui.remember_me') }}</label>
                 </div>
 
                 <x-ui.button type="submit" class="w-full">

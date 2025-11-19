@@ -286,7 +286,7 @@
                 </p>
             </div>
 
-            <div class="bg-white dark:bg-gray-900 rounded-lg p-6 font-mono text-sm overflow-x-auto">
+            <div class="bg-white dark:bg-gray-900 rounded-lg p-6 font-mono text-sm overflow-x-auto border border-gray-200 dark:border-gray-700">
                 <pre class="text-gray-800 dark:text-gray-200">
 ├── app/
 │   ├── Http/Controllers/     # Business logic

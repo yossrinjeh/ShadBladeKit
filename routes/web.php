@@ -5,7 +5,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return auth()->check() ? redirect()->route('dashboard') : view('welcome');
-});
+})->name('welcome');
 
 Route::get('locale/{locale}', function ($locale) {
     if (in_array($locale, ['en', 'fr', 'es', 'ar'])) {

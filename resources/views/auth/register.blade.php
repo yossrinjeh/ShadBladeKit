@@ -2,8 +2,8 @@
     <x-ui.card class="w-full max-w-md mx-auto">
         <div class="p-6">
             <div class="mb-6 text-center">
-                <h2 class="text-2xl font-bold">{{ __('ui.register') }}</h2>
-                <p class="text-muted-foreground mt-2">Create your account</p>
+                <h2 class="text-2xl font-bold text-gray-900 dark:text-white">{{ __('ui.register') }}</h2>
+                <p class="text-gray-600 dark:text-gray-300 mt-2">Create your account</p>
             </div>
 
             <form method="POST" action="{{ route('register') }}" class="space-y-4">
@@ -38,7 +38,7 @@
                 </x-ui.button>
 
                 <div class="text-center">
-                    <a class="text-sm text-primary hover:underline" href="{{ route('login') }}">
+                    <a class="text-sm text-primary hover:underline" href="{{ route('login') }">
                         Already registered?
                     </a>
                 </div>

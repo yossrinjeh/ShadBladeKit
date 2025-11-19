@@ -28,6 +28,12 @@
         </script>
     </head>
     <body class="font-sans antialiased bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100">
-        {{ $slot }}
+        @if(request()->routeIs('welcome'))
+            {{ $slot }}
+        @else
+            <div class="min-h-screen flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+                {{ $slot }}
+            </div>
+        @endif
     </body>
 </html>

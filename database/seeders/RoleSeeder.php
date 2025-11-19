@@ -22,6 +22,12 @@ class RoleSeeder extends Seeder
             'edit users',
             'delete users',
             'manage settings',
+            'manage roles',
+            'manage permissions',
+            'view analytics',
+            'export data',
+            'manage notifications',
+            'view components',
         ];
 
         foreach ($permissions as $permission) {
@@ -34,7 +40,7 @@ class RoleSeeder extends Seeder
 
         // Assign permissions to roles
         $adminRole->givePermissionTo($permissions);
-        $userRole->givePermissionTo(['view users']);
+        $userRole->givePermissionTo(['view users', 'view analytics', 'view components']);
 
         // Assign admin role to test user
         $testUser = User::where('email', 'test@example.com')->first();

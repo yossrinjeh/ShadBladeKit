@@ -41,6 +41,13 @@ Route::middleware('auth')->group(function () {
         Route::resource('users', App\Http\Controllers\UserController::class);
         Route::post('/users/bulk-delete', [App\Http\Controllers\UserController::class, 'bulkDelete'])->name('users.bulk-delete')->middleware('can:delete users');
     });
+    
+    // Roles & Permissions Management Routes (Admin Only)
+    Route::middleware(['auth'])->group(function () {
+        Route::resource('roles', App\Http\Controllers\RoleController::class)->except(['show', 'create', 'edit']);
+        Route::post('/permissions', [App\Http\Controllers\RoleController::class, 'createPermission'])->name('permissions.store');
+        Route::delete('/permissions/{permission}', [App\Http\Controllers\RoleController::class, 'deletePermission'])->name('permissions.destroy');
+    });
 });
 
 require __DIR__.'/auth.php';

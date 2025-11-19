@@ -167,6 +167,11 @@
                     </div>
                     @endforeach
                 </div>
+                <div class="mt-4 pt-4 border-t">
+                    <a href="{{ route('activity-logs.index') }}" class="text-sm text-primary hover:underline">
+                        View all activity →
+                    </a>
+                </div>
             </div>
         </x-ui.card>
     </div>

@@ -111,28 +111,35 @@ class AnalyticsController extends Controller
     
     private function getRecentActivity()
     {
-        return [
+        $activities = \Spatie\Activitylog\Models\Activity::with('causer')
+            ->latest()
+            ->limit(4)
+            ->get()
+            ->map(function ($activity) {
+                $icon = match($activity->log_name) {
+                    'authentication' => 'shield-check',
+                    'user' => 'user-plus',
+                    'profile' => 'settings',
+                    default => 'settings'
+                };
+                
+                return [
+                    'type' => $activity->log_name,
+                    'message' => $activity->description,
+                    'user' => $activity->causer?->name ?? 'System',
+                    'time' => $activity->created_at->diffForHumans(),
+                    'icon' => $icon
+                ];
+            });
+            
+        return $activities->isEmpty() ? [
             [
-                'type' => 'user_registered',
-                'message' => 'New user registered',
-                'user' => User::latest()->first()?->name ?? 'Unknown',
-                'time' => User::latest()->first()?->created_at?->diffForHumans() ?? 'N/A',
-                'icon' => 'user-plus'
-            ],
-            [
-                'type' => 'system_update',
-                'message' => 'System backup completed',
+                'type' => 'system',
+                'message' => 'No recent activity',
                 'user' => 'System',
-                'time' => '2 hours ago',
-                'icon' => 'shield-check'
-            ],
-            [
-                'type' => 'admin_action',
-                'message' => 'User roles updated',
-                'user' => 'Admin',
-                'time' => '4 hours ago',
+                'time' => 'N/A',
                 'icon' => 'settings'
             ]
-        ];
+        ] : $activities->toArray();
     }
 }

@@ -58,6 +58,11 @@ Route::middleware('auth')->group(function () {
         Route::post('/permissions', [App\Http\Controllers\RoleController::class, 'createPermission'])->name('permissions.store');
         Route::delete('/permissions/{permission}', [App\Http\Controllers\RoleController::class, 'deletePermission'])->name('permissions.destroy');
     });
+    
+    // Activity Logs (Admin Only)
+    Route::middleware(['auth', 'role:admin'])->group(function () {
+        Route::get('/activity-logs', [App\Http\Controllers\ActivityLogController::class, 'index'])->name('activity-logs.index');
+    });
 });
 
 require __DIR__.'/auth.php';

@@ -34,6 +34,13 @@ class ProfileController extends Controller
         }
 
         $request->user()->save();
+        
+        activity()
+            ->causedBy($request->user())
+            ->withProperties([
+                'ip_address' => request()->ip()
+            ])
+            ->log('Profile updated');
 
         return Redirect::route('profile.edit')->with('status', 'profile-updated');
     }
@@ -75,6 +82,13 @@ class ProfileController extends Controller
             // Update user avatar
             $request->user()->update(['avatar' => $avatarPath]);
             
+            activity()
+                ->causedBy($request->user())
+                ->withProperties([
+                    'ip_address' => request()->ip()
+                ])
+                ->log('Avatar updated');
+            
             return Redirect::route('profile.edit')->with('status', 'avatar-updated');
             
         } catch (\Exception $e) {
@@ -91,8 +105,18 @@ class ProfileController extends Controller
             'language' => 'required|in:en,fr,es,ar'
         ]);
 
+        $oldLanguage = $request->user()->language;
         $request->user()->update(['language' => $request->language]);
         session(['locale' => $request->language]);
+        
+        activity()
+            ->causedBy($request->user())
+            ->withProperties([
+                'old_language' => $oldLanguage,
+                'new_language' => $request->language,
+                'ip_address' => request()->ip()
+            ])
+            ->log('Language changed');
         
         return Redirect::route('profile.edit')->with('status', 'language-updated');
     }
@@ -107,6 +131,14 @@ class ProfileController extends Controller
         
         $user->update(['dark_mode' => $darkMode]);
         session(['theme' => $darkMode ? 'dark' : 'light']);
+        
+        activity()
+            ->causedBy($user)
+            ->withProperties([
+                'theme' => $darkMode ? 'dark' : 'light',
+                'ip_address' => request()->ip()
+            ])
+            ->log('Theme changed');
         
         return Redirect::route('profile.edit')->with('status', 'theme-updated');
     }

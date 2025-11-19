@@ -57,6 +57,15 @@ class UserController extends Controller
         
         $user->assignRole($request->role);
         
+        activity()
+            ->causedBy(auth()->user())
+            ->performedOn($user)
+            ->withProperties([
+                'role' => $request->role,
+                'ip_address' => request()->ip()
+            ])
+            ->log('User created');
+        
         return redirect()->route('users.index')->with('status', 'user-created');
     }
     
@@ -85,7 +94,18 @@ class UserController extends Controller
             'email' => $request->email,
         ]);
         
+        $oldRoles = $user->roles->pluck('name')->toArray();
         $user->syncRoles([$request->role]);
+        
+        activity()
+            ->causedBy(auth()->user())
+            ->performedOn($user)
+            ->withProperties([
+                'old_roles' => $oldRoles,
+                'new_role' => $request->role,
+                'ip_address' => request()->ip()
+            ])
+            ->log('User updated');
         
         return redirect()->route('users.index')->with('status', 'user-updated');
     }
@@ -96,6 +116,17 @@ class UserController extends Controller
             return back()->with('error', 'Cannot delete your own account');
         }
         
+        activity()
+            ->causedBy(auth()->user())
+            ->withProperties([
+                'deleted_user' => [
+                    'name' => $user->name,
+                    'email' => $user->email
+                ],
+                'ip_address' => request()->ip()
+            ])
+            ->log('User deleted');
+            
         $user->delete();
         
         return redirect()->route('users.index')->with('status', 'user-deleted');
@@ -109,6 +140,17 @@ class UserController extends Controller
         // Remove current user from deletion list
         $userIds = array_filter($userIds, fn($id) => $id != $currentUserId);
         
+        $deletedUsers = User::whereIn('id', $userIds)->get(['name', 'email']);
+        
+        activity()
+            ->causedBy(auth()->user())
+            ->withProperties([
+                'deleted_users' => $deletedUsers->toArray(),
+                'count' => $deletedUsers->count(),
+                'ip_address' => request()->ip()
+            ])
+            ->log('Bulk user deletion');
+            
         User::whereIn('id', $userIds)->delete();
         
         return back()->with('status', 'users-bulk-deleted');

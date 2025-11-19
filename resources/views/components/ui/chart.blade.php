@@ -14,7 +14,7 @@
             <canvas id="{{ $chartId }}"></canvas>
         </div>
     </div>
-</x-ui.chart>
+</x-ui.card>
 
 @push('scripts')
 <script>

@@ -31,6 +31,11 @@ Route::middleware('auth')->group(function () {
     // Analytics Routes
     Route::get('/analytics/api', [App\Http\Controllers\AnalyticsController::class, 'api'])->name('analytics.api');
     
+    // Components Showcase Routes
+    Route::get('/components', [App\Http\Controllers\ComponentsController::class, 'index'])->name('components.index');
+    Route::post('/components/file-upload', [App\Http\Controllers\ComponentsController::class, 'fileUpload'])->name('components.file-upload');
+    Route::post('/components/rich-content', [App\Http\Controllers\ComponentsController::class, 'richContent'])->name('components.rich-content');
+    
     // User Management Routes
     Route::middleware(['can:view users'])->group(function () {
         Route::resource('users', App\Http\Controllers\UserController::class);

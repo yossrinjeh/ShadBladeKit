@@ -14,9 +14,7 @@ Route::get('locale/{locale}', function ($locale) {
     return back();
 })->name('locale.switch');
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard', [App\Http\Controllers\AnalyticsController::class, 'dashboard'])->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -29,6 +27,9 @@ Route::middleware('auth')->group(function () {
     Route::post('/notifications/test', [App\Http\Controllers\NotificationController::class, 'test'])->name('notifications.test');
     Route::post('/notifications/{id}/read', [App\Http\Controllers\NotificationController::class, 'markAsRead'])->name('notifications.read');
     Route::post('/notifications/read-all', [App\Http\Controllers\NotificationController::class, 'markAllAsRead'])->name('notifications.read-all');
+    
+    // Analytics Routes
+    Route::get('/analytics/api', [App\Http\Controllers\AnalyticsController::class, 'api'])->name('analytics.api');
     
     // User Management Routes
     Route::middleware(['can:view users'])->group(function () {

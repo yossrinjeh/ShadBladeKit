@@ -29,6 +29,12 @@ Route::middleware('auth')->group(function () {
     Route::post('/notifications/test', [App\Http\Controllers\NotificationController::class, 'test'])->name('notifications.test');
     Route::post('/notifications/{id}/read', [App\Http\Controllers\NotificationController::class, 'markAsRead'])->name('notifications.read');
     Route::post('/notifications/read-all', [App\Http\Controllers\NotificationController::class, 'markAllAsRead'])->name('notifications.read-all');
+    
+    // User Management Routes
+    Route::middleware(['can:view users'])->group(function () {
+        Route::resource('users', App\Http\Controllers\UserController::class);
+        Route::post('/users/bulk-delete', [App\Http\Controllers\UserController::class, 'bulkDelete'])->name('users.bulk-delete')->middleware('can:delete users');
+    });
 });
 
 require __DIR__.'/auth.php';

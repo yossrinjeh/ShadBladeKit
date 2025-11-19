@@ -7,6 +7,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 
 class ProfileController extends Controller
@@ -35,6 +36,96 @@ class ProfileController extends Controller
         $request->user()->save();
 
         return Redirect::route('profile.edit')->with('status', 'profile-updated');
+    }
+
+    /**
+     * Update user avatar
+     */
+    public function updateAvatar(Request $request): RedirectResponse
+    {
+        $request->validate([
+            'avatar' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048'
+        ]);
+
+        try {
+            if (!$request->hasFile('avatar')) {
+                return Redirect::route('profile.edit')->withErrors(['avatar' => 'No file uploaded']);
+            }
+            
+            $file = $request->file('avatar');
+            
+            if (!$file->isValid()) {
+                return Redirect::route('profile.edit')->withErrors(['avatar' => 'Invalid file']);
+            }
+            
+            $user = $request->user();
+            
+            // Delete old avatar if exists
+            if ($user->avatar && file_exists(storage_path('app/public/' . $user->avatar))) {
+                unlink(storage_path('app/public/' . $user->avatar));
+            }
+            
+            // Generate unique filename
+            $filename = time() . '_' . uniqid() . '.' . $file->getClientOriginalExtension();
+            $avatarPath = 'avatars/' . $filename;
+            
+            // Move file to public storage
+            $file->move(storage_path('app/public/avatars'), $filename);
+            
+            // Update user avatar
+            $request->user()->update(['avatar' => $avatarPath]);
+            
+            return Redirect::route('profile.edit')->with('status', 'avatar-updated');
+            
+        } catch (\Exception $e) {
+            return Redirect::route('profile.edit')->withErrors(['avatar' => 'Upload failed: ' . $e->getMessage()]);
+        }
+    }
+
+    /**
+     * Update user language
+     */
+    public function updateLanguage(Request $request): RedirectResponse
+    {
+        $request->validate([
+            'language' => 'required|in:en,fr,es,ar'
+        ]);
+
+        $request->user()->update(['language' => $request->language]);
+        session(['locale' => $request->language]);
+        
+        return Redirect::route('profile.edit')->with('status', 'language-updated');
+    }
+
+    /**
+     * Toggle dark mode
+     */
+    public function toggleDarkMode(Request $request): RedirectResponse
+    {
+        $user = $request->user();
+        $darkMode = !$user->dark_mode;
+        
+        $user->update(['dark_mode' => $darkMode]);
+        session(['theme' => $darkMode ? 'dark' : 'light']);
+        
+        return Redirect::route('profile.edit')->with('status', 'theme-updated');
+    }
+
+    /**
+     * Update notification settings
+     */
+    public function updateNotifications(Request $request): RedirectResponse
+    {
+        $settings = [
+            'email_notifications' => $request->boolean('email_notifications'),
+            'push_notifications' => $request->boolean('push_notifications'),
+            'marketing_emails' => $request->boolean('marketing_emails'),
+            'security_alerts' => $request->boolean('security_alerts'),
+        ];
+        
+        $request->user()->update(['notification_settings' => $settings]);
+        
+        return Redirect::route('profile.edit')->with('status', 'notifications-updated');
     }
 
     /**

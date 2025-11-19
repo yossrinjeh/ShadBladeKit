@@ -22,6 +22,10 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'avatar',
+        'language',
+        'dark_mode',
+        'notification_settings',
     ];
 
     /**
@@ -48,6 +52,8 @@ class User extends Authenticatable
             'password' => 'hashed',
             'two_factor_confirmed_at' => 'datetime',
             'two_factor_recovery_codes' => 'array',
+            'dark_mode' => 'boolean',
+            'notification_settings' => 'array',
         ];
     }
     

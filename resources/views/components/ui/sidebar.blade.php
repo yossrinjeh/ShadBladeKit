@@ -68,11 +68,15 @@
             <div class="flex-shrink-0 flex border-t p-4">
                 <div class="flex items-center w-full">
                     <div class="flex-shrink-0">
-                        <div class="h-8 w-8 rounded-full bg-primary flex items-center justify-center">
-                            <span class="text-sm font-medium text-primary-foreground">
-                                {{ substr(Auth::user()->name, 0, 1) }}
-                            </span>
-                        </div>
+                        @if(Auth::user()->avatar)
+                            <img class="h-8 w-8 rounded-full object-cover" src="{{ asset('storage/' . Auth::user()->avatar) }}" alt="{{ Auth::user()->name }}">
+                        @else
+                            <div class="h-8 w-8 rounded-full bg-primary flex items-center justify-center">
+                                <span class="text-sm font-medium text-primary-foreground">
+                                    {{ substr(Auth::user()->name, 0, 1) }}
+                                </span>
+                            </div>
+                        @endif
                     </div>
                     <div class="ml-3 flex-1">
                         <p class="text-sm font-medium">{{ Auth::user()->name }}</p>

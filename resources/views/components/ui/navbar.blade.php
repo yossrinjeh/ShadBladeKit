@@ -43,6 +43,9 @@
                             <x-dropdown-link :href="route('profile.edit')">
                                 {{ __('ui.profile') }}
                             </x-dropdown-link>
+                            <x-dropdown-link :href="route('settings.index')">
+                                {{ __('ui.settings') }}
+                            </x-dropdown-link>
                             <form method="POST" action="{{ route('logout') }}">
                                 @csrf
                                 <x-dropdown-link :href="route('logout')" onclick="event.preventDefault(); this.closest('form').submit();">

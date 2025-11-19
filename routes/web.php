@@ -62,6 +62,8 @@ Route::middleware('auth')->group(function () {
     // Activity Logs (Admin Only)
     Route::middleware(['auth', 'role:admin'])->group(function () {
         Route::get('/activity-logs', [App\Http\Controllers\ActivityLogController::class, 'index'])->name('activity-logs.index');
+        Route::get('/admin/settings', [App\Http\Controllers\AdminSettingsController::class, 'index'])->name('admin.settings');
+        Route::patch('/admin/settings', [App\Http\Controllers\AdminSettingsController::class, 'update'])->name('admin.settings.update');
     });
 });
 

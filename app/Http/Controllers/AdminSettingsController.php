@@ -1,0 +1,120 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\AppSetting;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+
+class AdminSettingsController extends Controller
+{
+    public function index()
+    {
+        $settings = [
+            'app_name' => AppSetting::get('app_name', config('app.name')),
+            'bg_light_color' => AppSetting::get('bg_light_color', '#ffffff'),
+            'bg_dark_color' => AppSetting::get('bg_dark_color', '#1f2937'),
+            'primary_color' => AppSetting::get('primary_color', '#3b82f6'),
+            'secondary_color' => AppSetting::get('secondary_color', '#64748b'),
+            'accent_color' => AppSetting::get('accent_color', '#10b981'),
+            'success_color' => AppSetting::get('success_color', '#22c55e'),
+            'warning_color' => AppSetting::get('warning_color', '#f59e0b'),
+            'danger_color' => AppSetting::get('danger_color', '#ef4444'),
+            'app_logo' => AppSetting::get('app_logo'),
+            'app_favicon' => AppSetting::get('app_favicon'),
+        ];
+        
+        return view('admin.settings', compact('settings'));
+    }
+    
+    public function update(Request $request)
+    {
+        $request->validate([
+            'app_name' => 'required|string|max:255',
+            'bg_light_color' => 'required|string|regex:/^#[0-9A-Fa-f]{6}$/',
+            'bg_dark_color' => 'required|string|regex:/^#[0-9A-Fa-f]{6}$/',
+            'primary_color' => 'required|string|regex:/^#[0-9A-Fa-f]{6}$/',
+            'secondary_color' => 'required|string|regex:/^#[0-9A-Fa-f]{6}$/',
+            'accent_color' => 'required|string|regex:/^#[0-9A-Fa-f]{6}$/',
+            'success_color' => 'required|string|regex:/^#[0-9A-Fa-f]{6}$/',
+            'warning_color' => 'required|string|regex:/^#[0-9A-Fa-f]{6}$/',
+            'danger_color' => 'required|string|regex:/^#[0-9A-Fa-f]{6}$/',
+            'app_logo' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'app_favicon' => 'nullable|image|mimes:ico,png|max:2048',
+        ]);
+        
+        // Update app name
+        AppSetting::set('app_name', $request->app_name);
+        
+        // Update colors
+        AppSetting::set('bg_light_color', $request->bg_light_color);
+        AppSetting::set('bg_dark_color', $request->bg_dark_color);
+        AppSetting::set('primary_color', $request->primary_color);
+        AppSetting::set('secondary_color', $request->secondary_color);
+        AppSetting::set('accent_color', $request->accent_color);
+        AppSetting::set('success_color', $request->success_color);
+        AppSetting::set('warning_color', $request->warning_color);
+        AppSetting::set('danger_color', $request->danger_color);
+        
+        // Handle logo upload
+        if ($request->hasFile('app_logo')) {
+            $file = $request->file('app_logo');
+            
+            // Delete old logo
+            $oldLogo = AppSetting::get('app_logo');
+            if ($oldLogo && file_exists(storage_path('app/public/' . $oldLogo))) {
+                unlink(storage_path('app/public/' . $oldLogo));
+            }
+            
+            // Generate unique filename
+            $filename = time() . '_' . uniqid() . '.' . $file->getClientOriginalExtension();
+            $logoPath = 'logos/' . $filename;
+            
+            // Create logos directory if it doesn't exist
+            if (!file_exists(storage_path('app/public/logos'))) {
+                mkdir(storage_path('app/public/logos'), 0755, true);
+            }
+            
+            // Move file to public storage
+            $file->move(storage_path('app/public/logos'), $filename);
+            
+            AppSetting::set('app_logo', $logoPath);
+        }
+        // Handle favicon upload
+        if ($request->hasFile('app_favicon')) {
+            $file = $request->file('app_favicon');
+
+            // Delete old favicon
+            $oldFavicon = AppSetting::get('app_favicon');
+            if ($oldFavicon && file_exists(storage_path('app/public/' . $oldFavicon))) {
+                unlink(storage_path('app/public/' . $oldFavicon));
+            }
+
+            // Generate unique filename
+            $filename = time() . '_' . uniqid() . '.' . $file->getClientOriginalExtension();
+            $faviconPath = 'favicons/' . $filename;
+
+            // Create favicons directory if it doesn't exist
+            if (!file_exists(storage_path('app/public/favicons'))) {
+                mkdir(storage_path('app/public/favicons'), 0755, true);
+            }
+
+            // Move file to public storage
+            $file->move(storage_path('app/public/favicons'), $filename);
+
+            AppSetting::set('app_favicon', $faviconPath);
+        }
+        
+        activity()
+            ->causedBy(auth()->user())
+            ->withProperties([
+                'app_name' => $request->app_name,
+                'primary_color' => $request->primary_color,
+                'secondary_color' => $request->secondary_color,
+                'ip_address' => request()->ip()
+            ])
+            ->log('App settings updated');
+        
+        return redirect()->route('admin.settings')->with('status', 'settings-updated');
+    }
+}

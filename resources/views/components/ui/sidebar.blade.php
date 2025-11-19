@@ -6,8 +6,12 @@
         <div class="flex flex-col flex-grow pt-5 overflow-y-auto bg-card border-r">
             <!-- Logo -->
             <div class="flex items-center flex-shrink-0 px-4">
-                <x-application-logo class="h-8 w-8" />
-                <span class="ml-2 text-xl font-bold">{{ config('app.name') }}</span>
+                @if($appSettings['logo'])
+                    <img src="{{ asset('storage/' . $appSettings['logo']) }}" alt="{{ $appSettings['name'] }}" class="h-8 w-8 object-contain">
+                @else
+                    <x-application-logo class="h-8 w-8" />
+                @endif
+                <span class="ml-2 text-xl font-bold">{{ $appSettings['name'] }}</span>
             </div>
 
             <!-- Navigation -->
@@ -43,6 +47,13 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
                         </svg>
                         {{ __('navigation.activity_logs') }}
+                    </a>
+                    
+                    <a href="{{ route('admin.settings') }}" class="group flex items-center px-2 py-2 text-sm font-medium rounded-md {{ request()->routeIs('admin.settings*') ? 'bg-primary text-primary-foreground' : 'text-muted-foreground hover:bg-accent hover:text-accent-foreground' }}">
+                        <svg class="mr-3 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4" />
+                        </svg>
+                        Admin Settings
                     </a>
                     @endif
 

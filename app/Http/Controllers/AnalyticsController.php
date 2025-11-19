@@ -111,10 +111,16 @@ class AnalyticsController extends Controller
     
     private function getRecentActivity()
     {
-        $activities = \Spatie\Activitylog\Models\Activity::with('causer')
+        $query = \Spatie\Activitylog\Models\Activity::with('causer')
             ->latest()
-            ->limit(4)
-            ->get()
+            ->limit(4);
+            
+        // If not admin, only show current user's activities
+        if (!auth()->user()->hasRole('admin')) {
+            $query->where('causer_id', auth()->id());
+        }
+        
+        $activities = $query->get()
             ->map(function ($activity) {
                 $icon = match($activity->log_name) {
                     'authentication' => 'shield-check',

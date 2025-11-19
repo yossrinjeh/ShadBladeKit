@@ -1,0 +1,112 @@
+@props(['user' => null])
+
+<div class="flex h-screen bg-background">
+    <!-- Sidebar -->
+    <div class="hidden md:flex md:w-64 md:flex-col">
+        <div class="flex flex-col flex-grow pt-5 overflow-y-auto bg-card border-r">
+            <!-- Logo -->
+            <div class="flex items-center flex-shrink-0 px-4">
+                <x-application-logo class="h-8 w-8" />
+                <span class="ml-2 text-xl font-bold">{{ config('app.name') }}</span>
+            </div>
+
+            <!-- Navigation -->
+            <div class="mt-8 flex-grow flex flex-col">
+                <nav class="flex-1 px-2 space-y-1">
+                    <a href="{{ route('dashboard') }}" class="group flex items-center px-2 py-2 text-sm font-medium rounded-md {{ request()->routeIs('dashboard') ? 'bg-primary text-primary-foreground' : 'text-muted-foreground hover:bg-accent hover:text-accent-foreground' }}">
+                        <svg class="mr-3 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2H5a2 2 0 00-2-2z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5a2 2 0 012-2h4a2 2 0 012 2v6H8V5z" />
+                        </svg>
+                        {{ __('ui.dashboard') }}
+                    </a>
+
+                    @can('view users')
+                    <a href="#" class="group flex items-center px-2 py-2 text-sm font-medium rounded-md text-muted-foreground hover:bg-accent hover:text-accent-foreground">
+                        <svg class="mr-3 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z" />
+                        </svg>
+                        {{ __('ui.users') }}
+                    </a>
+                    @endcan
+
+                    <a href="{{ route('profile.edit') }}" class="group flex items-center px-2 py-2 text-sm font-medium rounded-md {{ request()->routeIs('profile.*') ? 'bg-primary text-primary-foreground' : 'text-muted-foreground hover:bg-accent hover:text-accent-foreground' }}">
+                        <svg class="mr-3 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                        </svg>
+                        {{ __('ui.profile') }}
+                    </a>
+
+                    <a href="{{ route('settings.index') }}" class="group flex items-center px-2 py-2 text-sm font-medium rounded-md {{ request()->routeIs('settings.*') ? 'bg-primary text-primary-foreground' : 'text-muted-foreground hover:bg-accent hover:text-accent-foreground' }}">
+                        <svg class="mr-3 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                        </svg>
+                        {{ __('ui.settings') }}
+                    </a>
+                </nav>
+            </div>
+
+            <!-- User Profile -->
+            @auth
+            <div class="flex-shrink-0 flex border-t p-4">
+                <div class="flex items-center w-full">
+                    <div class="flex-shrink-0">
+                        <div class="h-8 w-8 rounded-full bg-primary flex items-center justify-center">
+                            <span class="text-sm font-medium text-primary-foreground">
+                                {{ substr(Auth::user()->name, 0, 1) }}
+                            </span>
+                        </div>
+                    </div>
+                    <div class="ml-3 flex-1">
+                        <p class="text-sm font-medium">{{ Auth::user()->name }}</p>
+                        <p class="text-xs text-muted-foreground">{{ Auth::user()->email }}</p>
+                    </div>
+                    <x-dropdown align="right" width="48">
+                        <x-slot name="trigger">
+                            <button class="flex items-center text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary">
+                                <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z" />
+                                </svg>
+                            </button>
+                        </x-slot>
+                        <x-slot name="content">
+                            <form method="POST" action="{{ route('logout') }}">
+                                @csrf
+                                <x-dropdown-link :href="route('logout')" onclick="event.preventDefault(); this.closest('form').submit();">
+                                    {{ __('ui.logout') }}
+                                </x-dropdown-link>
+                            </form>
+                        </x-slot>
+                    </x-dropdown>
+                </div>
+            </div>
+            @endauth
+        </div>
+    </div>
+
+    <!-- Main content -->
+    <div class="flex flex-col flex-1 overflow-hidden">
+        <!-- Top bar -->
+        <header class="bg-background border-b px-4 py-3 flex items-center justify-between">
+            <div class="flex items-center">
+                <!-- Mobile menu button -->
+                <button class="md:hidden p-2 rounded-md text-muted-foreground hover:bg-accent">
+                    <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                </button>
+            </div>
+            
+            <div class="flex items-center space-x-4">
+                <x-ui.theme-toggle />
+                <x-ui.lang-switcher />
+            </div>
+        </header>
+
+        <!-- Page content -->
+        <main class="flex-1 overflow-y-auto p-6">
+            {{ $slot }}
+        </main>
+    </div>
+</div>

@@ -15,22 +15,14 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body class="font-sans antialiased bg-background text-foreground">
-        <div class="min-h-screen">
-            <x-ui.navbar />
-
-            <!-- Page Heading -->
+        <x-ui.sidebar>
             @isset($header)
-                <header class="border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-                    <div class="container mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                        {{ $header }}
-                    </div>
-                </header>
+                <div class="mb-6">
+                    {{ $header }}
+                </div>
             @endisset
-
-            <!-- Page Content -->
-            <main class="container mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                {{ $slot }}
-            </main>
-        </div>
+            
+            {{ $slot }}
+        </x-ui.sidebar>
     </body>
 </html>

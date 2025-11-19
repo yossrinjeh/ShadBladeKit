@@ -25,6 +25,22 @@ class AuthenticatedSessionController extends Controller
     public function store(LoginRequest $request): RedirectResponse
     {
         $request->authenticate();
+        
+        $user = Auth::user();
+        
+        // Check if user has 2FA enabled
+        if ($user->hasTwoFactorEnabled()) {
+            // Log out the user temporarily
+            Auth::logout();
+            
+            // Store user ID and remember preference in session
+            $request->session()->put([
+                'login.id' => $user->id,
+                'login.remember' => $request->boolean('remember')
+            ]);
+            
+            return redirect()->route('two-factor.login');
+        }
 
         $request->session()->regenerate();
 

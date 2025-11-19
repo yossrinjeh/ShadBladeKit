@@ -22,6 +22,14 @@
             </div>
         </x-ui.card>
 
+        <x-ui.card id="two-factor">
+            <div class="p-6">
+                <div class="max-w-xl">
+                    @include('profile.partials.two-factor-form')
+                </div>
+            </div>
+        </x-ui.card>
+
         <x-ui.card>
             <div class="p-6">
                 <div class="max-w-xl">

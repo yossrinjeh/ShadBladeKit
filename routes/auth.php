@@ -33,6 +33,11 @@ Route::middleware('guest')->group(function () {
 
     Route::post('reset-password', [NewPasswordController::class, 'store'])
         ->name('password.store');
+        
+    Route::get('two-factor-challenge', [App\Http\Controllers\Auth\TwoFactorLoginController::class, 'show'])
+        ->name('two-factor.login');
+        
+    Route::post('two-factor-challenge', [App\Http\Controllers\Auth\TwoFactorLoginController::class, 'store']);
 });
 
 Route::middleware('auth')->group(function () {

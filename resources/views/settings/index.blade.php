@@ -85,8 +85,19 @@
                         <div>
                             <p class="font-medium">Two-Factor Authentication</p>
                             <p class="text-sm text-muted-foreground">Add an extra layer of security</p>
+                            @if(auth()->user()->hasTwoFactorEnabled())
+                                <p class="text-xs text-green-600 dark:text-green-400 mt-1">✓ Enabled</p>
+                            @endif
                         </div>
-                        <x-ui.button variant="outline" size="sm">Enable</x-ui.button>
+                        @if(auth()->user()->hasTwoFactorEnabled())
+                            <a href="{{ route('profile.edit') }}#two-factor" class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-muted-foreground bg-background hover:bg-accent focus:outline-none transition ease-in-out duration-150">
+                                Manage
+                            </a>
+                        @else
+                            <a href="{{ route('profile.edit') }}#two-factor" class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md bg-primary text-primary-foreground hover:bg-primary/90 focus:outline-none transition ease-in-out duration-150">
+                                Enable
+                            </a>
+                        @endif
                     </div>
                 </div>
             </div>

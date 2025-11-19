@@ -90,8 +90,8 @@ A **production-ready Laravel 11 starter template** with enterprise-grade feature
 
 1. **Clone the repository**
 ```bash
-git clone https://github.com/yourusername/laravel-modern-starter.git
-cd laravel-modern-starter
+git clone https://github.com/yossrinjeh/ShadBladeKit.git
+cd ShadBladeKit
 ```
 
 2. **Install dependencies**
@@ -359,9 +359,9 @@ This project is licensed under the [MIT License](LICENSE).
 ## 📞 **Support**
 
 - 📧 **Email**: support@yourapp.com
-- 🐛 **Issues**: [GitHub Issues](https://github.com/yourusername/laravel-modern-starter/issues)
-- 💬 **Discussions**: [GitHub Discussions](https://github.com/yourusername/laravel-modern-starter/discussions)
-- 📖 **Documentation**: [Wiki](https://github.com/yourusername/laravel-modern-starter/wiki)
+- 🐛 **Issues**: [GitHub Issues](https://github.com/yossrinjeh/ShadBladeKit/issues)
+- 💬 **Discussions**: [GitHub Discussions](https://github.com/yossrinjeh/ShadBladeKit/discussions)
+- 📖 **Documentation**: [Wiki](https://github.com/yossrinjeh/ShadBladeKit/wiki)
 
 ---
 
@@ -370,5 +370,5 @@ This project is licensed under the [MIT License](LICENSE).
 </p>
 
 <p align="center">
-  Made with ❤️ by <a href="https://github.com/yourusername">Your Name</a>
+  Made with ❤️ by <a href="https://github.com/yossrinjeh">Yossri Njeh</a>
 </p>

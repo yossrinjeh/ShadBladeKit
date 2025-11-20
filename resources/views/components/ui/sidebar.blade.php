@@ -217,20 +217,68 @@
                         </button>
                     </x-slot>
                     <x-slot name="content">
-                        <div class="p-4 min-w-80">
-                            <div class="flex items-center justify-between mb-3">
-                                <h3 class="text-sm font-medium whitespace-nowrap">{{ __('ui.notifications') }}</h3>
-                                <a href="{{ route('notifications.index') }}" class="text-xs text-primary hover:text-primary/80 whitespace-nowrap ml-4">View All</a>
-                            </div>
-                            @forelse(auth()->user()->notifications->take(5) as $notification)
-                                <a href="{{ route('notifications.index') }}" class="block p-3 hover:bg-accent rounded-md mb-2 {{ $notification->read_at ? 'opacity-60' : '' }}">
-                                    <p class="text-sm font-medium">{{ $notification->data['title'] ?? 'Notification' }}</p>
-                                    <p class="text-xs text-muted-foreground mt-1">{{ $notification->data['message'] ?? '' }}</p>
-                                    <p class="text-xs text-muted-foreground mt-1">{{ $notification->created_at->diffForHumans() }}</p>
+                        <div class="min-w-80 max-h-96 overflow-y-auto">
+                            <!-- Header -->
+                            <div class="sticky top-0 bg-card border-b px-4 py-3 flex items-center justify-between min-w-0">
+                                <div class="flex items-center space-x-2 flex-shrink-0">
+                                    <div class="w-2 h-2 bg-primary rounded-full"></div>
+                                    <h3 class="text-sm font-semibold whitespace-nowrap">Notifications</h3>
+                                </div>
+                                <a href="{{ route('notifications.index') }}" class="text-xs font-medium text-primary hover:text-primary/80 px-2 py-1 rounded hover:bg-primary/10 transition-colors whitespace-nowrap flex-shrink-0">
+                                    View All
                                 </a>
-                            @empty
-                                <p class="text-sm text-muted-foreground p-3">No notifications</p>
-                            @endforelse
+                            </div>
+                            
+                            <!-- Notifications List -->
+                            <div class="p-2">
+                                @forelse(auth()->user()->notifications->take(5) as $notification)
+                                    <a href="{{ route('notifications.index') }}" class="group block p-3 hover:bg-accent/50 rounded-lg mb-1 border border-transparent hover:border-border/50 transition-all duration-200 {{ $notification->read_at ? 'opacity-70' : 'bg-primary/5' }}">
+                                        <div class="flex items-start space-x-3">
+                                            <!-- Icon -->
+                                            <div class="flex-shrink-0 mt-0.5">
+                                                <div class="w-8 h-8 rounded-full {{ $notification->read_at ? 'bg-muted' : 'bg-primary/20' }} flex items-center justify-center">
+                                                    <svg class="w-4 h-4 {{ $notification->read_at ? 'text-muted-foreground' : 'text-primary' }}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                                    </svg>
+                                                </div>
+                                            </div>
+                                            
+                                            <!-- Content -->
+                                            <div class="flex-1 min-w-0">
+                                                <div class="flex items-center justify-between mb-1">
+                                                    <p class="text-sm font-medium text-card-foreground group-hover:text-primary transition-colors truncate">
+                                                        {{ $notification->data['title'] ?? 'Notification' }}
+                                                    </p>
+                                                    @if(!$notification->read_at)
+                                                        <div class="w-2 h-2 bg-primary rounded-full flex-shrink-0 ml-2"></div>
+                                                    @endif
+                                                </div>
+                                                <p class="text-xs text-muted-foreground line-clamp-2 mb-2">
+                                                    {{ $notification->data['message'] ?? '' }}
+                                                </p>
+                                                <div class="flex items-center justify-between">
+                                                    <span class="text-xs text-muted-foreground">
+                                                        {{ $notification->created_at->diffForHumans() }}
+                                                    </span>
+                                                    <svg class="w-3 h-3 text-muted-foreground group-hover:text-primary transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                                                    </svg>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                @empty
+                                    <div class="text-center py-8">
+                                        <div class="w-12 h-12 mx-auto mb-3 rounded-full bg-muted flex items-center justify-center">
+                                            <svg class="w-6 h-6 text-muted-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4"/>
+                                            </svg>
+                                        </div>
+                                        <p class="text-sm text-muted-foreground">No notifications yet</p>
+                                        <p class="text-xs text-muted-foreground mt-1">We'll notify you when something happens</p>
+                                    </div>
+                                @endforelse
+                            </div>
                         </div>
                     </x-slot>
                 </x-dropdown>

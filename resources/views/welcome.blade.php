@@ -461,7 +461,7 @@
                                     </svg>
                                 </button>
                             </div>
-                            <p class="text-gray-300 text-sm">Creates a complete blog post management system</p>
+                            <p class="text-white text-sm">Creates a complete blog post management system</p>
                         </div>
                         
                         <div class="bg-gray-800 rounded-lg p-4 border border-gray-700">
@@ -473,7 +473,7 @@
                                     </svg>
                                 </button>
                             </div>
-                            <p class="text-gray-300 text-sm">Perfect for e-commerce product catalog</p>
+                            <p class="text-white text-sm">Perfect for e-commerce product catalog</p>
                         </div>
                         
                         <div class="bg-gray-800 rounded-lg p-4 border border-gray-700">
@@ -485,7 +485,7 @@
                                     </svg>
                                 </button>
                             </div>
-                            <p class="text-gray-300 text-sm">Customer relationship management made easy</p>
+                            <p class="text-white text-sm">Customer relationship management made easy</p>
                         </div>
                         
                         <div class="bg-gray-800 rounded-lg p-4 border border-gray-700">
@@ -497,7 +497,7 @@
                                     </svg>
                                 </button>
                             </div>
-                            <p class="text-gray-300 text-sm">Order management with full tracking</p>
+                            <p class="text-white text-sm">Order management with full tracking</p>
                         </div>
                     </div>
                 </div>
@@ -507,7 +507,7 @@
                     <h3 class="text-xl font-bold text-white mb-6">What Gets Generated</h3>
                     <div class="bg-gray-800 rounded-lg p-6 border border-gray-700 font-mono text-sm">
                         <div class="text-green-400 mb-4">✅ CRUD for Post created successfully!</div>
-                        <div class="space-y-1 text-gray-300">
+                        <div class="space-y-1 text-white">
                             <div class="flex items-center"><span class="text-blue-400 mr-2">📁</span> Migration: create_posts_table</div>
                             <div class="flex items-center"><span class="text-blue-400 mr-2">📄</span> Model: Post.php</div>
                             <div class="flex items-center"><span class="text-blue-400 mr-2">🎮</span> Controller: PostController.php</div>

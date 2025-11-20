@@ -147,6 +147,17 @@
                     <p class="text-gray-600 dark:text-gray-300">{{ __('welcome.analytics_desc') }}</p>
                 </div>
 
+                <!-- CRUD Generator -->
+                <div class="bg-gray-50 dark:bg-gray-800 p-6 rounded-xl">
+                    <div class="w-12 h-12 bg-orange-100 dark:bg-orange-900 rounded-lg flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-2">CRUD Generator</h3>
+                    <p class="text-gray-600 dark:text-gray-300">Generate complete CRUD interfaces with a single command. Includes modals, permissions, and sidebar integration.</p>
+                </div>
+
                 <!-- Production Ready -->
                 <div class="bg-gray-50 dark:bg-gray-800 p-6 rounded-xl">
                     <div class="w-12 h-12 bg-indigo-100 dark:bg-indigo-900 rounded-lg flex items-center justify-center mb-4">
@@ -270,6 +281,28 @@
                         <li>✅ Real-time Data</li>
                     </ul>
                 </div>
+
+                <div class="space-y-4">
+                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white">⚡ CRUD Generator</h3>
+                    <ul class="space-y-2 text-gray-600 dark:text-gray-300">
+                        <li>✅ One-Command Generation</li>
+                        <li>✅ Auto Migration & Seeding</li>
+                        <li>✅ Modal-Based Interface</li>
+                        <li>✅ Permission Integration</li>
+                        <li>✅ Sidebar Auto-Update</li>
+                    </ul>
+                </div>
+
+                <div class="space-y-4">
+                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white">🚀 Developer Experience</h3>
+                    <ul class="space-y-2 text-gray-600 dark:text-gray-300">
+                        <li>✅ Production Ready</li>
+                        <li>✅ Clean Architecture</li>
+                        <li>✅ Best Practices</li>
+                        <li>✅ Comprehensive Docs</li>
+                        <li>✅ Easy Deployment</li>
+                    </ul>
+                </div>
             </div>
         </div>
     </section>
@@ -310,6 +343,94 @@
     ├── web.php            # Web routes
     └── auth.php           # Authentication routes
                 </pre>
+            </div>
+        </div>
+    </section>
+
+    <!-- CRUD Generator Showcase -->
+    <section class="py-16 bg-gradient-to-br from-orange-50 to-red-50 dark:from-orange-900/20 dark:to-red-900/20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
+                    ⚡ CRUD Generator
+                </h2>
+                <p class="text-xl text-gray-600 dark:text-gray-300">
+                    Generate complete CRUD interfaces with a single command
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-6">Create Full CRUD in Seconds</h3>
+                    <div class="space-y-4 mb-8">
+                        <div class="flex items-start space-x-3">
+                            <div class="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                                <svg class="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                                </svg>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-900 dark:text-white">Complete CRUD Operations</h4>
+                                <p class="text-gray-600 dark:text-gray-300">Create, Read, Update, Delete with modal interfaces</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-3">
+                            <div class="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                                <svg class="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                                </svg>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-900 dark:text-white">Auto Database Setup</h4>
+                                <p class="text-gray-600 dark:text-gray-300">Migration and seeding handled automatically</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-3">
+                            <div class="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                                <svg class="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                                </svg>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-900 dark:text-white">Permission Integration</h4>
+                                <p class="text-gray-600 dark:text-gray-300">Role-based access control built-in</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-3">
+                            <div class="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                                <svg class="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+                                </svg>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-900 dark:text-white">Sidebar Integration</h4>
+                                <p class="text-gray-600 dark:text-gray-300">Navigation automatically updated</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div>
+                    <div class="bg-gray-900 rounded-lg p-6 font-mono text-sm overflow-x-auto">
+                        <div class="text-green-400 mb-2"># Generate a complete CRUD</div>
+                        <div class="text-white mb-4">php artisan create:crud Post</div>
+                        
+                        <div class="text-gray-400 mb-2"># What gets created:</div>
+                        <div class="text-blue-300 mb-1">✓ Migration (posts table)</div>
+                        <div class="text-blue-300 mb-1">✓ Model (Post.php)</div>
+                        <div class="text-blue-300 mb-1">✓ Controller (PostController.php)</div>
+                        <div class="text-blue-300 mb-1">✓ Views (index, create, edit, show)</div>
+                        <div class="text-blue-300 mb-1">✓ Request (PostRequest.php)</div>
+                        <div class="text-blue-300 mb-1">✓ Routes (protected with permissions)</div>
+                        <div class="text-blue-300 mb-1">✓ Permissions (view, create, edit, delete)</div>
+                        <div class="text-blue-300 mb-4">✓ Sidebar navigation link</div>
+                        
+                        <div class="text-green-400 mb-2"># More examples:</div>
+                        <div class="text-white mb-1">php artisan create:crud Product</div>
+                        <div class="text-white mb-1">php artisan create:crud Category</div>
+                        <div class="text-white">php artisan create:crud Customer</div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>

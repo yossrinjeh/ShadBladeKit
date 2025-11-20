@@ -655,7 +655,7 @@
                     <h3 class="text-lg font-semibold mb-4">Resources</h3>
                     <ul class="space-y-2 text-gray-400">
                         <li><a href="#" class="hover:text-white">Documentation</a></li>
-                        <li><a href="#" class="hover:text-white">GitHub</a></li>
+                        <li><a href="https://github.com/yossrinjeh/ShadBladeKit" class="hover:text-white">GitHub</a></li>
                         <li><a href="#" class="hover:text-white">Support</a></li>
                         <li><a href="#" class="hover:text-white">License</a></li>
                     </ul>

@@ -68,16 +68,16 @@
                     
                     <div class="space-y-2">
                         <h4 class="text-sm font-medium">Permissions:</h4>
-                        <div class="flex flex-wrap gap-1 overflow-hidden" style="max-height: 3.5rem;">
-                            @forelse($role->permissions as $permission)
+                        <div class="flex flex-wrap gap-1">
+                            @forelse($role->permissions->take(5) as $permission)
                                 <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-primary/10 text-primary">
                                     {{ $permission->name }}
                                 </span>
                             @empty
                                 <span class="text-xs text-muted-foreground">No permissions assigned</span>
                             @endforelse
-                            @if($role->permissions->count() > 6)
-                                <span class="text-xs text-muted-foreground self-end">...</span>
+                            @if($role->permissions->count() > 5)
+                                <span class="text-xs text-muted-foreground">+{{ $role->permissions->count() - 5 }} more</span>
                             @endif
                         </div>
                     </div>

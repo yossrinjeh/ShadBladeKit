@@ -61,6 +61,14 @@ A **production-ready Laravel 11 starter template** with enterprise-grade feature
 - ✅ **User Statistics** - Registration trends, role distribution
 - ✅ **Real-time Data** - Live updates and insights
 
+### ⚡ **CRUD Generator**
+- ✅ **One-Command Generation** - Complete CRUD with single command
+- ✅ **Auto Migration & Seeding** - Database setup included
+- ✅ **Permission Integration** - Role-based access control
+- ✅ **Modal-Based Interface** - Modern UI with modals
+- ✅ **Bulk Operations** - Multi-select and bulk actions
+- ✅ **Sidebar Integration** - Auto-added navigation links
+
 ---
 
 ## 🛠️ **Tech Stack**
@@ -75,6 +83,54 @@ A **production-ready Laravel 11 starter template** with enterprise-grade feature
 | **UI Components** | Custom Blade Components |
 | **Charts** | Chart.js |
 | **Icons** | Heroicons |
+
+---
+
+## ⚡ **CRUD Generator**
+
+### Generate Complete CRUD in Seconds
+
+Create a full-featured CRUD interface with a single command:
+
+```bash
+php artisan create:crud Post
+php artisan create:crud Product
+php artisan create:crud Category
+```
+
+### What Gets Generated
+- ✅ **Migration** - Database table with basic fields
+- ✅ **Model** - Eloquent model with activity logging
+- ✅ **Controller** - Full CRUD operations + bulk actions
+- ✅ **Views** - Modal-based interface matching your design
+- ✅ **Request** - Form validation rules
+- ✅ **Routes** - Protected with permissions
+- ✅ **Permissions** - Auto-created and assigned to admin
+- ✅ **Sidebar** - Navigation link with icon
+- ✅ **Translations** - Multi-language support
+
+### Generated Features
+- 🔍 **Search & Filter** - Real-time search functionality
+- 📄 **Pagination** - Efficient data handling
+- ✏️ **Modal CRUD** - Create/Edit/Delete in modals
+- 🗑️ **Bulk Delete** - Multi-select operations
+- 🔐 **Permission Protected** - Role-based access
+- 📱 **Responsive Design** - Mobile-friendly interface
+- 🎨 **Design System** - Matches your UI components
+
+### Example Usage
+```bash
+# Generate a Posts CRUD
+php artisan create:crud Post
+
+# Result: Complete /posts interface with:
+# - posts table created
+# - PostController with all CRUD methods
+# - Modal-based create/edit forms
+# - Search and pagination
+# - Permission-protected routes
+# - Sidebar navigation added
+```
 
 ---
 

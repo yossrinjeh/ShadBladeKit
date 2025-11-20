@@ -203,11 +203,11 @@
             <div class="flex items-center space-x-4">
                 <!-- Notifications -->
                 @auth
-                <x-dropdown align="right" width="80">
+                <x-dropdown align="right" width="w-80">
                     <x-slot name="trigger">
                         <button class="relative p-2 rounded-md text-muted-foreground hover:bg-accent">
                             <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-3.5-3.5a50.002 50.002 0 00-2.5-2.5m0 0a50.002 50.002 0 00-2.5-2.5L7 13H2l5 5 5-5z" />
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0" />
                             </svg>
                             @if(auth()->user()->unreadNotifications->count() > 0)
                                 <span class="absolute -top-1 -right-1 h-4 w-4 bg-red-500 text-white text-xs rounded-full flex items-center justify-center">
@@ -217,19 +217,19 @@
                         </button>
                     </x-slot>
                     <x-slot name="content">
-                        <div class="p-2">
-                            <div class="flex items-center justify-between mb-2">
-                                <h3 class="text-sm font-medium">{{ __('ui.notifications') }}</h3>
-                                <a href="{{ route('notifications.index') }}" class="text-xs text-primary hover:text-primary/80">View All</a>
+                        <div class="p-4 min-w-80">
+                            <div class="flex items-center justify-between mb-3">
+                                <h3 class="text-sm font-medium whitespace-nowrap">{{ __('ui.notifications') }}</h3>
+                                <a href="{{ route('notifications.index') }}" class="text-xs text-primary hover:text-primary/80 whitespace-nowrap ml-4">View All</a>
                             </div>
                             @forelse(auth()->user()->notifications->take(5) as $notification)
-                                <a href="{{ route('notifications.index') }}" class="block p-2 hover:bg-accent rounded-md mb-1 {{ $notification->read_at ? 'opacity-60' : '' }}">
+                                <a href="{{ route('notifications.index') }}" class="block p-3 hover:bg-accent rounded-md mb-2 {{ $notification->read_at ? 'opacity-60' : '' }}">
                                     <p class="text-sm font-medium">{{ $notification->data['title'] ?? 'Notification' }}</p>
-                                    <p class="text-xs text-muted-foreground">{{ $notification->data['message'] ?? '' }}</p>
+                                    <p class="text-xs text-muted-foreground mt-1">{{ $notification->data['message'] ?? '' }}</p>
                                     <p class="text-xs text-muted-foreground mt-1">{{ $notification->created_at->diffForHumans() }}</p>
                                 </a>
                             @empty
-                                <p class="text-sm text-muted-foreground p-2">No notifications</p>
+                                <p class="text-sm text-muted-foreground p-3">No notifications</p>
                             @endforelse
                         </div>
                     </x-slot>

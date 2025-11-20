@@ -72,29 +72,7 @@ Route::middleware('auth')->group(function () {
         Route::patch('/admin/settings', [App\Http\Controllers\AdminSettingsController::class, 'update'])->name('admin.settings.update');
     });
     
-    // Category Management Routes
-    Route::middleware(['can:view categories'])->group(function () {
-        Route::resource('categories', App\Http\Controllers\CategoryController::class);
-        Route::post('/categories/bulk-delete', [App\Http\Controllers\CategoryController::class, 'bulkDelete'])->name('categories.bulk-delete')->middleware('can:delete categories');
-    });
-
-    // Order Management Routes
-    Route::middleware(['can:view orders'])->group(function () {
-        Route::resource('orders', App\Http\Controllers\OrderController::class);
-        Route::post('/orders/bulk-delete', [App\Http\Controllers\OrderController::class, 'bulkDelete'])->name('orders.bulk-delete')->middleware('can:delete orders');
-    });
-
-    // Brand Management Routes
-    Route::middleware(['can:view brands'])->group(function () {
-        Route::resource('brands', App\Http\Controllers\BrandController::class);
-        Route::post('/brands/bulk-delete', [App\Http\Controllers\BrandController::class, 'bulkDelete'])->name('brands.bulk-delete')->middleware('can:delete brands');
-    });
-
-    // Customer Management Routes
-    Route::middleware(['can:view customers'])->group(function () {
-        Route::resource('customers', App\Http\Controllers\CustomerController::class);
-        Route::post('/customers/bulk-delete', [App\Http\Controllers\CustomerController::class, 'bulkDelete'])->name('customers.bulk-delete')->middleware('can:delete customers');
-    });
+  
 });
 
 require __DIR__.'/auth.php';

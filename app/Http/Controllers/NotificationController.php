@@ -7,6 +7,13 @@ use App\Notifications\WelcomeNotification;
 
 class NotificationController extends Controller
 {
+    public function index()
+    {
+        $notifications = auth()->user()->notifications()->paginate(10);
+        
+        return view('notifications.index', compact('notifications'));
+    }
+
     public function test()
     {
         auth()->user()->notify(new WelcomeNotification('Test notification sent successfully!'));

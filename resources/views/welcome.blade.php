@@ -435,6 +435,108 @@
         </div>
     </section>
 
+    <!-- Live Command Demo -->
+    <section class="py-16 bg-gray-900">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">
+                    Try It Yourself
+                </h2>
+                <p class="text-xl text-gray-300">
+                    See how easy it is to generate complete CRUD interfaces
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- Command Examples -->
+                <div>
+                    <h3 class="text-xl font-bold text-white mb-6">Generate Commands</h3>
+                    <div class="space-y-4">
+                        <div class="bg-gray-800 rounded-lg p-4 border border-gray-700">
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="text-green-400 font-mono text-sm">$ php artisan create:crud Post</span>
+                                <button onclick="copyCommand('php artisan create:crud Post')" class="text-gray-400 hover:text-white">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                                    </svg>
+                                </button>
+                            </div>
+                            <p class="text-gray-300 text-sm">Creates a complete blog post management system</p>
+                        </div>
+                        
+                        <div class="bg-gray-800 rounded-lg p-4 border border-gray-700">
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="text-green-400 font-mono text-sm">$ php artisan create:crud Product</span>
+                                <button onclick="copyCommand('php artisan create:crud Product')" class="text-gray-400 hover:text-white">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                                    </svg>
+                                </button>
+                            </div>
+                            <p class="text-gray-300 text-sm">Perfect for e-commerce product catalog</p>
+                        </div>
+                        
+                        <div class="bg-gray-800 rounded-lg p-4 border border-gray-700">
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="text-green-400 font-mono text-sm">$ php artisan create:crud Customer</span>
+                                <button onclick="copyCommand('php artisan create:crud Customer')" class="text-gray-400 hover:text-white">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                                    </svg>
+                                </button>
+                            </div>
+                            <p class="text-gray-300 text-sm">Customer relationship management made easy</p>
+                        </div>
+                        
+                        <div class="bg-gray-800 rounded-lg p-4 border border-gray-700">
+                            <div class="flex items-center justify-between mb-2">
+                                <span class="text-green-400 font-mono text-sm">$ php artisan create:crud Order</span>
+                                <button onclick="copyCommand('php artisan create:crud Order')" class="text-gray-400 hover:text-white">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                                    </svg>
+                                </button>
+                            </div>
+                            <p class="text-gray-300 text-sm">Order management with full tracking</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Live Output -->
+                <div>
+                    <h3 class="text-xl font-bold text-white mb-6">What Gets Generated</h3>
+                    <div class="bg-gray-800 rounded-lg p-6 border border-gray-700 font-mono text-sm">
+                        <div class="text-green-400 mb-4">✅ CRUD for Post created successfully!</div>
+                        <div class="space-y-1 text-gray-300">
+                            <div class="flex items-center"><span class="text-blue-400 mr-2">📁</span> Migration: create_posts_table</div>
+                            <div class="flex items-center"><span class="text-blue-400 mr-2">📄</span> Model: Post.php</div>
+                            <div class="flex items-center"><span class="text-blue-400 mr-2">🎮</span> Controller: PostController.php</div>
+                            <div class="flex items-center"><span class="text-blue-400 mr-2">👁️</span> Views: index, create, edit, show</div>
+                            <div class="flex items-center"><span class="text-blue-400 mr-2">✅</span> Request: PostRequest.php</div>
+                            <div class="flex items-center"><span class="text-blue-400 mr-2">🛣️</span> Routes: /posts (protected)</div>
+                            <div class="flex items-center"><span class="text-blue-400 mr-2">🔐</span> Permissions: view, create, edit, delete</div>
+                            <div class="flex items-center"><span class="text-blue-400 mr-2">📋</span> Sidebar: Navigation updated</div>
+                        </div>
+                        <div class="mt-4 pt-4 border-t border-gray-700">
+                            <div class="text-green-400 mb-2">✅ Migration executed</div>
+                            <div class="text-green-400">✅ Permissions created</div>
+                        </div>
+                        <div class="mt-4 pt-4 border-t border-gray-700 text-yellow-400">
+                            <div>🚀 Ready to use at: /posts</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-12 text-center">
+                <div class="bg-gradient-to-r from-orange-500 to-red-500 rounded-lg p-6 inline-block">
+                    <h4 class="text-white font-bold text-lg mb-2">⚡ One Command = Complete CRUD</h4>
+                    <p class="text-orange-100">Migration + Model + Controller + Views + Routes + Permissions + Sidebar</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Installation -->
     <section class="py-16 bg-white dark:bg-gray-900">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -506,6 +608,22 @@
             </div>
         </div>
     </section>
+
+    <script>
+        function copyCommand(command) {
+            navigator.clipboard.writeText(command).then(function() {
+                // Show success feedback
+                const button = event.target.closest('button');
+                const originalHTML = button.innerHTML;
+                button.innerHTML = '<svg class="w-4 h-4 text-green-400" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" /></svg>';
+                setTimeout(() => {
+                    button.innerHTML = originalHTML;
+                }, 2000);
+            }).catch(function(err) {
+                console.error('Could not copy text: ', err);
+            });
+        }
+    </script>
 
     <!-- Footer -->
     <footer class="bg-gray-900 text-white py-12">

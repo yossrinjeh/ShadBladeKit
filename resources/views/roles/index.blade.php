@@ -68,7 +68,7 @@
                     
                     <div class="space-y-2">
                         <h4 class="text-sm font-medium">Permissions:</h4>
-                        <div class="flex flex-wrap gap-1">
+                        <div class="flex flex-wrap gap-1 overflow-hidden" style="max-height: 3.5rem;">
                             @forelse($role->permissions as $permission)
                                 <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-primary/10 text-primary">
                                     {{ $permission->name }}
@@ -76,6 +76,9 @@
                             @empty
                                 <span class="text-xs text-muted-foreground">No permissions assigned</span>
                             @endforelse
+                            @if($role->permissions->count() > 6)
+                                <span class="text-xs text-muted-foreground self-end">...</span>
+                            @endif
                         </div>
                     </div>
                     
@@ -99,10 +102,12 @@
                         $parts = explode(' ', $permission->name);
                         return count($parts) > 1 ? $parts[1] : 'general';
                     });
+                    $moduleChunks = $groupedPermissions->chunk(3);
                 @endphp
                 
-                <div class="space-y-6">
-                    @foreach($groupedPermissions as $module => $modulePermissions)
+                @foreach($moduleChunks as $moduleRow)
+                <div class="grid grid-cols-3 gap-6 mb-6">
+                    @foreach($moduleRow as $module => $modulePermissions)
                     <div class="border rounded-lg p-4">
                         <h4 class="text-md font-semibold mb-3 capitalize flex items-center">
                             <svg class="w-5 h-5 mr-2 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -110,12 +115,12 @@
                             </svg>
                             {{ $module }} Module
                         </h4>
-                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+                        <div class="space-y-2">
                             @foreach($modulePermissions as $permission)
-                            <div class="flex items-center justify-between p-3 bg-muted/30 rounded-md">
+                            <div class="flex items-center justify-between p-2 bg-muted/30 rounded-md">
                                 <div class="flex items-center space-x-2">
                                     <svg class="w-4 h-4 text-muted-foreground" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1721 9z"/>
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1 1 21 9z"/>
                                     </svg>
                                     <span class="text-sm font-medium">{{ $permission->name }}</span>
                                 </div>
@@ -130,6 +135,7 @@
                     </div>
                     @endforeach
                 </div>
+                @endforeach
             </div>
         </x-ui.card>
     </div>
@@ -154,18 +160,18 @@
                             });
                         @endphp
                         
-                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div class="grid grid-cols-3 gap-2">
                             @foreach($groupedPermissions as $module => $modulePermissions)
-                            <div class="border rounded-lg p-3">
-                                <div class="flex items-center space-x-2 mb-2">
+                            <div class="border rounded-lg p-2 min-w-0">
+                                <div class="flex items-center space-x-1 mb-2">
                                     <input type="checkbox" class="module-checkbox rounded border-input" data-module="{{ $module }}" onchange="toggleModule('{{ $module }}')"> 
-                                    <span class="text-sm font-semibold capitalize">{{ $module }}</span>
+                                    <span class="text-xs font-semibold capitalize truncate">{{ $module }}</span>
                                 </div>
                                 <div class="space-y-1">
                                     @foreach($modulePermissions as $permission)
-                                    <label class="flex items-center space-x-2">
+                                    <label class="flex items-center space-x-1">
                                         <input type="checkbox" name="permissions[]" value="{{ $permission->name }}" class="rounded border-input permission-checkbox" data-module="{{ $module }}">
-                                        <span class="text-xs">{{ $permission->name }}</span>
+                                        <span class="text-xs truncate">{{ $permission->name }}</span>
                                     </label>
                                     @endforeach
                                 </div>
@@ -196,18 +202,18 @@
                 <div>
                     <label class="block text-sm font-medium mb-2">Permissions</label>
                     <div class="max-h-96 overflow-y-auto" id="edit-permissions">
-                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div class="grid grid-cols-3 gap-2">
                             @foreach($groupedPermissions as $module => $modulePermissions)
-                            <div class="border rounded-lg p-3">
-                                <div class="flex items-center space-x-2 mb-2">
+                            <div class="border rounded-lg p-2 min-w-0">
+                                <div class="flex items-center space-x-1 mb-2">
                                     <input type="checkbox" class="edit-module-checkbox rounded border-input" data-module="{{ $module }}" onchange="toggleEditModule('{{ $module }}')"> 
-                                    <span class="text-sm font-semibold capitalize">{{ $module }}</span>
+                                    <span class="text-xs font-semibold capitalize truncate">{{ $module }}</span>
                                 </div>
                                 <div class="space-y-1">
                                     @foreach($modulePermissions as $permission)
-                                    <label class="flex items-center space-x-2">
+                                    <label class="flex items-center space-x-1">
                                         <input type="checkbox" name="permissions[]" value="{{ $permission->name }}" class="rounded border-input edit-permission" data-permission="{{ $permission->id }}" data-module="{{ $module }}">
-                                        <span class="text-xs">{{ $permission->name }}</span>
+                                        <span class="text-xs truncate">{{ $permission->name }}</span>
                                     </label>
                                     @endforeach
                                 </div>

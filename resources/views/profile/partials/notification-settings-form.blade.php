@@ -20,8 +20,8 @@
             <!-- Email Notifications -->
             <div class="flex items-center justify-between p-4 rounded-lg border border-input">
                 <div class="flex items-center space-x-3">
-                    <div class="p-2 rounded-lg bg-blue-100 dark:bg-blue-900/20">
-                        <svg class="w-5 h-5 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <div class="p-2 rounded-lg bg-gray-100 dark:bg-gray-800 flex items-center justify-center">
+                        <svg class="w-5 h-5 text-gray-600 dark:text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                         </svg>
                     </div>
@@ -42,9 +42,9 @@
             <!-- Push Notifications -->
             <div class="flex items-center justify-between p-4 rounded-lg border border-input">
                 <div class="flex items-center space-x-3">
-                    <div class="p-2 rounded-lg bg-green-100 dark:bg-green-900/20">
-                        <svg class="w-5 h-5 text-green-600 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-5 5v-5zM4.868 19.718A8.966 8.966 0 003 15a9 9 0 0118 0 8.966 8.966 0 00-1.868 4.718" />
+                    <div class="p-2 rounded-lg bg-gray-100 dark:bg-gray-800 flex items-center justify-center">
+                        <svg class="w-5 h-5 text-gray-600 dark:text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-3.5-3.5a50.002 50.002 0 00-2.5-2.5m0 0a50.002 50.002 0 00-2.5-2.5L7 13H2l5 5 5-5z" />
                         </svg>
                     </div>
                     <div>
@@ -64,8 +64,8 @@
             <!-- Marketing Emails -->
             <div class="flex items-center justify-between p-4 rounded-lg border border-input">
                 <div class="flex items-center space-x-3">
-                    <div class="p-2 rounded-lg bg-purple-100 dark:bg-purple-900/20">
-                        <svg class="w-5 h-5 text-purple-600 dark:text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <div class="p-2 rounded-lg bg-gray-100 dark:bg-gray-800 flex items-center justify-center">
+                        <svg class="w-5 h-5 text-gray-600 dark:text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 4V2a1 1 0 011-1h8a1 1 0 011 1v2m-9 0h10m-10 0a2 2 0 00-2 2v14a2 2 0 002 2h10a2 2 0 002-2V6a2 2 0 00-2-2" />
                         </svg>
                     </div>
@@ -86,8 +86,8 @@
             <!-- Security Alerts -->
             <div class="flex items-center justify-between p-4 rounded-lg border border-input">
                 <div class="flex items-center space-x-3">
-                    <div class="p-2 rounded-lg bg-red-100 dark:bg-red-900/20">
-                        <svg class="w-5 h-5 text-red-600 dark:text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <div class="p-2 rounded-lg bg-gray-100 dark:bg-gray-800 flex items-center justify-center">
+                        <svg class="w-5 h-5 text-gray-600 dark:text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
                         </svg>
                     </div>

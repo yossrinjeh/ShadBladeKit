@@ -6,8 +6,8 @@
             </h2>
             @can('create users')
             <x-ui.button onclick="openCreateModal()">
-                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
                 </svg>
                 Add User
             </x-ui.button>
@@ -51,8 +51,8 @@
                         </select>
                     </div>
                     <x-ui.button type="submit" variant="outline">
-                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
                         </svg>
                         Search
                     </x-ui.button>
@@ -126,13 +126,21 @@
                                 <td class="py-3 px-4">
                                     <div class="flex items-center space-x-2">
                                         @can('edit users')
-                                        <button onclick="editUser({{ $user->id }})" class="text-sm text-primary hover:underline">
+                                        <button onclick="editUser({{ $user->id }}, '{{ $user->name }}', '{{ $user->email }}', '{{ $user->roles->first()?->name ?? '' }}')" 
+                                                class="inline-flex items-center px-3 py-1.5 text-xs font-medium text-blue-700 bg-blue-100 hover:bg-blue-200 rounded-lg transition-colors border border-blue-200 dark:text-blue-300 dark:bg-blue-900/30 dark:hover:bg-blue-900/50 dark:border-blue-800">
+                                            <svg class="w-3 h-3 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
+                                            </svg>
                                             Edit
                                         </button>
                                         @endcan
                                         @can('delete users')
                                         @if($user->id !== auth()->id())
-                                        <button onclick="deleteUser({{ $user->id }})" class="text-sm text-destructive hover:underline">
+                                        <button onclick="deleteUser({{ $user->id }})" 
+                                                class="inline-flex items-center px-3 py-1.5 text-xs font-medium text-red-700 bg-red-100 hover:bg-red-200 rounded-lg transition-colors border border-red-200 dark:text-red-300 dark:bg-red-900/30 dark:hover:bg-red-900/50 dark:border-red-800">
+                                            <svg class="w-3 h-3 mr-1.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                                            </svg>
                                             Delete
                                         </button>
                                         @endif
@@ -197,6 +205,56 @@
         </div>
     </div>
 
+    <!-- Edit User Modal -->
+    <div id="edit-modal" class="fixed inset-0 bg-black/50 hidden items-center justify-center z-50">
+        <div class="bg-background rounded-lg p-6 w-full max-w-md mx-4">
+            <h3 class="text-lg font-semibold mb-4">Edit User</h3>
+            <form id="edit-form" method="POST" class="space-y-4">
+                @csrf
+                @method('PUT')
+                <div>
+                    <label class="block text-sm font-medium mb-1">Name</label>
+                    <x-ui.input type="text" name="name" id="edit-name" required />
+                </div>
+                <div>
+                    <label class="block text-sm font-medium mb-1">Email</label>
+                    <x-ui.input type="email" name="email" id="edit-email" required />
+                </div>
+                <div>
+                    <label class="block text-sm font-medium mb-1">Role</label>
+                    <select name="role" id="edit-role" class="w-full rounded-md border border-input bg-background px-3 py-2 text-sm" required>
+                        @foreach($roles as $role)
+                            <option value="{{ $role->name }}">{{ ucfirst($role->name) }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="flex justify-end space-x-2 pt-4">
+                    <x-ui.button type="button" variant="outline" onclick="closeEditModal()">Cancel</x-ui.button>
+                    <x-ui.button type="submit">Update User</x-ui.button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Delete Confirmation Modal -->
+    <div id="delete-modal" class="fixed inset-0 bg-black/50 hidden items-center justify-center z-50">
+        <div class="bg-background rounded-lg p-6 w-full max-w-md mx-4">
+            <div class="flex items-center mb-4">
+                <div class="flex-shrink-0 w-10 h-10 mx-auto bg-red-100 rounded-full flex items-center justify-center dark:bg-red-900/30">
+                    <svg class="w-6 h-6 text-red-600 dark:text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
+                    </svg>
+                </div>
+            </div>
+            <h3 class="text-lg font-semibold text-center mb-2">Delete User</h3>
+            <p class="text-sm text-muted-foreground text-center mb-6">Are you sure you want to delete this user? This action cannot be undone.</p>
+            <div class="flex justify-end space-x-2">
+                <x-ui.button type="button" variant="outline" onclick="closeDeleteModal()">Cancel</x-ui.button>
+                <x-ui.button type="button" variant="destructive" onclick="confirmDelete()">Delete</x-ui.button>
+            </div>
+        </div>
+    </div>
+
     <script>
         function openCreateModal() {
             document.getElementById('create-modal').classList.remove('hidden');
@@ -208,11 +266,25 @@
             document.getElementById('create-modal').classList.remove('flex');
         }
 
+        let deleteUserId = null;
+
         function deleteUser(userId) {
-            if (confirm('Are you sure you want to delete this user?')) {
+            deleteUserId = userId;
+            document.getElementById('delete-modal').classList.remove('hidden');
+            document.getElementById('delete-modal').classList.add('flex');
+        }
+
+        function closeDeleteModal() {
+            deleteUserId = null;
+            document.getElementById('delete-modal').classList.add('hidden');
+            document.getElementById('delete-modal').classList.remove('flex');
+        }
+
+        function confirmDelete() {
+            if (deleteUserId) {
                 const form = document.createElement('form');
                 form.method = 'POST';
-                form.action = `/users/${userId}`;
+                form.action = `/users/${deleteUserId}`;
                 form.innerHTML = `
                     @csrf
                     @method('DELETE')
@@ -239,6 +311,21 @@
             if (bulkBtn) {
                 bulkBtn.style.display = selected > 0 ? 'block' : 'none';
             }
+        }
+
+        function editUser(userId, name, email, role) {
+            document.getElementById('edit-form').action = `/users/${userId}`;
+            document.getElementById('edit-name').value = name;
+            document.getElementById('edit-email').value = email;
+            document.getElementById('edit-role').value = role;
+            
+            document.getElementById('edit-modal').classList.remove('hidden');
+            document.getElementById('edit-modal').classList.add('flex');
+        }
+
+        function closeEditModal() {
+            document.getElementById('edit-modal').classList.add('hidden');
+            document.getElementById('edit-modal').classList.remove('flex');
         }
 
         function bulkDelete() {

@@ -521,7 +521,7 @@
                             <div class="text-green-400 mb-2">✅ Migration executed</div>
                             <div class="text-green-400">✅ Permissions created</div>
                         </div>
-                        <div class="mt-4 pt-4 border-t border-gray-700 text-yellow-400">
+                        <div class="mt-4 pt-4 border-t border-gray-700 text-white">
                             <div>🚀 Ready to use at: /posts</div>
                         </div>
                     </div>

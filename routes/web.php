@@ -52,6 +52,12 @@ Route::middleware('auth')->group(function () {
         Route::post('/users/bulk-delete', [App\Http\Controllers\UserController::class, 'bulkDelete'])->name('users.bulk-delete')->middleware('can:delete users');
     });
     
+    // Post Management Routes
+    Route::middleware(['can:view posts'])->group(function () {
+        Route::resource('posts', App\Http\Controllers\PostController::class);
+        Route::post('/posts/bulk-delete', [App\Http\Controllers\PostController::class, 'bulkDelete'])->name('posts.bulk-delete')->middleware('can:delete posts');
+    });
+    
     // Roles & Permissions Management Routes (Admin Only)
     Route::middleware(['auth'])->group(function () {
         Route::resource('roles', App\Http\Controllers\RoleController::class)->except(['show', 'create', 'edit']);
@@ -64,6 +70,30 @@ Route::middleware('auth')->group(function () {
         Route::get('/activity-logs', [App\Http\Controllers\ActivityLogController::class, 'index'])->name('activity-logs.index');
         Route::get('/admin/settings', [App\Http\Controllers\AdminSettingsController::class, 'index'])->name('admin.settings');
         Route::patch('/admin/settings', [App\Http\Controllers\AdminSettingsController::class, 'update'])->name('admin.settings.update');
+    });
+    
+    // Category Management Routes
+    Route::middleware(['can:view categories'])->group(function () {
+        Route::resource('categories', App\Http\Controllers\CategoryController::class);
+        Route::post('/categories/bulk-delete', [App\Http\Controllers\CategoryController::class, 'bulkDelete'])->name('categories.bulk-delete')->middleware('can:delete categories');
+    });
+
+    // Order Management Routes
+    Route::middleware(['can:view orders'])->group(function () {
+        Route::resource('orders', App\Http\Controllers\OrderController::class);
+        Route::post('/orders/bulk-delete', [App\Http\Controllers\OrderController::class, 'bulkDelete'])->name('orders.bulk-delete')->middleware('can:delete orders');
+    });
+
+    // Brand Management Routes
+    Route::middleware(['can:view brands'])->group(function () {
+        Route::resource('brands', App\Http\Controllers\BrandController::class);
+        Route::post('/brands/bulk-delete', [App\Http\Controllers\BrandController::class, 'bulkDelete'])->name('brands.bulk-delete')->middleware('can:delete brands');
+    });
+
+    // Customer Management Routes
+    Route::middleware(['can:view customers'])->group(function () {
+        Route::resource('customers', App\Http\Controllers\CustomerController::class);
+        Route::post('/customers/bulk-delete', [App\Http\Controllers\CustomerController::class, 'bulkDelete'])->name('customers.bulk-delete')->middleware('can:delete customers');
     });
 });
 

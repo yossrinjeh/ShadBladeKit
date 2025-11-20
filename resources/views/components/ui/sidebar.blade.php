@@ -77,6 +77,50 @@
                             </svg>
                             {{ __('navigation.components') }}
                         </a>
+                        
+                        
+                @can('view posts')
+                <x-nav-link :href="route('posts.index')" :active="request()->routeIs('posts.*')" class="group flex items-center px-2 py-2 text-sm font-medium rounded-md">
+                    <svg class="mr-3 h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                    {{ __('Posts') }}
+                </x-nav-link>
+                @endcan
+                
+                @can('view posts')
+                <x-nav-link :href="route('posts.index')" :active="request()->routeIs('posts.*')" class="group flex items-center px-2 py-2 text-sm font-medium rounded-md">
+                    <svg class="mr-3 h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                    {{ __('Posts') }}
+                </x-nav-link>
+                @endcan
+                
+                @can('view categories')
+                <x-nav-link :href="route('categories.index')" :active="request()->routeIs('categories.*')" class="group flex items-center px-2 py-2 text-sm font-medium rounded-md">
+                    <svg class="mr-3 h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                    {{ __('Categories') }}
+                </x-nav-link>
+                @endcan
+                
+                @can('view orders')
+                <x-nav-link :href="route('orders.index')" :active="request()->routeIs('orders.*')" class="group flex items-center px-2 py-2 text-sm font-medium rounded-md">
+                    <svg class="mr-3 h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                    {{ __('Orders') }}
+                </x-nav-link>
+                @endcan
+                
+                @can('view brands')
+                <x-nav-link :href="route('brands.index')" :active="request()->routeIs('brands.*')" class="group flex items-center px-2 py-2 text-sm font-medium rounded-md">
+                    <svg class="mr-3 h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                    {{ __('Brands') }}
+                </x-nav-link>
+                @endcan
+                
+                @can('view customers')
+                <x-nav-link :href="route('customers.index')" :active="request()->routeIs('customers.*')" class="group flex items-center px-2 py-2 text-sm font-medium rounded-md">
+                    <svg class="mr-3 h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                    {{ __('Customers') }}
+                </x-nav-link>
+                @endcan
+                {{-- Add more navigation items here --}}
                     </div>
                     @else
                     <!-- Regular User Section -->

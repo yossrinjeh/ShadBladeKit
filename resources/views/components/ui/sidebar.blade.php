@@ -109,6 +109,18 @@
                             <h3 class="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Personal</h3>
                         </div>
                         
+                        <a href="{{ route('notifications.index') }}" class="group flex items-center px-2 py-2 text-sm font-medium rounded-md {{ request()->routeIs('notifications.*') ? 'bg-primary text-primary-foreground' : 'text-muted-foreground hover:bg-accent hover:text-accent-foreground' }}">
+                            <svg class="mr-3 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0" />
+                            </svg>
+                            {{ __('Notifications') }}
+                            @if(auth()->user()->unreadNotifications->count() > 0)
+                                <span class="ml-auto inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-white bg-red-600 rounded-full">
+                                    {{ auth()->user()->unreadNotifications->count() }}
+                                </span>
+                            @endif
+                        </a>
+                        
                         <a href="{{ route('profile.edit') }}" class="group flex items-center px-2 py-2 text-sm font-medium rounded-md {{ request()->routeIs('profile.*') ? 'bg-primary text-primary-foreground' : 'text-muted-foreground hover:bg-accent hover:text-accent-foreground' }}">
                             <svg class="mr-3 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
@@ -206,13 +218,16 @@
                     </x-slot>
                     <x-slot name="content">
                         <div class="p-2">
-                            <h3 class="text-sm font-medium mb-2">{{ __('ui.notifications') }}</h3>
+                            <div class="flex items-center justify-between mb-2">
+                                <h3 class="text-sm font-medium">{{ __('ui.notifications') }}</h3>
+                                <a href="{{ route('notifications.index') }}" class="text-xs text-primary hover:text-primary/80">View All</a>
+                            </div>
                             @forelse(auth()->user()->notifications->take(5) as $notification)
-                                <div class="p-2 hover:bg-accent rounded-md mb-1 {{ $notification->read_at ? 'opacity-60' : '' }}">
+                                <a href="{{ route('notifications.index') }}" class="block p-2 hover:bg-accent rounded-md mb-1 {{ $notification->read_at ? 'opacity-60' : '' }}">
                                     <p class="text-sm font-medium">{{ $notification->data['title'] ?? 'Notification' }}</p>
                                     <p class="text-xs text-muted-foreground">{{ $notification->data['message'] ?? '' }}</p>
                                     <p class="text-xs text-muted-foreground mt-1">{{ $notification->created_at->diffForHumans() }}</p>
-                                </div>
+                                </a>
                             @empty
                                 <p class="text-sm text-muted-foreground p-2">No notifications</p>
                             @endforelse

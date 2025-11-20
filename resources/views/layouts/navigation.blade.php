@@ -94,6 +94,15 @@
             </div>
 
             <div class="mt-3 space-y-1">
+                <x-responsive-nav-link :href="route('notifications.index')">
+                    {{ __('Notifications') }}
+                    @if(auth()->user()->unreadNotifications->count() > 0)
+                        <span class="ml-2 inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-white bg-red-600 rounded-full">
+                            {{ auth()->user()->unreadNotifications->count() }}
+                        </span>
+                    @endif
+                </x-responsive-nav-link>
+                
                 <x-responsive-nav-link :href="route('profile.edit')">
                     {{ __('Profile') }}
                 </x-responsive-nav-link>

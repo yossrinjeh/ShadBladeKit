@@ -20,6 +20,7 @@ A **production-ready Laravel 11 starter template** with enterprise-grade feature
 - 🔐 **Enterprise Security** - 2FA, role-based permissions, activity logging
 - 🌍 **Multilingual Ready** - 4 languages with RTL support
 - 🎨 **Modern UI/UX** - Dark mode, responsive design, Shadcn-inspired components
+- 🎨 **Theme System** - 5 predefined themes + custom color management
 - 📊 **Analytics Dashboard** - Real-time metrics and user insights
 - 🚀 **Production Ready** - Optimized, tested, and documented
 
@@ -44,9 +45,11 @@ A **production-ready Laravel 11 starter template** with enterprise-grade feature
 
 ### 🎨 **UI/UX Features**
 - ✅ **Dark/Light Mode** - Persistent theme switching
+- ✅ **Theme Presets** - 5 predefined themes (Classic Blue, Emerald SaaS, Cyber Purple, Warm Orange, Minimal B/W)
+- ✅ **Custom Colors** - Manual color customization with live preview
 - ✅ **Responsive Design** - Mobile-first approach
 - ✅ **Custom Components** - Shadcn-inspired Blade components
-- ✅ **Modern Sidebar** - Professional navigation
+- ✅ **Modern Sidebar** - Professional navigation with dropdowns
 - ✅ **Toast Notifications** - Real-time feedback
 
 ### 🌍 **Internationalization**
@@ -68,6 +71,13 @@ A **production-ready Laravel 11 starter template** with enterprise-grade feature
 - ✅ **Modal-Based Interface** - Modern UI with modals
 - ✅ **Bulk Operations** - Multi-select and bulk actions
 - ✅ **Sidebar Integration** - Auto-added navigation links
+
+### 🎨 **Theme Management**
+- ✅ **Theme Presets** - 5 professionally designed color schemes
+- ✅ **Custom Colors** - 8-color palette customization
+- ✅ **Live Preview** - Real-time color updates
+- ✅ **Reset to Defaults** - One-click restoration
+- ✅ **Admin Interface** - Dedicated theme management page
 
 ---
 
@@ -268,6 +278,7 @@ $user->update(['language' => 'fr']);
 - `<x-ui.dropdown>` - Dropdown menus
 - `<x-ui.toast>` - Notification toasts
 - `<x-ui.theme-toggle>` - Dark mode toggle
+- `<x-ui.theme-selector>` - Quick theme switcher
 - `<x-ui.lang-switcher>` - Language switcher
 
 ### Usage Example
@@ -276,7 +287,40 @@ $user->update(['language' => 'fr']);
     <x-ui.button variant="primary" size="lg">
         Save Changes
     </x-ui.button>
+    
+    <!-- Quick theme switcher -->
+    <x-ui.theme-selector class="ml-4" />
 </x-ui.card>
+```
+
+---
+
+## 🎨 **Theme System**
+
+### Predefined Themes
+- 🔵 **Classic Blue** - Traditional professional theme
+- 🟢 **Emerald SaaS** - Modern green SaaS theme  
+- 🟣 **Cyber Purple** - Futuristic purple theme
+- 🟠 **Warm Orange** - Cozy orange theme
+- ⚫ **Minimal Black/White** - Clean monochrome theme
+
+### Theme Management
+```bash
+# Access theme management
+/theme-presets  # Complete theme interface
+/admin/settings # App configuration only
+```
+
+### Customization Options
+- **8 Color Palette** - Primary, Secondary, Accent, Success, Warning, Danger, Light/Dark backgrounds
+- **Live Preview** - See changes instantly
+- **Reset Function** - Restore defaults anytime
+- **Theme Persistence** - Settings saved across sessions
+
+### Quick Theme Switching
+```blade
+<!-- Add anywhere in your layout -->
+<x-ui.theme-selector />
 ```
 
 ---

@@ -7,7 +7,7 @@ return [
     'get_started' => 'Get Started',
     'starter_kit' => 'Starter Kit',
     'hero_description' => 'Production-ready :app template with enterprise-grade features, modern UI components, and comprehensive security. Skip the boilerplate and start building amazing applications immediately.',
-    'get_started_free' => 'Get Started Free',
+    'get_started_free' => 'Get Started',
     'view_features' => 'View Features',
     'everything_you_need' => 'Everything You Need to Build Modern Apps',
     'enterprise_features' => 'Enterprise-grade features built with Laravel 11 and modern technologies',

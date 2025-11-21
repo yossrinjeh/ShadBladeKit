@@ -147,6 +147,28 @@
                     <p class="text-gray-600 dark:text-gray-300">{{ __('welcome.analytics_desc') }}</p>
                 </div>
 
+                <!-- Theme Management -->
+                <div class="bg-gray-50 dark:bg-gray-800 p-6 rounded-xl">
+                    <div class="w-12 h-12 bg-pink-100 dark:bg-pink-900 rounded-lg flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-pink-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zM21 5a2 2 0 00-2-2h-4a2 2 0 00-2 2v12a4 4 0 004 4 4 4 0 004-4V5z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-2">Theme System</h3>
+                    <p class="text-gray-600 dark:text-gray-300">5 predefined themes plus custom color management. Live preview and one-click theme switching.</p>
+                </div>
+
+                <!-- Command Palette -->
+                <div class="bg-gray-50 dark:bg-gray-800 p-6 rounded-xl">
+                    <div class="w-12 h-12 bg-cyan-100 dark:bg-cyan-900 rounded-lg flex items-center justify-center mb-4">
+                        <svg class="w-6 h-6 text-cyan-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-2">Command Palette</h3>
+                    <p class="text-gray-600 dark:text-gray-300">Quick navigation with Ctrl+K. Smart search, keyboard shortcuts, and contextual actions.</p>
+                </div>
+
                 <!-- CRUD Generator -->
                 <div class="bg-gray-50 dark:bg-gray-800 p-6 rounded-xl">
                     <div class="w-12 h-12 bg-orange-100 dark:bg-orange-900 rounded-lg flex items-center justify-center mb-4">
@@ -264,10 +286,12 @@
                     <h3 class="text-xl font-semibold text-gray-900 dark:text-white">🎨 UI Components</h3>
                     <ul class="space-y-2 text-gray-600 dark:text-gray-300">
                         <li>✅ Dark/Light Mode</li>
+                        <li>✅ Theme Presets (5 themes)</li>
+                        <li>✅ Custom Color Management</li>
+                        <li>✅ Command Palette (Ctrl+K)</li>
                         <li>✅ Responsive Design</li>
                         <li>✅ Custom Blade Components</li>
                         <li>✅ Toast Notifications</li>
-                        <li>✅ Data Tables</li>
                     </ul>
                 </div>
 

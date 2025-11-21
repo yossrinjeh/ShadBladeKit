@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\AppSetting;
+use App\Models\ThemePreset;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -24,7 +25,10 @@ class AdminSettingsController extends Controller
             'app_favicon' => AppSetting::get('app_favicon'),
         ];
         
-        return view('admin.settings', compact('settings'));
+        $presets = ThemePreset::all();
+        $activePreset = ThemePreset::getActive();
+        
+        return view('admin.settings', compact('settings', 'presets', 'activePreset'));
     }
     
     public function update(Request $request)
@@ -116,5 +120,48 @@ class AdminSettingsController extends Controller
             ->log('App settings updated');
         
         return redirect()->route('admin.settings')->with('status', 'settings-updated');
+    }
+    
+    public function activatePreset(ThemePreset $preset)
+    {
+        $preset->activate();
+        
+        activity()
+            ->causedBy(auth()->user())
+            ->withProperties([
+                'preset_name' => $preset->name,
+                'ip_address' => request()->ip()
+            ])
+            ->log('Theme preset activated');
+        
+        return redirect()->route('admin.settings')->with('status', 'preset-activated');
+    }
+    
+    public function resetToDefaults()
+    {
+        $defaults = [
+            'bg_light_color' => '#ffffff',
+            'bg_dark_color' => '#0f172a',
+            'primary_color' => '#6366f1',
+            'secondary_color' => '#64748b',
+            'accent_color' => '#10b981',
+            'success_color' => '#22c55e',
+            'warning_color' => '#f59e0b',
+            'danger_color' => '#ef4444',
+        ];
+        
+        foreach ($defaults as $key => $value) {
+            AppSetting::set($key, $value);
+        }
+        
+        // Deactivate all presets
+        ThemePreset::query()->update(['is_active' => false]);
+        
+        activity()
+            ->causedBy(auth()->user())
+            ->withProperties(['ip_address' => request()->ip()])
+            ->log('Theme colors reset to defaults');
+        
+        return redirect()->route('admin.settings')->with('status', 'reset-completed');
     }
 }

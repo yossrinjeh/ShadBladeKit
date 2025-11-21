@@ -8,11 +8,60 @@
     <div class="space-y-6">
         @if (session('status') === 'settings-updated')
             <x-ui.toast type="success" title="Success" message="App settings updated successfully!" />
+        @elseif (session('status') === 'preset-activated')
+            <x-ui.toast type="success" title="Success" message="Theme preset activated successfully!" />
+        @elseif (session('status') === 'reset-completed')
+            <x-ui.toast type="success" title="Success" message="Colors reset to defaults successfully!" />
         @endif
 
         <x-ui.card>
             <div class="p-6">
                 <h3 class="text-lg font-semibold mb-6">App Customization</h3>
+                
+                <!-- Theme Presets Section -->
+                <div class="mb-8">
+                    <div class="flex justify-between items-center mb-6">
+                        <h4 class="text-lg font-semibold">Theme Presets</h4>
+                        <form action="{{ route('admin.settings.reset') }}" method="POST" class="inline">
+                            @csrf
+                            @method('POST')
+                            <button type="submit" class="px-4 py-2 rounded text-white bg-gray-600 hover:bg-gray-700" onclick="return confirm('Reset all colors to defaults?')">
+                                Reset to Defaults
+                            </button>
+                        </form>
+                    </div>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        @foreach($presets as $preset)
+                            <div class="border rounded-lg p-4 {{ $preset->is_active ? 'border-blue-500 bg-blue-50 dark:bg-blue-900/20' : 'border-gray-200 dark:border-gray-700 dark:bg-gray-900' }}">
+                                <div class="flex justify-between items-start mb-3">
+                                    <h3 class="font-semibold text-lg">{{ $preset->name }}</h3>
+                                    @if($preset->is_active)
+                                        <span class="bg-green-100 text-green-800 dark:bg-green-900/20 dark:text-green-400 text-xs px-2 py-1 rounded-full">Active</span>
+                                    @endif
+                                </div>
+                                
+                                <div class="grid grid-cols-4 gap-2 mb-4">
+                                    @foreach($preset->colors as $key => $color)
+                                        <div class="w-8 h-8 rounded border border-gray-300 dark:border-gray-600" 
+                                             style="background-color: {{ $color }}"
+                                             title="{{ ucwords(str_replace('_', ' ', $key)) }}"></div>
+                                    @endforeach
+                                </div>
+                                
+                                @unless($preset->is_active)
+                                    <form action="{{ route('admin.settings.preset', $preset) }}" method="POST">
+                                        @csrf
+                                        @method('PATCH')
+                                        <button type="submit" class="w-full px-4 py-2 rounded text-white" style="background-color: {{ $preset->colors['primary_color'] }}; hover:opacity-90">
+                                            Apply Theme
+                                        </button>
+                                    </form>
+                                @endunless
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
                 
                 <form method="POST" action="{{ route('admin.settings.update') }}" enctype="multipart/form-data" class="space-y-6">
                     @csrf
@@ -33,7 +82,7 @@
                     </div>
 
                     <div class="space-y-4">
-                        <h4 class="text-md font-medium">Color Scheme</h4>
+                        <h4 class="text-md font-medium">Custom Colors</h4>
                         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                             <div>
                                 <label for="bg_light_color" class="block text-sm font-medium mb-2">Light Background</label>

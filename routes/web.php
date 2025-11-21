@@ -71,8 +71,12 @@ Route::middleware('auth')->group(function () {
         Route::get('/activity-logs', [App\Http\Controllers\ActivityLogController::class, 'index'])->name('activity-logs.index');
         Route::get('/admin/settings', [App\Http\Controllers\AdminSettingsController::class, 'index'])->name('admin.settings');
         Route::patch('/admin/settings', [App\Http\Controllers\AdminSettingsController::class, 'update'])->name('admin.settings.update');
-        Route::patch('/admin/settings/preset/{preset}', [App\Http\Controllers\AdminSettingsController::class, 'activatePreset'])->name('admin.settings.preset');
-        Route::post('/admin/settings/reset', [App\Http\Controllers\AdminSettingsController::class, 'resetToDefaults'])->name('admin.settings.reset');
+        
+        // Theme Presets
+        Route::get('/theme-presets', [App\Http\Controllers\ThemePresetController::class, 'index'])->name('theme-presets.index');
+        Route::patch('/theme-presets/{preset}/activate', [App\Http\Controllers\ThemePresetController::class, 'activate'])->name('theme-presets.activate');
+        Route::patch('/theme-presets/colors', [App\Http\Controllers\ThemePresetController::class, 'updateColors'])->name('theme-presets.colors');
+        Route::post('/theme-presets/reset', [App\Http\Controllers\ThemePresetController::class, 'resetToDefaults'])->name('theme-presets.reset');
     });
     
   

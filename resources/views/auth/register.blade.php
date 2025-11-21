@@ -38,7 +38,7 @@
                 </x-ui.button>
 
                 <div class="text-center">
-                    <a class="text-sm text-primary hover:underline" href="{{ route('login') }">
+                    <a class="text-sm text-primary hover:underline" href="{{route('login') }}">
                         Already registered?
                     </a>
                 </div>

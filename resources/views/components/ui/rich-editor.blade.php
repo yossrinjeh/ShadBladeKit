@@ -77,70 +77,18 @@
         class="p-4 {{ $height }} overflow-y-auto focus:outline-none"
         @input="updateContent()"
         @paste="handlePaste($event)"
-        :placeholder="placeholder"
+        :data-placeholder="'{{ $placeholder }}'"
     ></div>
     
     <!-- Hidden Input -->
     <input type="hidden" name="{{ $name }}" x-model="content" />
 </div>
 
-<script>
-function richEditor() {
-    return {
-        content: @json($value),
-        
-        init() {
-            this.$refs.editor.innerHTML = this.content;
-            
-            // Add placeholder styling
-            if (!this.content) {
-                this.$refs.editor.classList.add('empty');
-            }
-        },
-        
-        execCommand(command, value = null) {
-            document.execCommand(command, false, value);
-            this.updateContent();
-            this.$refs.editor.focus();
-        },
-        
-        updateContent() {
-            this.content = this.$refs.editor.innerHTML;
-            
-            // Handle placeholder
-            if (this.$refs.editor.textContent.trim() === '') {
-                this.$refs.editor.classList.add('empty');
-            } else {
-                this.$refs.editor.classList.remove('empty');
-            }
-        },
-        
-        insertLink() {
-            const url = prompt('Enter URL:');
-            if (url) {
-                this.execCommand('createLink', url);
-            }
-        },
-        
-        insertImage() {
-            const url = prompt('Enter image URL:');
-            if (url) {
-                this.execCommand('insertImage', url);
-            }
-        },
-        
-        handlePaste(event) {
-            event.preventDefault();
-            const text = event.clipboardData.getData('text/plain');
-            this.execCommand('insertText', text);
-        }
-    }
-}
-</script>
+
 
 <style>
 [contenteditable].empty:before {
-    content: attr(placeholder);
+    content: attr(data-placeholder);
     color: rgb(156 163 175);
     pointer-events: none;
 }

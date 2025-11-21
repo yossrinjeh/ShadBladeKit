@@ -63,32 +63,3 @@
     </div>
 </div>
 
-<script>
-function fileUpload() {
-    return {
-        files: [],
-        dragover: false,
-        
-        handleFiles(fileList) {
-            this.files = Array.from(fileList);
-        },
-        
-        handleDrop(e) {
-            this.dragover = false;
-            this.handleFiles(e.dataTransfer.files);
-        },
-        
-        removeFile(index) {
-            this.files.splice(index, 1);
-        },
-        
-        formatFileSize(bytes) {
-            if (bytes === 0) return '0 Bytes';
-            const k = 1024;
-            const sizes = ['Bytes', 'KB', 'MB', 'GB'];
-            const i = Math.floor(Math.log(bytes) / Math.log(k));
-            return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
-        }
-    }
-}
-</script>

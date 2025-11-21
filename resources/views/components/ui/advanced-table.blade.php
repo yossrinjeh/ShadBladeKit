@@ -7,7 +7,7 @@
     'perPage' => [10, 25, 50, 100]
 ])
 
-<div x-data="advancedTable()" class="space-y-4">
+<div class="space-y-4">
     <!-- Table Controls -->
     <div class="flex flex-wrap items-center justify-between gap-4">
         <div class="flex items-center space-x-4">
@@ -53,7 +53,7 @@
             @endif
             
             @if($bulkActions)
-            <x-ui.button variant="destructive" size="sm" x-show="selectedItems.length > 0">
+            <x-ui.button variant="destructive" size="sm" x-show="selectedItems.length > 0" @click="deleteSelected()">
                 Delete Selected
             </x-ui.button>
             @endif
@@ -67,13 +67,14 @@
                 <tr>
                     @if($bulkActions)
                     <th class="w-12 px-4 py-3">
-                        <input type="checkbox" class="rounded border-input">
+                        <input type="checkbox" class="rounded border-input" @change="selectAll()">
                     </th>
                     @endif
                     
                     @foreach($headers as $key => $header)
-                    <th class="px-4 py-3 text-left text-sm font-medium">
+                    <th class="px-4 py-3 text-left text-sm font-medium cursor-pointer" @click="sort('{{ $key }}')">
                         {{ $header }}
+                        <span x-show="sortColumn === '{{ $key }}'" x-text="sortDirection === 'asc' ? '↑' : '↓'"></span>
                     </th>
                     @endforeach
                 </tr>
@@ -84,8 +85,26 @@
         </table>
         
         <!-- Empty State -->
-        <div class="text-center py-8 text-muted-foreground">
-            <p>Table content will be rendered here</p>
+        <div x-show="paginatedData.length === 0" class="text-center py-8 text-muted-foreground">
+            <p>No data found</p>
+        </div>
+    </div>
+    
+    <!-- Pagination -->
+    <div class="flex items-center justify-between text-sm text-muted-foreground">
+        <div>
+            Showing <span x-text="(currentPage - 1) * itemsPerPage + 1"></span> to 
+            <span x-text="Math.min(currentPage * itemsPerPage, filteredData.length)"></span> of 
+            <span x-text="filteredData.length"></span> results
+        </div>
+        <div class="flex items-center space-x-2">
+            <button @click="currentPage = Math.max(1, currentPage - 1)" :disabled="currentPage === 1" class="px-3 py-1 rounded border disabled:opacity-50">
+                Previous
+            </button>
+            <span x-text="currentPage + ' of ' + totalPages"></span>
+            <button @click="currentPage = Math.min(totalPages, currentPage + 1)" :disabled="currentPage === totalPages" class="px-3 py-1 rounded border disabled:opacity-50">
+                Next
+            </button>
         </div>
     </div>
 </div>

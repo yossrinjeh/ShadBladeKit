@@ -73,41 +73,45 @@
                 <h3 class="text-lg font-semibold mb-4">Advanced Data Table</h3>
                 <p class="text-sm text-muted-foreground mb-4">Feature-rich table with search, sort, pagination, and export</p>
                 
-                <div x-data="{
-                    tableData: [
+                <div x-data="advancedTable()" x-init="data = [
                         { id: 1, name: 'John Doe', email: 'john@example.com', role: 'Admin', status: 'Active', created: '2024-01-15' },
                         { id: 2, name: 'Jane Smith', email: 'jane@example.com', role: 'User', status: 'Active', created: '2024-01-20' },
                         { id: 3, name: 'Bob Johnson', email: 'bob@example.com', role: 'User', status: 'Inactive', created: '2024-02-01' },
-                        { id: 4, name: 'Alice Brown', email: 'alice@example.com', role: 'Editor', status: 'Active', created: '2024-02-10' },
+                        { id: 4, name: 'Alice Brown', email: 'alice@example.com', role: 'Editor', status: 'Active', created: '2024-02-15' },
                         { id: 5, name: 'Charlie Wilson', email: 'charlie@example.com', role: 'User', status: 'Active', created: '2024-02-15' }
-                    ]
-                }" x-init="$refs.table.data = tableData">
+                    ]">
                     <x-ui.advanced-table 
-                        x-ref="table"
                         :headers="['name' => 'Name', 'email' => 'Email', 'role' => 'Role', 'status' => 'Status', 'created' => 'Created']"
                         :searchable="true"
                         :sortable="true"
                         :exportable="true"
                         :bulk-actions="true"
                     >
-                        <td class="px-4 py-3">
-                            <div class="flex items-center space-x-3">
-                                <div class="h-8 w-8 rounded-full bg-primary flex items-center justify-center">
-                                    <span class="text-sm font-medium text-primary-foreground" x-text="item.name.charAt(0)"></span>
-                                </div>
-                                <span class="font-medium" x-text="item.name"></span>
-                            </div>
-                        </td>
-                        <td class="px-4 py-3 text-sm text-muted-foreground" x-text="item.email"></td>
-                        <td class="px-4 py-3">
-                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary/10 text-primary" x-text="item.role"></span>
-                        </td>
-                        <td class="px-4 py-3">
-                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium" 
-                                  :class="item.status === 'Active' ? 'bg-green-100 text-green-800 dark:bg-green-900/20 dark:text-green-400' : 'bg-red-100 text-red-800 dark:bg-red-900/20 dark:text-red-400'"
-                                  x-text="item.status"></span>
-                        </td>
-                        <td class="px-4 py-3 text-sm text-muted-foreground" x-text="item.created"></td>
+                        <template x-for="item in paginatedData" :key="item.id">
+                            <tr>
+                                <td class="px-4 py-3">
+                                    <input type="checkbox" class="rounded border-input" :value="item.id" @change="toggleSelection(item.id)">
+                                </td>
+                                <td class="px-4 py-3">
+                                    <div class="flex items-center space-x-3">
+                                        <div class="h-8 w-8 rounded-full bg-primary flex items-center justify-center">
+                                            <span class="text-sm font-medium text-primary-foreground" x-text="item.name.charAt(0)"></span>
+                                        </div>
+                                        <span class="font-medium" x-text="item.name"></span>
+                                    </div>
+                                </td>
+                                <td class="px-4 py-3 text-sm text-muted-foreground" x-text="item.email"></td>
+                                <td class="px-4 py-3">
+                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary/10 text-primary" x-text="item.role"></span>
+                                </td>
+                                <td class="px-4 py-3">
+                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium" 
+                                          :class="item.status === 'Active' ? 'bg-green-100 text-green-800 dark:bg-green-900/20 dark:text-green-400' : 'bg-red-100 text-red-800 dark:bg-red-900/20 dark:text-red-400'"
+                                          x-text="item.status"></span>
+                                </td>
+                                <td class="px-4 py-3 text-sm text-muted-foreground" x-text="item.created"></td>
+                            </tr>
+                        </template>
                     </x-ui.advanced-table>
                 </div>
             </div>

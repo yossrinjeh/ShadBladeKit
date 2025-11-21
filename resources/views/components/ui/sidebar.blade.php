@@ -234,6 +234,19 @@
             </div>
             
             <div class="flex items-center space-x-4">
+                <!-- Command Palette Trigger -->
+                <button 
+                    @click="$dispatch('toggle-command-palette')"
+                    class="flex items-center space-x-2 px-3 py-1.5 text-sm text-muted-foreground hover:text-foreground hover:bg-accent rounded-md transition-colors"
+                    title="Open command palette (Ctrl+K)"
+                >
+                    <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                    </svg>
+                    <span class="hidden sm:inline">Press</span>
+                    <kbd class="hidden sm:inline-flex items-center rounded border bg-muted px-1.5 py-0.5 text-xs font-mono">Ctrl+K</kbd>
+                </button>
+                
                 <!-- Notifications -->
                 @auth
                 <x-dropdown align="right" width="w-80">
@@ -326,5 +339,10 @@
         <main class="flex-1 overflow-y-auto p-6">
             {{ $slot }}
         </main>
+    </div>
+    
+    <!-- Command Palette -->
+    <div x-data="{ open: false }" @toggle-command-palette.window="open = !open">
+        <x-ui.command-palette x-show="open" @close="open = false" />
     </div>
 </div>

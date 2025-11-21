@@ -28,6 +28,7 @@ class DatabaseSeeder extends Seeder
         $this->call([
             RoleSeeder::class,
             AppSettingsSeeder::class,
+            ThemePresetsSeeder::class,
         ]);
     }
 }

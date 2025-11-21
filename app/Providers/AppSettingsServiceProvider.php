@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Models\AppSetting;
+use App\Models\ThemePreset;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\View;
 
@@ -29,7 +30,9 @@ class AppSettingsServiceProvider extends ServiceProvider
                     'success_color' => AppSetting::get('success_color', '#22c55e'),
                     'warning_color' => AppSetting::get('warning_color', '#f59e0b'),
                     'danger_color' => AppSetting::get('danger_color', '#ef4444'),
-                ]
+                ],
+                'activeThemePreset' => ThemePreset::getActive(),
+                'themePresets' => ThemePreset::all(),
             ]);
         });
     }

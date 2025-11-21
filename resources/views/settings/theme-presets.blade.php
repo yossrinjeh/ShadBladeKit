@@ -121,7 +121,7 @@
                             </div>
                             
                             <div class="flex justify-end pt-4">
-                                <button type="submit" class="px-6 py-2 rounded text-white bg-blue-600 hover:bg-blue-700">
+                                <button type="submit" class="px-6 py-2 rounded text-white" style="background-color: {{ $settings['primary_color'] }}">
                                     Save Custom Colors
                                 </button>
                             </div>

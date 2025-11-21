@@ -18,7 +18,7 @@
             <div class="p-6">
                 <div class="flex justify-between items-center mb-6">
                     <h3 class="text-lg font-semibold">App Configuration</h3>
-                    <a href="{{ route('theme-presets.index') }}" class="px-4 py-2 rounded text-white bg-blue-600 hover:bg-blue-700">
+                    <a href="{{ route('theme-presets.index') }}" class="px-4 py-2 rounded text-white" style="background-color: {{ $settings['primary_color'] }}">
                         Manage Themes
                     </a>
                 </div>

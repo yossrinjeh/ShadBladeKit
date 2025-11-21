@@ -50,6 +50,7 @@ A **production-ready Laravel 11 starter template** with enterprise-grade feature
 - ✅ **Responsive Design** - Mobile-first approach
 - ✅ **Custom Components** - Shadcn-inspired Blade components
 - ✅ **Modern Sidebar** - Professional navigation with dropdowns
+- ✅ **Command Palette** - Quick navigation with Ctrl+K
 - ✅ **Toast Notifications** - Real-time feedback
 
 ### 🌍 **Internationalization**
@@ -78,6 +79,13 @@ A **production-ready Laravel 11 starter template** with enterprise-grade feature
 - ✅ **Live Preview** - Real-time color updates
 - ✅ **Reset to Defaults** - One-click restoration
 - ✅ **Admin Interface** - Dedicated theme management page
+
+### ⚡ **Command Palette**
+- ✅ **Quick Navigation** - Jump to any page instantly with Ctrl+K
+- ✅ **Smart Search** - Find pages, users, and actions by typing
+- ✅ **Keyboard Shortcuts** - Full keyboard navigation support
+- ✅ **Action Commands** - Toggle theme, create users, logout
+- ✅ **Contextual Results** - Relevant suggestions based on current page
 
 ---
 
@@ -279,6 +287,7 @@ $user->update(['language' => 'fr']);
 - `<x-ui.toast>` - Notification toasts
 - `<x-ui.theme-toggle>` - Dark mode toggle
 - `<x-ui.theme-selector>` - Quick theme switcher
+- `<x-ui.command-palette>` - Command palette with Ctrl+K
 - `<x-ui.lang-switcher>` - Language switcher
 
 ### Usage Example
@@ -291,6 +300,9 @@ $user->update(['language' => 'fr']);
     <!-- Quick theme switcher -->
     <x-ui.theme-selector class="ml-4" />
 </x-ui.card>
+
+<!-- Command Palette -->
+<x-ui.command-palette />
 ```
 
 ---
@@ -321,6 +333,31 @@ $user->update(['language' => 'fr']);
 ```blade
 <!-- Add anywhere in your layout -->
 <x-ui.theme-selector />
+```
+
+---
+
+## ⚡ **Command Palette**
+
+### Quick Access
+Press `Ctrl+K` (or `Cmd+K` on Mac) from anywhere in the application to open the command palette.
+
+### Available Commands
+- **Navigation** - Jump to Dashboard, Users, Settings, Profile
+- **Actions** - Create User, Toggle Theme, Logout
+- **Search** - Find any page or action by typing
+
+### Keyboard Shortcuts
+- `Ctrl+K` / `Cmd+K` - Open command palette
+- `↑` / `↓` - Navigate results
+- `Enter` - Execute selected command
+- `Escape` - Close palette
+
+### Usage
+```blade
+<!-- Command palette is automatically included in the layout -->
+<!-- Access via topbar button or Ctrl+K -->
+<x-ui.command-palette />
 ```
 
 ---

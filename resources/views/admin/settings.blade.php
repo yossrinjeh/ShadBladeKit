@@ -7,7 +7,7 @@
 
     <div class="space-y-6">
         @if (session('status') === 'settings-updated')
-            <x-ui.toast type="success" title="Success" message="App settings updated successfully!" />
+            <x-ui.toast type="success" title="Success" message="{{ session('message', 'App settings updated successfully!') }}" />
         @elseif (session('status') === 'preset-activated')
             <x-ui.toast type="success" title="Success" message="Theme preset activated successfully!" />
         @elseif (session('status') === 'reset-completed')
@@ -41,8 +41,6 @@
                         @enderror
                     </div>
 
-
-
                     <div>
                         <label for="app_favicon" class="block text-sm font-medium mb-2">App Favicon</label>
                         
@@ -57,10 +55,18 @@
                             type="file" 
                             id="app_favicon" 
                             name="app_favicon" 
-                            accept="image/*"
+                            accept="image/*,.ico"
                             class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-primary file:text-white hover:file:bg-primary/90"
+                            onchange="previewFile(this, 'favicon-preview')"
                         >
-                        <p class="text-xs text-muted-foreground mt-1">Supported: ICO, PNG, JPG. Max: 1MB. Recommended: 32x32px</p>
+                        <div id="favicon-preview" class="mt-2 hidden">
+                            <p class="text-sm text-gray-600 mb-1">Preview:</p>
+                            <img class="w-8 h-8 object-contain border rounded" alt="Favicon Preview">
+                        </div>
+                        <p class="text-xs text-muted-foreground mt-1">Supported: ICO, PNG, JPG. Max: 2MB. Recommended: 32x32px</p>
+                        @error('app_favicon')
+                            <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                        @enderror
                     </div>
 
                     <div>
@@ -79,8 +85,16 @@
                             name="app_logo" 
                             accept="image/*"
                             class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-primary file:text-white hover:file:bg-primary/90"
+                            onchange="previewFile(this, 'logo-preview')"
                         >
+                        <div id="logo-preview" class="mt-2 hidden">
+                            <p class="text-sm text-gray-600 mb-1">Preview:</p>
+                            <img class="w-16 h-16 object-contain border rounded" alt="Logo Preview">
+                        </div>
                         <p class="text-xs text-muted-foreground mt-1">Supported: JPEG, PNG, JPG, GIF, SVG. Max: 2MB</p>
+                        @error('app_logo')
+                            <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                        @enderror
                     </div>
 
                     <div class="flex items-center justify-end space-x-4 pt-6 border-t">
@@ -92,4 +106,23 @@
             </div>
         </x-ui.card>
     </div>
+
+    <script>
+    function previewFile(input, previewId) {
+        const file = input.files[0];
+        const preview = document.getElementById(previewId);
+        const img = preview.querySelector('img');
+        
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                img.src = e.target.result;
+                preview.classList.remove('hidden');
+            };
+            reader.readAsDataURL(file);
+        } else {
+            preview.classList.add('hidden');
+        }
+    }
+    </script>
 </x-app-layout>

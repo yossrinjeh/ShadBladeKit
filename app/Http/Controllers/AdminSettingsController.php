@@ -35,30 +35,12 @@ class AdminSettingsController extends Controller
     {
         $request->validate([
             'app_name' => 'required|string|max:255',
-            'bg_light_color' => 'required|string|regex:/^#[0-9A-Fa-f]{6}$/',
-            'bg_dark_color' => 'required|string|regex:/^#[0-9A-Fa-f]{6}$/',
-            'primary_color' => 'required|string|regex:/^#[0-9A-Fa-f]{6}$/',
-            'secondary_color' => 'required|string|regex:/^#[0-9A-Fa-f]{6}$/',
-            'accent_color' => 'required|string|regex:/^#[0-9A-Fa-f]{6}$/',
-            'success_color' => 'required|string|regex:/^#[0-9A-Fa-f]{6}$/',
-            'warning_color' => 'required|string|regex:/^#[0-9A-Fa-f]{6}$/',
-            'danger_color' => 'required|string|regex:/^#[0-9A-Fa-f]{6}$/',
             'app_logo' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'app_favicon' => 'nullable|image|mimes:ico,png|max:2048',
+            'app_favicon' => 'nullable|file|mimes:ico,png,jpg,jpeg|max:2048',
         ]);
         
         // Update app name
         AppSetting::set('app_name', $request->app_name);
-        
-        // Update colors
-        AppSetting::set('bg_light_color', $request->bg_light_color);
-        AppSetting::set('bg_dark_color', $request->bg_dark_color);
-        AppSetting::set('primary_color', $request->primary_color);
-        AppSetting::set('secondary_color', $request->secondary_color);
-        AppSetting::set('accent_color', $request->accent_color);
-        AppSetting::set('success_color', $request->success_color);
-        AppSetting::set('warning_color', $request->warning_color);
-        AppSetting::set('danger_color', $request->danger_color);
         
         // Handle logo upload
         if ($request->hasFile('app_logo')) {
@@ -70,42 +52,43 @@ class AdminSettingsController extends Controller
                 unlink(storage_path('app/public/' . $oldLogo));
             }
             
-            // Generate unique filename
-            $filename = time() . '_' . uniqid() . '.' . $file->getClientOriginalExtension();
-            $logoPath = 'logos/' . $filename;
-            
             // Create logos directory if it doesn't exist
             if (!file_exists(storage_path('app/public/logos'))) {
                 mkdir(storage_path('app/public/logos'), 0755, true);
             }
+            
+            // Generate unique filename
+            $filename = time() . '_' . uniqid() . '.' . $file->getClientOriginalExtension();
+            $logoPath = 'logos/' . $filename;
             
             // Move file to public storage
             $file->move(storage_path('app/public/logos'), $filename);
             
             AppSetting::set('app_logo', $logoPath);
         }
+        
         // Handle favicon upload
         if ($request->hasFile('app_favicon')) {
             $file = $request->file('app_favicon');
-
+            
             // Delete old favicon
             $oldFavicon = AppSetting::get('app_favicon');
             if ($oldFavicon && file_exists(storage_path('app/public/' . $oldFavicon))) {
                 unlink(storage_path('app/public/' . $oldFavicon));
             }
-
-            // Generate unique filename
-            $filename = time() . '_' . uniqid() . '.' . $file->getClientOriginalExtension();
-            $faviconPath = 'favicons/' . $filename;
-
+            
             // Create favicons directory if it doesn't exist
             if (!file_exists(storage_path('app/public/favicons'))) {
                 mkdir(storage_path('app/public/favicons'), 0755, true);
             }
-
+            
+            // Generate unique filename
+            $filename = time() . '_' . uniqid() . '.' . $file->getClientOriginalExtension();
+            $faviconPath = 'favicons/' . $filename;
+            
             // Move file to public storage
             $file->move(storage_path('app/public/favicons'), $filename);
-
+            
             AppSetting::set('app_favicon', $faviconPath);
         }
         
@@ -119,7 +102,15 @@ class AdminSettingsController extends Controller
             ])
             ->log('App settings updated');
         
-        return redirect()->route('admin.settings')->with('status', 'settings-updated');
+        $message = 'App settings updated successfully!';
+        if ($request->hasFile('app_logo')) {
+            $message .= ' Logo uploaded.';
+        }
+        if ($request->hasFile('app_favicon')) {
+            $message .= ' Favicon uploaded.';
+        }
+        
+        return redirect()->route('admin.settings')->with('status', 'settings-updated')->with('message', $message);
     }
     
     public function activatePreset(ThemePreset $preset)

@@ -78,7 +78,7 @@ return [
     'support' => 'Support',
     'license' => 'License',
     'made_with_love' => 'Made with ❤️ by Yossri Njeh',
-    'made_with_love_by' => 'Made with ❤️ by Yossri Njeh.'
+    'made_with_love_by' => 'Made with ❤️ by Yossri Njeh.',
     
     // Feature cards
     'theme_system' => 'Theme System',

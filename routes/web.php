@@ -82,4 +82,9 @@ Route::middleware('auth')->group(function () {
   
 });
 
+// Test route for 500 error (remove after testing)
+Route::get('/test-500', function () {
+    abort(500);
+});
+
 require __DIR__.'/auth.php';

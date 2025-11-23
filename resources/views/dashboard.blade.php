@@ -19,12 +19,12 @@
                     <div class="space-y-2">
                         <div class="flex items-center space-x-2">
                             <div class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-                            <span class="text-xs font-medium uppercase tracking-wider" style="color: #059669;">Online</span>
+                            <span class="text-xs font-medium uppercase tracking-wider" style="color: #059669;">{{ __('ui.online') }}</span>
                         </div>
                         <h3 class="text-xl sm:text-2xl font-bold bg-gradient-to-r from-foreground to-muted-foreground bg-clip-text text-transparent">
                             {{ __('ui.welcome') }}, {{ Auth::user()->name }}!
                         </h3>
-                        <p class="text-muted-foreground text-sm sm:text-base">{{ __('You\'re logged in and ready to go!') }}</p>
+                        <p class="text-muted-foreground text-sm sm:text-base">{{ __('ui.logged_in_ready') }}</p>
                         <div class="flex items-center space-x-4 text-xs text-muted-foreground">
                             <div class="flex items-center space-x-1">
                                 <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -48,14 +48,14 @@
                                 <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-5 5v-5zM4 19h6v-2H4v2zM4 15h8v-2H4v2zM4 11h10V9H4v2z"/>
                                 </svg>
-                                Test Notification
+                                {{ __('ui.test_notification') }}
                             </x-ui.button>
                         </form>
                         <x-ui.button variant="ghost" size="sm" class="w-full sm:w-auto hover:scale-105 transition-transform">
                             <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
                             </svg>
-                            Quick Tour
+                            {{ __('ui.quick_tour') }}
                         </x-ui.button>
                     </div>
                 </div>
@@ -102,7 +102,7 @@
                             </svg>
                         </div>
                         <div class="ml-4">
-                            <p class="text-sm font-medium text-muted-foreground">Active</p>
+                            <p class="text-sm font-medium text-muted-foreground">{{ __('ui.active') }}</p>
                             <p class="text-2xl font-bold">98.5%</p>
                         </div>
                     </div>
@@ -118,7 +118,7 @@
                             </svg>
                         </div>
                         <div class="ml-4">
-                            <p class="text-sm font-medium text-muted-foreground">Growth</p>
+                            <p class="text-sm font-medium text-muted-foreground">{{ __('ui.growth') }}</p>
                             <p class="text-2xl font-bold">+12.5%</p>
                         </div>
                     </div>
@@ -134,7 +134,7 @@
                             </svg>
                         </div>
                         <div class="ml-4">
-                            <p class="text-sm font-medium text-muted-foreground">Revenue</p>
+                            <p class="text-sm font-medium text-muted-foreground">{{ __('ui.revenue') }}</p>
                             <p class="text-2xl font-bold">$45.2K</p>
                         </div>
                     </div>
@@ -150,10 +150,10 @@
                         <div class="flex items-center justify-between mb-6">
                             <h3 class="text-lg font-semibold flex items-center space-x-2">
                                 <div class="w-2 h-2 bg-primary rounded-full animate-pulse"></div>
-                                <span>Recent Activity</span>
+                                <span>{{ __('ui.recent_activity') }}</span>
                             </h3>
                             <button class="text-xs text-primary hover:text-primary/80 font-medium px-3 py-1 rounded-lg hover:bg-primary/10 transition-colors">
-                                View All
+                                {{ __('ui.view_all') }}
                             </button>
                         </div>
                         <div class="space-y-4">
@@ -165,7 +165,7 @@
                                 </div>
                                 <div class="flex-1 min-w-0">
                                     <div class="flex items-center justify-between">
-                                        <p class="text-sm font-medium group-hover:text-primary transition-colors">New user registered</p>
+                                        <p class="text-sm font-medium group-hover:text-primary transition-colors">{{ __('ui.new_user_registered') }}</p>
                                         <span class="text-xs text-muted-foreground">2m</span>
                                     </div>
                                     <p class="text-xs text-muted-foreground mt-1">John Doe joined the platform</p>
@@ -179,7 +179,7 @@
                                 </div>
                                 <div class="flex-1 min-w-0">
                                     <div class="flex items-center justify-between">
-                                        <p class="text-sm font-medium group-hover:text-primary transition-colors">System update completed</p>
+                                        <p class="text-sm font-medium group-hover:text-primary transition-colors">{{ __('ui.system_update_completed') }}</p>
                                         <span class="text-xs text-muted-foreground">1h</span>
                                     </div>
                                     <p class="text-xs text-muted-foreground mt-1">Version 2.1.0 deployed successfully</p>
@@ -193,7 +193,7 @@
                                 </div>
                                 <div class="flex-1 min-w-0">
                                     <div class="flex items-center justify-between">
-                                        <p class="text-sm font-medium group-hover:text-primary transition-colors">Backup created</p>
+                                        <p class="text-sm font-medium group-hover:text-primary transition-colors">{{ __('ui.backup_created') }}</p>
                                         <span class="text-xs text-muted-foreground">3h</span>
                                     </div>
                                     <p class="text-xs text-muted-foreground mt-1">Daily backup completed (2.3GB)</p>
@@ -208,7 +208,7 @@
             <div class="space-y-4">
                 <x-ui.card>
                     <div class="p-4 sm:p-6">
-                        <h3 class="text-lg font-semibold mb-4">Quick Actions</h3>
+                        <h3 class="text-lg font-semibold mb-4">{{ __('ui.quick_actions') }}</h3>
                         <div class="space-y-3">
                             <button class="w-full flex items-start space-x-3 p-3 rounded-lg hover:bg-accent/50 transition-colors text-left group">
                                 <div class="w-8 h-8 bg-primary/10 rounded-lg flex items-center justify-center group-hover:bg-primary/20 transition-colors flex-shrink-0">
@@ -217,8 +217,8 @@
                                     </svg>
                                 </div>
                                 <div>
-                                    <p class="text-sm font-medium">Add User</p>
-                                    <p class="text-xs text-muted-foreground">Create new account</p>
+                                    <p class="text-sm font-medium">{{ __('ui.add_user') }}</p>
+                                    <p class="text-xs text-muted-foreground">{{ __('ui.create_new_account') }}</p>
                                 </div>
                             </button>
                             <button class="w-full flex items-start space-x-3 p-3 rounded-lg hover:bg-accent/50 transition-colors text-left group">
@@ -228,8 +228,8 @@
                                     </svg>
                                 </div>
                                 <div>
-                                    <p class="text-sm font-medium">View Reports</p>
-                                    <p class="text-xs text-muted-foreground">Analytics dashboard</p>
+                                    <p class="text-sm font-medium">{{ __('ui.view_reports') }}</p>
+                                    <p class="text-xs text-muted-foreground">{{ __('ui.analytics_dashboard') }}</p>
                                 </div>
                             </button>
                             <button class="w-full flex items-start space-x-3 p-3 rounded-lg hover:bg-accent/50 transition-colors text-left group">
@@ -241,7 +241,7 @@
                                 </div>
                                 <div>
                                     <p class="text-sm font-medium">Settings</p>
-                                    <p class="text-xs text-muted-foreground">System configuration</p>
+                                    <p class="text-xs text-muted-foreground">{{ __('ui.system_configuration') }}</p>
                                 </div>
                             </button>
                         </div>

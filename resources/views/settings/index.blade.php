@@ -17,13 +17,13 @@
                             <input type="radio" id="light" name="theme" value="light" 
                                    {{ session('theme', 'light') === 'light' ? 'checked' : '' }}
                                    class="rounded border-input">
-                            <label for="light" class="text-sm font-medium">Light Mode</label>
+                            <label for="light" class="text-sm font-medium">{{ __('ui.light_mode') }}</label>
                         </div>
                         <div class="flex items-center space-x-4">
                             <input type="radio" id="dark" name="theme" value="dark" 
                                    {{ session('theme') === 'dark' ? 'checked' : '' }}
                                    class="rounded border-input">
-                            <label for="dark" class="text-sm font-medium">Dark Mode</label>
+                            <label for="dark" class="text-sm font-medium">{{ __('ui.dark_mode') }}</label>
                         </div>
                     </div>
                     <div class="mt-6">
@@ -72,30 +72,30 @@
         <!-- Account Settings -->
         <x-ui.card>
             <div class="p-6">
-                <h3 class="text-lg font-semibold mb-4">Account Settings</h3>
+                <h3 class="text-lg font-semibold mb-4">{{ __('ui.account_settings') }}</h3>
                 <div class="space-y-4">
                     <div class="flex items-center justify-between">
                         <div>
-                            <p class="font-medium">Email Notifications</p>
-                            <p class="text-sm text-muted-foreground">Receive email updates about your account</p>
+                            <p class="font-medium">{{ __('ui.email_notifications') }}</p>
+                            <p class="text-sm text-muted-foreground">{{ __('ui.email_notifications_desc') }}</p>
                         </div>
                         <input type="checkbox" checked class="rounded border-input">
                     </div>
                     <div class="flex items-center justify-between">
                         <div>
-                            <p class="font-medium">Two-Factor Authentication</p>
-                            <p class="text-sm text-muted-foreground">Add an extra layer of security</p>
+                            <p class="font-medium">{{ __('ui.two_factor_authentication') }}</p>
+                            <p class="text-sm text-muted-foreground">{{ __('ui.two_factor_desc') }}</p>
                             @if(auth()->user()->hasTwoFactorEnabled())
-                                <p class="text-xs text-green-600 dark:text-green-400 mt-1">✓ Enabled</p>
+                                <p class="text-xs text-green-600 dark:text-green-400 mt-1">✓ {{ __('ui.enabled') }}</p>
                             @endif
                         </div>
                         @if(auth()->user()->hasTwoFactorEnabled())
                             <a href="{{ route('profile.edit') }}#two-factor" class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-muted-foreground bg-background hover:bg-accent focus:outline-none transition ease-in-out duration-150">
-                                Manage
+                                {{ __('ui.manage') }}
                             </a>
                         @else
                             <a href="{{ route('profile.edit') }}#two-factor" class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md bg-primary text-primary-foreground hover:bg-primary/90 focus:outline-none transition ease-in-out duration-150">
-                                Enable
+                                {{ __('ui.enable') }}
                             </a>
                         @endif
                     </div>
@@ -105,7 +105,7 @@
 
         @if (session('status') === 'settings-updated')
             <div class="p-4 bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-md">
-                <p class="text-sm text-green-800 dark:text-green-200">Settings updated successfully!</p>
+                <p class="text-sm text-green-800 dark:text-green-200">{{ __('ui.settings_updated') }}</p>
             </div>
         @endif
     </div>

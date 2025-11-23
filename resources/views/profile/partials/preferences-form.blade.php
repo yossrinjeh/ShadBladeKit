@@ -1,10 +1,10 @@
 <section>
     <header>
         <h2 class="text-lg font-medium">
-            {{ __('Preferences') }}
+            {{ __('ui.preferences') }}
         </h2>
         <p class="mt-1 text-sm text-muted-foreground">
-            {{ __('Customize your language and theme preferences.') }}
+            {{ __('ui.preferences_description') }}
         </p>
     </header>
 
@@ -45,7 +45,7 @@
 
         <!-- Dark Mode Toggle -->
         <div>
-            <h3 class="text-sm font-medium mb-3">{{ __('Theme') }}</h3>
+            <h3 class="text-sm font-medium mb-3">{{ __('ui.theme') }}</h3>
             <form method="post" action="{{ route('profile.dark-mode') }}">
                 @csrf
                 <div class="flex items-center justify-between p-3 rounded-lg border border-input">
@@ -56,8 +56,8 @@
                             </svg>
                         </div>
                         <div>
-                            <p class="font-medium">{{ __('Dark Mode') }}</p>
-                            <p class="text-sm text-muted-foreground">{{ __('Switch to dark theme') }}</p>
+                            <p class="font-medium">{{ __('ui.dark_mode') }}</p>
+                            <p class="text-sm text-muted-foreground">{{ __('ui.switch_to_dark_theme') }}</p>
                         </div>
                     </div>
                     <button 
@@ -72,13 +72,13 @@
 
         @if (session('status') === 'language-updated')
             <p x-data="{ show: true }" x-show="show" x-transition x-init="setTimeout(() => show = false, 2000)" class="text-sm text-green-600">
-                {{ __('Language updated successfully.') }}
+                {{ __('ui.language_updated_successfully') }}
             </p>
         @endif
 
         @if (session('status') === 'theme-updated')
             <p x-data="{ show: true }" x-show="show" x-transition x-init="setTimeout(() => show = false, 2000)" class="text-sm text-green-600">
-                {{ __('Theme updated successfully.') }}
+                {{ __('ui.theme_updated_successfully') }}
             </p>
         @endif
     </div>

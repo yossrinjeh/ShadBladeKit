@@ -154,8 +154,8 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zM21 5a2 2 0 00-2-2h-4a2 2 0 00-2 2v12a4 4 0 004 4 4 4 0 004-4V5z" />
                         </svg>
                     </div>
-                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-2">Theme System</h3>
-                    <p class="text-gray-600 dark:text-gray-300">5 predefined themes plus custom color management. Live preview and one-click theme switching.</p>
+                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-2">{{ __('welcome.theme_system') }}</h3>
+                    <p class="text-gray-600 dark:text-gray-300">{{ __('welcome.theme_system_desc') }}</p>
                 </div>
 
                 <!-- Command Palette -->
@@ -165,8 +165,8 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v14a2 2 0 002 2z" />
                         </svg>
                     </div>
-                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-2">Command Palette</h3>
-                    <p class="text-gray-600 dark:text-gray-300">Quick navigation with Ctrl+K. Smart search, keyboard shortcuts, and contextual actions.</p>
+                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-2">{{ __('welcome.command_palette') }}</h3>
+                    <p class="text-gray-600 dark:text-gray-300">{{ __('welcome.command_palette_desc') }}</p>
                 </div>
 
                 <!-- CRUD Generator -->
@@ -176,8 +176,8 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
                         </svg>
                     </div>
-                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-2">CRUD Generator</h3>
-                    <p class="text-gray-600 dark:text-gray-300">Generate complete CRUD interfaces with a single command. Includes modals, permissions, and sidebar integration.</p>
+                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white mb-2">{{ __('ui.crud_generator') }}</h3>
+                    <p class="text-gray-600 dark:text-gray-300">{{ __('welcome.crud_generator_desc') }}</p>
                 </div>
 
                 <!-- Production Ready -->
@@ -199,10 +199,10 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
                 <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
-                    Built with Modern Technologies
+                    {{ __('welcome.built_with_modern') }}
                 </h2>
                 <p class="text-xl text-gray-600 dark:text-gray-300">
-                    Leveraging the best tools and frameworks for optimal performance
+                    {{ __('welcome.leveraging_best_tools') }}
                 </p>
             </div>
 
@@ -252,79 +252,79 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
                 <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
-                    Complete Feature Set
+                    {{ __('welcome.complete_feature_set') }}
                 </h2>
                 <p class="text-xl text-gray-600 dark:text-gray-300">
-                    All the modules you need for a modern web application
+                    {{ __('welcome.all_modules_needed') }}
                 </p>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div class="space-y-4">
-                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white">🔐 Authentication & Security</h3>
+                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white">🔐 {{ __('welcome.auth_security') }}</h3>
                     <ul class="space-y-2 text-gray-600 dark:text-gray-300">
-                        <li>✅ Complete Auth System (Login, Register, Reset)</li>
-                        <li>✅ Two-Factor Authentication (TOTP)</li>
-                        <li>✅ Recovery Codes</li>
-                        <li>✅ Email Verification</li>
-                        <li>✅ Activity Logging</li>
+                        <li>✅ {{ __('welcome.complete_auth_system') }}</li>
+                        <li>✅ {{ __('welcome.two_factor_totp') }}</li>
+                        <li>✅ {{ __('welcome.recovery_codes') }}</li>
+                        <li>✅ {{ __('welcome.email_verification') }}</li>
+                        <li>✅ {{ __('welcome.activity_logging') }}</li>
                     </ul>
                 </div>
 
                 <div class="space-y-4">
-                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white">👥 User Management</h3>
+                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white">👥 {{ __('welcome.user_management_section') }}</h3>
                     <ul class="space-y-2 text-gray-600 dark:text-gray-300">
-                        <li>✅ Advanced User CRUD</li>
-                        <li>✅ Bulk Operations</li>
-                        <li>✅ Role Assignment</li>
-                        <li>✅ Search & Filters</li>
-                        <li>✅ Avatar Upload</li>
+                        <li>✅ {{ __('welcome.advanced_user_crud') }}</li>
+                        <li>✅ {{ __('welcome.bulk_operations') }}</li>
+                        <li>✅ {{ __('welcome.role_assignment') }}</li>
+                        <li>✅ {{ __('welcome.search_filters') }}</li>
+                        <li>✅ {{ __('welcome.avatar_upload') }}</li>
                     </ul>
                 </div>
 
                 <div class="space-y-4">
-                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white">🎨 UI Components</h3>
+                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white">🎨 {{ __('welcome.ui_components') }}</h3>
                     <ul class="space-y-2 text-gray-600 dark:text-gray-300">
-                        <li>✅ Dark/Light Mode</li>
-                        <li>✅ Theme Presets (5 themes)</li>
-                        <li>✅ Custom Color Management</li>
-                        <li>✅ Command Palette (Ctrl+K)</li>
-                        <li>✅ Responsive Design</li>
-                        <li>✅ Custom Blade Components</li>
-                        <li>✅ Toast Notifications</li>
+                        <li>✅ {{ __('welcome.dark_light_mode') }}</li>
+                        <li>✅ {{ __('welcome.theme_presets') }}</li>
+                        <li>✅ {{ __('welcome.custom_color_management') }}</li>
+                        <li>✅ {{ __('welcome.command_palette_ctrl_k') }}</li>
+                        <li>✅ {{ __('welcome.responsive_design') }}</li>
+                        <li>✅ {{ __('welcome.custom_blade_components') }}</li>
+                        <li>✅ {{ __('welcome.toast_notifications') }}</li>
                     </ul>
                 </div>
 
                 <div class="space-y-4">
-                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white">📊 Analytics & Monitoring</h3>
+                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white">📊 {{ __('welcome.analytics_monitoring') }}</h3>
                     <ul class="space-y-2 text-gray-600 dark:text-gray-300">
-                        <li>✅ Dashboard Analytics</li>
-                        <li>✅ KPI Cards</li>
-                        <li>✅ Charts & Graphs</li>
-                        <li>✅ User Statistics</li>
-                        <li>✅ Real-time Data</li>
+                        <li>✅ {{ __('welcome.dashboard_analytics') }}</li>
+                        <li>✅ {{ __('welcome.kpi_cards') }}</li>
+                        <li>✅ {{ __('welcome.charts_graphs') }}</li>
+                        <li>✅ {{ __('welcome.user_statistics') }}</li>
+                        <li>✅ {{ __('welcome.real_time_data') }}</li>
                     </ul>
                 </div>
 
                 <div class="space-y-4">
-                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white">⚡ CRUD Generator</h3>
+                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white">⚡ {{ __('welcome.crud_generator_section') }}</h3>
                     <ul class="space-y-2 text-gray-600 dark:text-gray-300">
-                        <li>✅ One-Command Generation</li>
-                        <li>✅ Auto Migration & Seeding</li>
-                        <li>✅ Modal-Based Interface</li>
-                        <li>✅ Permission Integration</li>
-                        <li>✅ Sidebar Auto-Update</li>
+                        <li>✅ {{ __('welcome.one_command_generation') }}</li>
+                        <li>✅ {{ __('welcome.auto_migration_seeding') }}</li>
+                        <li>✅ {{ __('welcome.modal_based_interface') }}</li>
+                        <li>✅ {{ __('welcome.permission_integration') }}</li>
+                        <li>✅ {{ __('welcome.sidebar_auto_update') }}</li>
                     </ul>
                 </div>
 
                 <div class="space-y-4">
-                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white">🚀 Developer Experience</h3>
+                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white">🚀 {{ __('welcome.developer_experience') }}</h3>
                     <ul class="space-y-2 text-gray-600 dark:text-gray-300">
-                        <li>✅ Production Ready</li>
-                        <li>✅ Clean Architecture</li>
-                        <li>✅ Best Practices</li>
-                        <li>✅ Comprehensive Docs</li>
-                        <li>✅ Easy Deployment</li>
+                        <li>✅ {{ __('welcome.production_ready') }}</li>
+                        <li>✅ {{ __('welcome.clean_architecture') }}</li>
+                        <li>✅ {{ __('welcome.best_practices') }}</li>
+                        <li>✅ {{ __('welcome.comprehensive_docs') }}</li>
+                        <li>✅ {{ __('welcome.easy_deployment') }}</li>
                     </ul>
                 </div>
             </div>
@@ -336,36 +336,36 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
                 <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
-                    Well-Organized Structure
+                    {{ __('welcome.well_organized_structure') }}
                 </h2>
                 <p class="text-xl text-gray-600 dark:text-gray-300">
-                    Clean, maintainable, and scalable project organization
+                    {{ __('welcome.clean_maintainable_scalable') }}
                 </p>
             </div>
 
             <div class="bg-white dark:bg-gray-900 rounded-lg p-6 font-mono text-sm overflow-x-auto border border-gray-200 dark:border-gray-700">
                 <pre class="text-gray-800 dark:text-gray-200">
 ├── app/
-│   ├── Http/Controllers/     # Business logic
-│   ├── Models/              # Eloquent models
-│   └── Listeners/           # Event listeners
+│   ├── Http/Controllers/     # {{ __('welcome.business_logic') }}
+│   ├── Models/              # {{ __('welcome.eloquent_models') }}
+│   └── Listeners/           # {{ __('welcome.event_listeners') }}
 ├── resources/
 │   ├── views/
-│   │   ├── components/ui/   # Reusable UI components
-│   │   ├── auth/           # Authentication views
-│   │   ├── profile/        # Profile management
-│   │   └── users/          # User management
-│   └── lang/               # Multilingual files
-│       ├── en/             # English translations
-│       ├── fr/             # French translations
-│       ├── es/             # Spanish translations
-│       └── ar/             # Arabic translations
+│   │   ├── components/ui/   # {{ __('welcome.reusable_ui_components') }}
+│   │   ├── auth/           # {{ __('welcome.authentication_views') }}
+│   │   ├── profile/        # {{ __('welcome.profile_management') }}
+│   │   └── users/          # {{ __('welcome.user_management_views') }}
+│   └── lang/               # {{ __('welcome.multilingual_files') }}
+│       ├── en/             # {{ __('welcome.english_translations') }}
+│       ├── fr/             # {{ __('welcome.french_translations') }}
+│       ├── es/             # {{ __('welcome.spanish_translations') }}
+│       └── ar/             # {{ __('welcome.arabic_translations') }}
 ├── database/
-│   ├── migrations/         # Database schema
-│   └── seeders/           # Sample data
+│   ├── migrations/         # {{ __('welcome.database_schema') }}
+│   └── seeders/           # {{ __('welcome.sample_data') }}
 └── routes/
-    ├── web.php            # Web routes
-    └── auth.php           # Authentication routes
+    ├── web.php            # {{ __('welcome.web_routes') }}
+    └── auth.php           # {{ __('welcome.authentication_routes') }}
                 </pre>
             </div>
         </div>
@@ -379,13 +379,13 @@
                     ⚡ CRUD Generator
                 </h2>
                 <p class="text-xl text-gray-600 dark:text-gray-300">
-                    Generate complete CRUD interfaces with a single command
+                    {{ __('welcome.generate_complete_crud') }}
                 </p>
             </div>
 
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
                 <div>
-                    <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-6">Create Full CRUD in Seconds</h3>
+                    <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-6">{{ __('welcome.create_full_crud_seconds') }}</h3>
                     <div class="space-y-4 mb-8">
                         <div class="flex items-start space-x-3">
                             <div class="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
@@ -394,8 +394,8 @@
                                 </svg>
                             </div>
                             <div>
-                                <h4 class="font-semibold text-gray-900 dark:text-white">Complete CRUD Operations</h4>
-                                <p class="text-gray-600 dark:text-gray-300">Create, Read, Update, Delete with modal interfaces</p>
+                                <h4 class="font-semibold text-gray-900 dark:text-white">{{ __('welcome.complete_crud_operations') }}</h4>
+                                <p class="text-gray-600 dark:text-gray-300">{{ __('welcome.crud_modal_interfaces') }}</p>
                             </div>
                         </div>
                         <div class="flex items-start space-x-3">
@@ -405,8 +405,8 @@
                                 </svg>
                             </div>
                             <div>
-                                <h4 class="font-semibold text-gray-900 dark:text-white">Auto Database Setup</h4>
-                                <p class="text-gray-600 dark:text-gray-300">Migration and seeding handled automatically</p>
+                                <h4 class="font-semibold text-gray-900 dark:text-white">{{ __('welcome.auto_database_setup') }}</h4>
+                                <p class="text-gray-600 dark:text-gray-300">{{ __('welcome.migration_seeding_automatic') }}</p>
                             </div>
                         </div>
                         <div class="flex items-start space-x-3">
@@ -416,8 +416,8 @@
                                 </svg>
                             </div>
                             <div>
-                                <h4 class="font-semibold text-gray-900 dark:text-white">Permission Integration</h4>
-                                <p class="text-gray-600 dark:text-gray-300">Role-based access control built-in</p>
+                                <h4 class="font-semibold text-gray-900 dark:text-white">{{ __('welcome.permission_integration') }}</h4>
+                                <p class="text-gray-600 dark:text-gray-300">{{ __('welcome.permission_integration_desc') }}</p>
                             </div>
                         </div>
                         <div class="flex items-start space-x-3">
@@ -427,8 +427,8 @@
                                 </svg>
                             </div>
                             <div>
-                                <h4 class="font-semibold text-gray-900 dark:text-white">Sidebar Integration</h4>
-                                <p class="text-gray-600 dark:text-gray-300">Navigation automatically updated</p>
+                                <h4 class="font-semibold text-gray-900 dark:text-white">{{ __('welcome.sidebar_integration') }}</h4>
+                                <p class="text-gray-600 dark:text-gray-300">{{ __('welcome.navigation_auto_updated') }}</p>
                             </div>
                         </div>
                     </div>
@@ -464,17 +464,17 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-12">
                 <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">
-                    Try It Yourself
+                    {{ __('welcome.try_it_yourself') }}
                 </h2>
                 <p class="text-xl text-gray-300">
-                    See how easy it is to generate complete CRUD interfaces
+                    {{ __('welcome.see_how_easy_generate') }}
                 </p>
             </div>
 
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
                 <!-- Command Examples -->
                 <div>
-                    <h3 class="text-xl font-bold text-white mb-6">Generate Commands</h3>
+                    <h3 class="text-xl font-bold text-white mb-6">{{ __('welcome.generate_commands') }}</h3>
                     <div class="space-y-4">
                         <div class="bg-gray-800 rounded-lg p-4 border border-gray-700">
                             <div class="flex items-center justify-between mb-2">
@@ -485,7 +485,7 @@
                                     </svg>
                                 </button>
                             </div>
-                            <p class="text-white text-sm">Creates a complete blog post management system</p>
+                            <p class="text-white text-sm">{{ __('welcome.blog_post_management') }}</p>
                         </div>
                         
                         <div class="bg-gray-800 rounded-lg p-4 border border-gray-700">
@@ -497,7 +497,7 @@
                                     </svg>
                                 </button>
                             </div>
-                            <p class="text-white text-sm">Perfect for e-commerce product catalog</p>
+                            <p class="text-white text-sm">{{ __('welcome.ecommerce_product_catalog') }}</p>
                         </div>
                         
                         <div class="bg-gray-800 rounded-lg p-4 border border-gray-700">
@@ -509,7 +509,7 @@
                                     </svg>
                                 </button>
                             </div>
-                            <p class="text-white text-sm">Customer relationship management made easy</p>
+                            <p class="text-white text-sm">{{ __('welcome.customer_relationship_management') }}</p>
                         </div>
                         
                         <div class="bg-gray-800 rounded-lg p-4 border border-gray-700">
@@ -521,16 +521,16 @@
                                     </svg>
                                 </button>
                             </div>
-                            <p class="text-white text-sm">Order management with full tracking</p>
+                            <p class="text-white text-sm">{{ __('welcome.order_management_tracking') }}</p>
                         </div>
                     </div>
                 </div>
                 
                 <!-- Live Output -->
                 <div>
-                    <h3 class="text-xl font-bold text-white mb-6">What Gets Generated</h3>
+                    <h3 class="text-xl font-bold text-white mb-6">{{ __('welcome.what_gets_generated') }}</h3>
                     <div class="bg-gray-800 rounded-lg p-6 border border-gray-700 font-mono text-sm">
-                        <div class="text-green-400 mb-4">✅ CRUD for Post created successfully!</div>
+                        <div class="text-green-400 mb-4">✅ {{ __('welcome.crud_created_successfully') }}</div>
                         <div class="space-y-1 text-white">
                             <div class="flex items-center"><span class="text-blue-400 mr-2">📁</span> Migration: create_posts_table</div>
                             <div class="flex items-center"><span class="text-blue-400 mr-2">📄</span> Model: Post.php</div>
@@ -542,11 +542,11 @@
                             <div class="flex items-center"><span class="text-blue-400 mr-2">📋</span> Sidebar: Navigation updated</div>
                         </div>
                         <div class="mt-4 pt-4 border-t border-gray-700">
-                            <div class="text-green-400 mb-2">✅ Migration executed</div>
-                            <div class="text-green-400">✅ Permissions created</div>
+                            <div class="text-green-400 mb-2">✅ {{ __('welcome.migration_executed') }}</div>
+                            <div class="text-green-400">✅ {{ __('welcome.permissions_created') }}</div>
                         </div>
                         <div class="mt-4 pt-4 border-t border-gray-700 text-white">
-                            <div>🚀 Ready to use at: /posts</div>
+                            <div>🚀 {{ __('welcome.ready_to_use_at') }}</div>
                         </div>
                     </div>
                 </div>
@@ -554,8 +554,8 @@
             
             <div class="mt-12 text-center">
                 <div class="bg-gradient-to-r from-orange-500 to-red-500 rounded-lg p-6 inline-block">
-                    <h4 class="text-white font-bold text-lg mb-2">⚡ One Command = Complete CRUD</h4>
-                    <p class="text-orange-100">Migration + Model + Controller + Views + Routes + Permissions + Sidebar</p>
+                    <h4 class="text-white font-bold text-lg mb-2">⚡ {{ __('welcome.one_command_complete_crud') }}</h4>
+                    <p class="text-orange-100">{{ __('welcome.migration_model_controller_etc') }}</p>
                 </div>
             </div>
         </div>
@@ -566,44 +566,44 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
                 <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-4">
-                    Quick Installation
+                    {{ __('welcome.quick_installation') }}
                 </h2>
                 <p class="text-xl text-gray-600 dark:text-gray-300">
-                    Get started in minutes with our simple setup process
+                    {{ __('welcome.get_started_minutes_simple') }}
                 </p>
             </div>
 
             <div class="max-w-4xl mx-auto">
                 <div class="bg-gray-900 rounded-lg p-6 font-mono text-sm overflow-x-auto">
-                    <div class="text-green-400 mb-4"># Clone the repository</div>
+                    <div class="text-green-400 mb-4"># {{ __('welcome.clone_repository') }}</div>
                     <div class="text-white mb-4">git clone https://github.com/yossrinjeh/ShadBladeKit.git</div>
                     <div class="text-white mb-4">cd ShadBladeKit</div>
                     
-                    <div class="text-green-400 mb-4 mt-6"># Install dependencies</div>
+                    <div class="text-green-400 mb-4 mt-6"># {{ __('welcome.install_dependencies') }}</div>
                     <div class="text-white mb-4">composer install</div>
                     <div class="text-white mb-4">npm install</div>
                     
-                    <div class="text-green-400 mb-4 mt-6"># Setup environment</div>
+                    <div class="text-green-400 mb-4 mt-6"># {{ __('welcome.setup_environment') }}</div>
                     <div class="text-white mb-4">cp .env.example .env</div>
                     <div class="text-white mb-4">php artisan key:generate</div>
                     
-                    <div class="text-green-400 mb-4 mt-6"># Run migrations</div>
+                    <div class="text-green-400 mb-4 mt-6"># {{ __('welcome.run_migrations') }}</div>
                     <div class="text-white mb-4">php artisan migrate --seed</div>
                     
-                    <div class="text-green-400 mb-4 mt-6"># Start development</div>
+                    <div class="text-green-400 mb-4 mt-6"># {{ __('welcome.start_development') }}</div>
                     <div class="text-white">composer run dev</div>
                 </div>
 
                 <div class="mt-8 p-6 bg-blue-50 dark:bg-blue-900/20 rounded-lg">
-                    <h3 class="text-lg font-semibold text-blue-900 dark:text-blue-100 mb-2">Default Credentials</h3>
+                    <h3 class="text-lg font-semibold text-blue-900 dark:text-blue-100 mb-2">{{ __('welcome.default_credentials') }}</h3>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
                         <div>
-                            <strong class="text-blue-800 dark:text-blue-200">Admin:</strong><br>
+                            <strong class="text-blue-800 dark:text-blue-200">{{ __('welcome.admin') }}:</strong><br>
                             Email: admin@example.com<br>
                             Password: password
                         </div>
                         <div>
-                            <strong class="text-blue-800 dark:text-blue-200">User:</strong><br>
+                            <strong class="text-blue-800 dark:text-blue-200">{{ __('welcome.user') }}:</strong><br>
                             Email: user@example.com<br>
                             Password: password
                         </div>
@@ -617,17 +617,17 @@
     <section class="py-16 bg-gradient-to-r from-blue-600 to-indigo-600">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">
-                Ready to Build Something Amazing?
+                {{ __('welcome.ready_build_amazing') }}
             </h2>
             <p class="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
-                Skip the boilerplate and start building your next Laravel application with our production-ready starter kit.
+                {{ __('welcome.skip_boilerplate_start_building') }}
             </p>
             <div class="flex flex-col sm:flex-row gap-4 justify-center">
                 <a href="{{ route('register') }}" class="bg-white text-blue-600 px-8 py-3 rounded-lg text-lg font-semibold hover:bg-gray-100 transition">
-                    Start Building Now
+                    {{ __('welcome.start_building_now') }}
                 </a>
                 <a href="https://github.com/yossrinjeh/ShadBladeKit" class="border border-white text-white px-8 py-3 rounded-lg text-lg font-semibold hover:bg-white/10 transition">
-                    View on GitHub
+                    {{ __('welcome.view_on_github') }}
                 </a>
             </div>
         </div>
@@ -663,30 +663,30 @@
                         <span class="ml-2 text-xl font-bold">{{ $appSettings['name'] }}</span>
                     </div>
                     <p class="text-gray-400 mb-4">
-                        Production-ready {{ $appSettings['name'] }} with enterprise-grade features and modern UI components.
+                        {{ __('welcome.production_ready_with_features', ['app' => $appSettings['name']]) }}
                     </p>
                 </div>
                 <div>
-                    <h3 class="text-lg font-semibold mb-4">Features</h3>
+                    <h3 class="text-lg font-semibold mb-4">{{ __('welcome.features') }}</h3>
                     <ul class="space-y-2 text-gray-400">
-                        <li>Authentication</li>
-                        <li>User Management</li>
-                        <li>Analytics</li>
-                        <li>Multilingual</li>
+                        <li>{{ __('welcome.authentication') }}</li>
+                        <li>{{ __('welcome.user_management') }}</li>
+                        <li>{{ __('welcome.analytics') }}</li>
+                        <li>{{ __('welcome.multilingual') }}</li>
                     </ul>
                 </div>
                 <div>
-                    <h3 class="text-lg font-semibold mb-4">Resources</h3>
+                    <h3 class="text-lg font-semibold mb-4">{{ __('welcome.resources') }}</h3>
                     <ul class="space-y-2 text-gray-400">
-                        <li><a href="#" class="hover:text-white">Documentation</a></li>
-                        <li><a href="https://github.com/yossrinjeh/ShadBladeKit" class="hover:text-white">GitHub</a></li>
-                        <li><a href="#" class="hover:text-white">Support</a></li>
-                        <li><a href="#" class="hover:text-white">License</a></li>
+                        <li><a href="#" class="hover:text-white">{{ __('welcome.documentation') }}</a></li>
+                        <li><a href="https://github.com/yossrinjeh/ShadBladeKit" class="hover:text-white">{{ __('welcome.github') }}</a></li>
+                        <li><a href="#" class="hover:text-white">{{ __('welcome.support') }}</a></li>
+                        <li><a href="#" class="hover:text-white">{{ __('welcome.license') }}</a></li>
                     </ul>
                 </div>
             </div>
             <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
-                <p>&copy; {{ date('Y') }} {{ $appSettings['name'] }}. Made with ❤️ by Yossri Njeh.</p>
+                <p>&copy; {{ date('Y') }} {{ $appSettings['name'] }}. {{ __('welcome.made_with_love_by') }}</p>
             </div>
         </div>
     </footer>

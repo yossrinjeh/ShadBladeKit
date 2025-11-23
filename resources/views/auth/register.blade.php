@@ -3,7 +3,7 @@
         <div class="p-6">
             <div class="mb-6 text-center">
                 <h2 class="text-2xl font-bold text-gray-900 dark:text-white">{{ __('ui.register') }}</h2>
-                <p class="text-gray-600 dark:text-gray-300 mt-2">Create your account</p>
+                <p class="text-gray-600 dark:text-gray-300 mt-2">{{ __('ui.create_your_account') }}</p>
             </div>
 
             <form method="POST" action="{{ route('register') }}" class="space-y-4">
@@ -39,7 +39,7 @@
 
                 <div class="text-center">
                     <a class="text-sm text-primary hover:underline" href="{{route('login') }}">
-                        Already registered?
+                        {{ __('ui.already_registered') }}?
                     </a>
                 </div>
             </form>

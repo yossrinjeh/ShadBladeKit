@@ -1,10 +1,10 @@
 <section>
     <header>
         <h2 class="text-lg font-medium">
-            {{ __('Profile Avatar') }}
+            {{ __('ui.profile_avatar') }}
         </h2>
         <p class="mt-1 text-sm text-muted-foreground">
-            {{ __('Upload a profile picture to personalize your account.') }}
+            {{ __('ui.profile_avatar_description') }}
         </p>
     </header>
 
@@ -34,10 +34,10 @@
                             class="block w-full text-sm file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-primary file:text-primary-foreground hover:file:bg-primary/90"
                         />
                         <x-input-error class="mt-2" :messages="$errors->get('avatar')" />
-                        <p class="mt-1 text-xs text-muted-foreground">PNG, JPG, GIF up to 2MB</p>
+                        <p class="mt-1 text-xs text-muted-foreground">{{ __('ui.file_size_limit') }}</p>
                     </div>
                     <x-ui.button type="submit" size="sm">
-                        {{ __('Upload Avatar') }}
+                        {{ __('ui.upload_avatar') }}
                     </x-ui.button>
                 </form>
             </div>
@@ -45,7 +45,7 @@
 
         @if (session('status') === 'avatar-updated')
             <p x-data="{ show: true }" x-show="show" x-transition x-init="setTimeout(() => show = false, 2000)" class="text-sm text-green-600">
-                {{ __('Avatar updated successfully.') }}
+                {{ __('ui.avatar_updated_successfully') }}
             </p>
         @endif
     </div>

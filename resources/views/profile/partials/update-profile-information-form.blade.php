@@ -1,10 +1,10 @@
 <section>
     <header>
         <h2 class="text-lg font-medium">
-            {{ __('Profile Information') }}
+            {{ __('ui.profile_information') }}
         </h2>
         <p class="mt-1 text-sm text-muted-foreground">
-            {{ __("Update your account's profile information and email address.") }}
+            {{ __('ui.update_profile_description') }}
         </p>
     </header>
 
@@ -17,29 +17,29 @@
         @method('patch')
 
         <div>
-            <x-input-label for="name" :value="__('Name')" />
+            <x-input-label for="name" :value="__('ui.name')" />
             <x-ui.input id="name" name="name" type="text" class="mt-1 block w-full" :value="old('name', $user->name)" required autofocus autocomplete="name" />
             <x-input-error class="mt-2" :messages="$errors->get('name')" />
         </div>
 
         <div>
-            <x-input-label for="email" :value="__('Email')" />
+            <x-input-label for="email" :value="__('ui.email')" />
             <x-ui.input id="email" name="email" type="email" class="mt-1 block w-full" :value="old('email', $user->email)" required autocomplete="username" />
             <x-input-error class="mt-2" :messages="$errors->get('email')" />
 
             @if ($user instanceof \Illuminate\Contracts\Auth\MustVerifyEmail && ! $user->hasVerifiedEmail())
                 <div>
                     <p class="text-sm mt-2 text-muted-foreground">
-                        {{ __('Your email address is unverified.') }}
+                        {{ __('ui.email_unverified') }}
 
                         <button form="send-verification" class="underline text-sm text-muted-foreground hover:text-foreground rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary">
-                            {{ __('Click here to re-send the verification email.') }}
+                            {{ __('ui.resend_verification') }}
                         </button>
                     </p>
 
                     @if (session('status') === 'verification-link-sent')
                         <p class="mt-2 font-medium text-sm text-green-600">
-                            {{ __('A new verification link has been sent to your email address.') }}
+                            {{ __('ui.verification_sent') }}
                         </p>
                     @endif
                 </div>
@@ -50,7 +50,7 @@
             <x-ui.button type="submit">{{ __('ui.save') }}</x-ui.button>
 
             @if (session('status') === 'profile-updated')
-                <p x-data="{ show: true }" x-show="show" x-transition x-init="setTimeout(() => show = false, 2000)" class="text-sm text-muted-foreground">{{ __('Saved.') }}</p>
+                <p x-data="{ show: true }" x-show="show" x-transition x-init="setTimeout(() => show = false, 2000)" class="text-sm text-muted-foreground">{{ __('ui.saved') }}</p>
             @endif
         </div>
     </form>

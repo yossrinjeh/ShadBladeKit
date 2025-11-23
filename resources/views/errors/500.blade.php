@@ -1,5 +1,5 @@
 <x-guest-layout>
-    <x-slot name="title">{{ __('Server Error') }}</x-slot>
+    <x-slot name="title">{{ __('ui.server_error') }}</x-slot>
 <div class="h-screen flex items-center justify-center px-4 bg-gradient-to-br from-orange-500/5 to-red-500/5">
     <div class="max-w-md w-full text-center">
         <!-- Error Code -->
@@ -18,9 +18,9 @@
 
         <!-- Content -->
         <div class="mb-8">
-            <h2 class="text-2xl md:text-3xl font-bold text-foreground mb-4">{{ __('Server Error') }}</h2>
+            <h2 class="text-2xl md:text-3xl font-bold text-foreground mb-4">{{ __('ui.server_error') }}</h2>
             <p class="text-muted-foreground text-sm md:text-base leading-relaxed">
-                {{ __('Something went wrong on our end. We\'re working to fix this issue. Please try again later.') }}
+                {{ __('ui.server_error_desc') }}
             </p>
         </div>
 
@@ -34,7 +34,7 @@
                 <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
                 </svg>
-                {{ __('Try Again') }}
+                {{ __('ui.try_again') }}
             </x-ui.button>
 
             <x-ui.button 
@@ -44,7 +44,7 @@
                 <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
                 </svg>
-                {{ __('Go Home') }}
+                {{ __('ui.go_home') }}
             </x-ui.button>
         </div>
     </div>

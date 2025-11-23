@@ -1,10 +1,10 @@
 <section>
     <header>
         <h2 class="text-lg font-medium">
-            {{ __('Notification Settings') }}
+            {{ __('ui.notification_settings') }}
         </h2>
         <p class="mt-1 text-sm text-muted-foreground">
-            {{ __('Manage how you receive notifications and updates.') }}
+            {{ __('ui.notification_settings_description') }}
         </p>
     </header>
 
@@ -26,8 +26,8 @@
                         </svg>
                     </div>
                     <div>
-                        <p class="font-medium">{{ __('Email Notifications') }}</p>
-                        <p class="text-sm text-muted-foreground">{{ __('Receive notifications via email') }}</p>
+                        <p class="font-medium">{{ __('ui.email_notifications') }}</p>
+                        <p class="text-sm text-muted-foreground">{{ __('ui.receive_notifications_via_email') }}</p>
                     </div>
                 </div>
                 <input 
@@ -48,8 +48,8 @@
                         </svg>
                     </div>
                     <div>
-                        <p class="font-medium">{{ __('Push Notifications') }}</p>
-                        <p class="text-sm text-muted-foreground">{{ __('Receive push notifications in browser') }}</p>
+                        <p class="font-medium">{{ __('ui.push_notifications') }}</p>
+                        <p class="text-sm text-muted-foreground">{{ __('ui.receive_push_notifications_browser') }}</p>
                     </div>
                 </div>
                 <input 
@@ -70,8 +70,8 @@
                         </svg>
                     </div>
                     <div>
-                        <p class="font-medium">{{ __('Marketing Emails') }}</p>
-                        <p class="text-sm text-muted-foreground">{{ __('Receive updates about new features') }}</p>
+                        <p class="font-medium">{{ __('ui.marketing_emails') }}</p>
+                        <p class="text-sm text-muted-foreground">{{ __('ui.receive_updates_new_features') }}</p>
                     </div>
                 </div>
                 <input 
@@ -92,8 +92,8 @@
                         </svg>
                     </div>
                     <div>
-                        <p class="font-medium">{{ __('Security Alerts') }}</p>
-                        <p class="text-sm text-muted-foreground">{{ __('Important security notifications') }}</p>
+                        <p class="font-medium">{{ __('ui.security_alerts') }}</p>
+                        <p class="text-sm text-muted-foreground">{{ __('ui.important_security_notifications') }}</p>
                     </div>
                 </div>
                 <input 
@@ -111,7 +111,7 @@
 
             @if (session('status') === 'notifications-updated')
                 <p x-data="{ show: true }" x-show="show" x-transition x-init="setTimeout(() => show = false, 2000)" class="text-sm text-green-600">
-                    {{ __('Notification settings updated.') }}
+                    {{ __('ui.notification_settings_updated') }}
                 </p>
             @endif
         </div>

@@ -1,5 +1,5 @@
 <x-guest-layout>
-    <x-slot name="title">{{ __('Access Forbidden') }}</x-slot>
+    <x-slot name="title">{{ __('ui.access_forbidden') }}</x-slot>
 <div class="h-screen flex items-center justify-center px-4 bg-gradient-to-br from-destructive/5 to-orange-500/5">
     <div class="max-w-md w-full text-center">
         <!-- Error Code -->
@@ -18,9 +18,9 @@
 
         <!-- Content -->
         <div class="mb-8">
-            <h2 class="text-2xl md:text-3xl font-bold text-foreground mb-4">{{ __('Access Forbidden') }}</h2>
+            <h2 class="text-2xl md:text-3xl font-bold text-foreground mb-4">{{ __('ui.access_forbidden') }}</h2>
             <p class="text-muted-foreground text-sm md:text-base leading-relaxed">
-                {{ __('You don\'t have permission to access this resource. Please contact your administrator if you believe this is an error.') }}
+                {{ __('ui.access_forbidden_desc') }}
             </p>
         </div>
 
@@ -34,7 +34,7 @@
                 <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
                 </svg>
-                {{ __('Go Back') }}
+                {{ __('ui.go_back') }}
             </x-ui.button>
 
             <x-ui.button 
@@ -44,7 +44,7 @@
                 <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path>
                 </svg>
-                {{ __('Go Home') }}
+                {{ __('ui.go_home') }}
             </x-ui.button>
         </div>
     </div>

@@ -2,20 +2,20 @@
     <x-slot name="header">
         <div class="flex items-center justify-between">
             <h2 class="font-semibold text-xl leading-tight">
-                Roles & Permissions Management
+                {{ __('ui.roles_permissions_management') }}
             </h2>
             <div class="flex space-x-2">
                 <x-ui.button onclick="openCreateRoleModal()">
                     <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
                     </svg>
-                    Create Role
+                    {{ __('ui.create_role') }}
                 </x-ui.button>
                 <x-ui.button variant="outline" onclick="openCreatePermissionModal()">
                     <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
                     </svg>
-                    Create Permission
+                    {{ __('ui.create_permission') }}
                 </x-ui.button>
             </div>
         </div>
@@ -45,7 +45,7 @@
                     <div class="flex items-center justify-between mb-4">
                         <div>
                             <h3 class="font-semibold text-lg">{{ ucfirst($role->name) }}</h3>
-                            <p class="text-sm text-muted-foreground">{{ $role->permissions->count() }} permissions</p>
+                            <p class="text-sm text-muted-foreground">{{ $role->permissions->count() }} {{ __('ui.permissions') }}</p>
                         </div>
                         <x-dropdown align="right">
                             <x-slot name="trigger">
@@ -55,11 +55,11 @@
                             </x-slot>
                             <x-slot name="content">
                                 <x-dropdown-link href="#" onclick="editRole({{ $role->id }}, '{{ $role->name }}', {{ $role->permissions->pluck('id') }})">
-                                    Edit Role
+                                    {{ __('ui.edit_role') }}
                                 </x-dropdown-link>
                                 @if($role->name !== 'admin')
                                 <x-dropdown-link href="#" onclick="deleteRole({{ $role->id }})" class="text-destructive">
-                                    Delete Role
+                                    {{ __('ui.delete_role') }}
                                 </x-dropdown-link>
                                 @endif
                             </x-slot>
@@ -67,14 +67,14 @@
                     </div>
                     
                     <div class="space-y-2">
-                        <h4 class="text-sm font-medium">Permissions:</h4>
+                        <h4 class="text-sm font-medium">{{ __('ui.permissions') }}:</h4>
                         <div class="flex flex-wrap gap-1">
                             @forelse($role->permissions->take(5) as $permission)
                                 <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-primary/10 text-primary">
                                     {{ $permission->name }}
                                 </span>
                             @empty
-                                <span class="text-xs text-muted-foreground">No permissions assigned</span>
+                                <span class="text-xs text-muted-foreground">{{ __('ui.no_permissions_assigned') }}</span>
                             @endforelse
                             @if($role->permissions->count() > 5)
                                 <span class="text-xs text-muted-foreground">+{{ $role->permissions->count() - 5 }} more</span>
@@ -84,7 +84,7 @@
                     
                     <div class="mt-4 pt-4 border-t">
                         <div class="flex items-center justify-between text-sm">
-                            <span class="text-muted-foreground">Users with this role:</span>
+                            <span class="text-muted-foreground">{{ __('ui.users_with_role') }}:</span>
                             <span class="font-medium">{{ $role->users->count() }}</span>
                         </div>
                     </div>
@@ -96,7 +96,7 @@
         <!-- Permissions List -->
         <x-ui.card>
             <div class="p-6">
-                <h3 class="text-lg font-semibold mb-4">All Permissions</h3>
+                <h3 class="text-lg font-semibold mb-4">{{ __('ui.all_permissions') }}</h3>
                 @php
                     $groupedPermissions = $permissions->groupBy(function($permission) {
                         $parts = explode(' ', $permission->name);
@@ -113,7 +113,7 @@
                             <svg class="w-5 h-5 mr-2 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/>
                             </svg>
-                            {{ $module }} Module
+                            {{ $module }} {{ __('ui.module') }}
                         </h4>
                         <div class="space-y-2">
                             @foreach($modulePermissions as $permission)
@@ -143,15 +143,15 @@
     <!-- Create Role Modal -->
     <div id="create-role-modal" class="fixed inset-0 bg-black/50 hidden items-center justify-center z-50">
         <div class="bg-background rounded-lg p-6 w-full max-w-4xl mx-4">
-            <h3 class="text-lg font-semibold mb-4">Create New Role</h3>
+            <h3 class="text-lg font-semibold mb-4">{{ __('ui.create_new_role') }}</h3>
             <form method="POST" action="{{ route('roles.store') }}" class="space-y-4">
                 @csrf
                 <div>
-                    <label class="block text-sm font-medium mb-1">Role Name</label>
+                    <label class="block text-sm font-medium mb-1">{{ __('ui.role_name') }}</label>
                     <x-ui.input type="text" name="name" required />
                 </div>
                 <div>
-                    <label class="block text-sm font-medium mb-2">Permissions</label>
+                    <label class="block text-sm font-medium mb-2">{{ __('ui.permissions') }}</label>
                     <div class="max-h-96 overflow-y-auto">
                         @php
                             $groupedPermissions = $permissions->groupBy(function($permission) {
@@ -181,8 +181,8 @@
                     </div>
                 </div>
                 <div class="flex justify-end space-x-2 pt-4">
-                    <x-ui.button type="button" variant="outline" onclick="closeCreateRoleModal()">Cancel</x-ui.button>
-                    <x-ui.button type="submit">Create Role</x-ui.button>
+                    <x-ui.button type="button" variant="outline" onclick="closeCreateRoleModal()">{{ __('ui.cancel') }}</x-ui.button>
+                    <x-ui.button type="submit">{{ __('ui.create_role') }}</x-ui.button>
                 </div>
             </form>
         </div>
@@ -191,16 +191,16 @@
     <!-- Edit Role Modal -->
     <div id="edit-role-modal" class="fixed inset-0 bg-black/50 hidden items-center justify-center z-50">
         <div class="bg-background rounded-lg p-6 w-full max-w-4xl mx-4">
-            <h3 class="text-lg font-semibold mb-4">Edit Role</h3>
+            <h3 class="text-lg font-semibold mb-4">{{ __('ui.edit_role') }}</h3>
             <form id="edit-role-form" method="POST" class="space-y-4">
                 @csrf
                 @method('PUT')
                 <div>
-                    <label class="block text-sm font-medium mb-1">Role Name</label>
+                    <label class="block text-sm font-medium mb-1">{{ __('ui.role_name') }}</label>
                     <x-ui.input type="text" name="name" id="edit-role-name" required />
                 </div>
                 <div>
-                    <label class="block text-sm font-medium mb-2">Permissions</label>
+                    <label class="block text-sm font-medium mb-2">{{ __('ui.permissions') }}</label>
                     <div class="max-h-96 overflow-y-auto" id="edit-permissions">
                         <div class="grid grid-cols-3 gap-2">
                             @foreach($groupedPermissions as $module => $modulePermissions)
@@ -223,8 +223,8 @@
                     </div>
                 </div>
                 <div class="flex justify-end space-x-2 pt-4">
-                    <x-ui.button type="button" variant="outline" onclick="closeEditRoleModal()">Cancel</x-ui.button>
-                    <x-ui.button type="submit">Update Role</x-ui.button>
+                    <x-ui.button type="button" variant="outline" onclick="closeEditRoleModal()">{{ __('ui.cancel') }}</x-ui.button>
+                    <x-ui.button type="submit">{{ __('ui.update_role') }}</x-ui.button>
                 </div>
             </form>
         </div>
@@ -233,17 +233,17 @@
     <!-- Create Permission Modal -->
     <div id="create-permission-modal" class="fixed inset-0 bg-black/50 hidden items-center justify-center z-50">
         <div class="bg-background rounded-lg p-6 w-full max-w-md mx-4">
-            <h3 class="text-lg font-semibold mb-4">Create New Permission</h3>
+            <h3 class="text-lg font-semibold mb-4">{{ __('ui.create_new_permission') }}</h3>
             <form method="POST" action="{{ route('permissions.store') }}" class="space-y-4">
                 @csrf
                 <div>
-                    <label class="block text-sm font-medium mb-1">Permission Name</label>
+                    <label class="block text-sm font-medium mb-1">{{ __('ui.permission_name') }}</label>
                     <x-ui.input type="text" name="name" placeholder="e.g., manage posts" required />
-                    <p class="text-xs text-muted-foreground mt-1">Use lowercase with spaces (e.g., "view users", "edit posts")</p>
+                    <p class="text-xs text-muted-foreground mt-1">{{ __('ui.permission_name_hint') }}</p>
                 </div>
                 <div class="flex justify-end space-x-2 pt-4">
-                    <x-ui.button type="button" variant="outline" onclick="closeCreatePermissionModal()">Cancel</x-ui.button>
-                    <x-ui.button type="submit">Create Permission</x-ui.button>
+                    <x-ui.button type="button" variant="outline" onclick="closeCreatePermissionModal()">{{ __('ui.cancel') }}</x-ui.button>
+                    <x-ui.button type="submit">{{ __('ui.create_permission') }}</x-ui.button>
                 </div>
             </form>
         </div>

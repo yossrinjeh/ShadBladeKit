@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl leading-tight">
-            Activity Logs
+            {{ __('ui.activity_logs') }}
         </h2>
     </x-slot>
 
@@ -14,14 +14,14 @@
                         <x-ui.input 
                             type="text" 
                             name="event" 
-                            placeholder="Filter by event..." 
+                            placeholder="{{ __('ui.filter_by_event') }}" 
                             value="{{ request('event') }}"
                             class="w-full"
                         />
                     </div>
                     <div class="min-w-32">
                         <select name="user" class="w-full rounded-md border border-input bg-background px-3 py-2 text-sm">
-                            <option value="">All Users</option>
+                            <option value="">{{ __('ui.all_users') }}</option>
                             @foreach($users as $user)
                                 <option value="{{ $user->id }}" {{ request('user') == $user->id ? 'selected' : '' }}>
                                     {{ $user->name }}
@@ -49,11 +49,11 @@
                         <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
                         </svg>
-                        Filter
+                        {{ __('ui.filter') }}
                     </x-ui.button>
                     @if(request()->hasAny(['event', 'user', 'date_from', 'date_to']))
                         <a href="{{ route('activity-logs.index') }}" class="inline-flex items-center px-4 py-2 text-sm font-medium text-muted-foreground hover:text-foreground">
-                            Clear
+                            {{ __('ui.clear') }}
                         </a>
                     @endif
                 </form>
@@ -63,7 +63,7 @@
         <!-- Activity Logs -->
         <x-ui.card>
             <div class="p-6">
-                <h3 class="text-lg font-semibold mb-4">Activity Timeline ({{ $activities->total() }} events)</h3>
+                <h3 class="text-lg font-semibold mb-4">{{ __('ui.activity_timeline') }} ({{ $activities->total() }} {{ __('ui.events') }})</h3>
                 
                 <div class="space-y-4">
                     @forelse($activities as $activity)
@@ -123,7 +123,7 @@
                                     @if($activity->causer)
                                         <span class="font-medium">{{ $activity->causer->name }}</span>
                                     @else
-                                        <span class="italic">System</span>
+                                        <span class="italic">{{ __('ui.system') }}</span>
                                     @endif
                                     
                                     @if($activity->properties && $activity->properties->has('ip_address'))
@@ -131,7 +131,7 @@
                                     @endif
                                     
                                     @if($activity->subject)
-                                        • Target: {{ class_basename($activity->subject_type) }} #{{ $activity->subject_id }}
+                                        • {{ __('ui.target') }}: {{ class_basename($activity->subject_type) }} #{{ $activity->subject_id }}
                                     @endif
                                 </div>
 
@@ -139,8 +139,8 @@
                                 @if($activity->properties && $activity->properties->count() > 1)
                                     <div class="mt-2" x-data="{ expanded: false }">
                                         <button @click="expanded = !expanded" class="text-xs text-primary hover:underline">
-                                            <span x-show="!expanded">Show details</span>
-                                            <span x-show="expanded">Hide details</span>
+                                            <span x-show="!expanded">{{ __('ui.show_details') }}</span>
+                                            <span x-show="expanded">{{ __('ui.hide_details') }}</span>
                                         </button>
                                         <div x-show="expanded" class="mt-2 p-2 bg-muted rounded text-xs">
                                             <pre class="whitespace-pre-wrap">{{ json_encode($activity->properties, JSON_PRETTY_PRINT) }}</pre>
@@ -151,7 +151,7 @@
                         </div>
                     @empty
                         <div class="text-center py-8 text-muted-foreground">
-                            No activity logs found
+                            {{ __('ui.no_activity_logs') }}
                         </div>
                     @endforelse
                 </div>

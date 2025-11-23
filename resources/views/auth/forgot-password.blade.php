@@ -4,7 +4,7 @@
             <div class="mb-6 text-center">
                 <h2 class="text-2xl font-bold text-gray-900 dark:text-white">{{ __('ui.forgot_password') }}</h2>
                 <p class="text-gray-600 dark:text-gray-300 mt-2 text-sm">
-                    {{ __('Forgot your password? No problem. Just let us know your email address and we will email you a password reset link.') }}
+                    {{ __('ui.forgot_password_desc') }}
                 </p>
             </div>
 
@@ -20,12 +20,12 @@
                 </div>
 
                 <x-ui.button type="submit" class="w-full">
-                    Email Password Reset Link
+                    {{ __('ui.email_password_reset_link') }}
                 </x-ui.button>
 
                 <div class="text-center">
                     <a class="text-sm text-primary hover:underline" href="{{ route('login') }}">
-                        Back to {{ __('ui.login') }}
+                        {{ __('ui.back_to_login') }}
                     </a>
                 </div>
             </form>

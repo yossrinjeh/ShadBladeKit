@@ -1,17 +1,38 @@
 @props(['user' => null])
 
-<div class="flex h-screen bg-background">
+<div class="flex h-screen bg-background" x-data="{ sidebarOpen: false, isMobile: window.innerWidth < 768 }" @resize.window="isMobile = window.innerWidth < 768">
+    <!-- Mobile Backdrop -->
+    <div x-show="sidebarOpen && isMobile" 
+         x-transition:enter="transition-opacity ease-linear duration-300"
+         x-transition:enter-start="opacity-0"
+         x-transition:enter-end="opacity-100"
+         x-transition:leave="transition-opacity ease-linear duration-300"
+         x-transition:leave-start="opacity-100"
+         x-transition:leave-end="opacity-0"
+         @click="sidebarOpen = false"
+         class="fixed inset-0 z-40 bg-black/50 backdrop-blur-sm md:hidden"
+         style="display: none;"></div>
+
     <!-- Sidebar -->
-    <div class="hidden md:flex md:w-64 md:flex-col">
-        <div class="flex flex-col flex-grow pt-5 overflow-y-auto bg-card border-r">
+    <div class="fixed inset-y-0 left-0 z-50 w-72 transform transition-transform duration-300 ease-in-out md:relative md:translate-x-0 md:w-64 md:flex md:flex-col"
+         :class="{ '-translate-x-full': !sidebarOpen && isMobile, 'translate-x-0': sidebarOpen || !isMobile }">
+        <div class="flex flex-col h-full pt-5 overflow-y-auto bg-card/95 backdrop-blur-xl border-r border-border/50 shadow-2xl md:shadow-none">
             <!-- Logo -->
-            <div class="flex items-center flex-shrink-0 px-4">
-                @if($appSettings['logo'])
-                    <img src="{{ asset('storage/' . $appSettings['logo']) }}" alt="{{ $appSettings['name'] }}" class="h-8 w-8 object-contain">
-                @else
-                    <x-application-logo class="h-8 w-8" />
-                @endif
-                <span class="ml-2 text-xl font-bold">{{ $appSettings['name'] }}</span>
+            <div class="flex items-center justify-between flex-shrink-0 px-4 mb-2">
+                <div class="flex items-center">
+                    @if($appSettings['logo'])
+                        <img src="{{ asset('storage/' . $appSettings['logo']) }}" alt="{{ $appSettings['name'] }}" class="h-8 w-8 object-contain">
+                    @else
+                        <x-application-logo class="h-8 w-8" />
+                    @endif
+                    <span class="ml-3 text-xl font-bold text-foreground">{{ $appSettings['name'] }}</span>
+                </div>
+                <!-- Mobile Close Button -->
+                <button @click="sidebarOpen = false" class="md:hidden p-2 rounded-lg hover:bg-accent/50 transition-colors">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                    </svg>
+                </button>
             </div>
 
             <!-- Navigation -->
@@ -19,11 +40,15 @@
                 <nav class="flex-1 px-2 space-y-6">
                     <!-- Main Section -->
                     <div class="space-y-1">
-                        <a href="{{ route('dashboard') }}" class="group flex items-center px-2 py-2 text-sm font-medium rounded-md {{ request()->routeIs('dashboard') ? 'bg-primary text-primary-foreground' : 'text-muted-foreground hover:bg-accent hover:text-accent-foreground' }}">
-                            <svg class="mr-3 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2H5a2 2 0 00-2-2z" />
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5a2 2 0 012-2h4a2 2 0 012 2v6H8V5z" />
-                            </svg>
+                        <a href="{{ route('dashboard') }}" 
+                           @click="isMobile && (sidebarOpen = false)"
+                           class="group flex items-center px-3 py-2 text-sm font-medium rounded-md transition-all duration-200 {{ request()->routeIs('dashboard') ? 'bg-primary text-white' : 'text-muted-foreground hover:bg-accent/70 hover:text-accent-foreground hover:translate-x-1' }}">
+                            <div class="flex items-center justify-center w-5 h-5 rounded {{ request()->routeIs('dashboard') ? 'bg-white/20' : 'bg-accent/30 group-hover:bg-accent/50' }} transition-colors mr-2">
+                                <svg class="h-3 w-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2H5a2 2 0 00-2-2z" />
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5a2 2 0 012-2h4a2 2 0 012 2v6H8V5z" />
+                                </svg>
+                            </div>
                             {{ __('navigation.dashboard') }}
                         </a>
                     </div>
@@ -45,18 +70,26 @@
                         
                         <div x-show="open" x-transition class="ml-6 space-y-1">
                             @can('view users')
-                            <a href="{{ route('users.index') }}" class="group flex items-center px-2 py-2 text-sm font-medium rounded-md {{ request()->routeIs('users.*') ? 'bg-primary text-primary-foreground' : 'text-muted-foreground hover:bg-accent hover:text-accent-foreground' }}">
-                                <svg class="mr-3 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z" />
-                                </svg>
+                            <a href="{{ route('users.index') }}" 
+                               @click="isMobile && (sidebarOpen = false)"
+                               class="group flex items-center px-3 py-2 text-sm font-medium rounded-md transition-all duration-200 {{ request()->routeIs('users.*') ? 'bg-primary text-white' : 'text-muted-foreground hover:bg-accent/70 hover:text-accent-foreground hover:translate-x-1' }}">
+                                <div class="flex items-center justify-center w-5 h-5 rounded {{ request()->routeIs('users.*') ? 'bg-white/20' : 'bg-accent/30 group-hover:bg-accent/50' }} transition-colors mr-2">
+                                    <svg class="h-3 w-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z" />
+                                    </svg>
+                                </div>
                                 {{ __('navigation.users') }}
                             </a>
                             @endcan
                             
-                            <a href="{{ route('roles.index') }}" class="group flex items-center px-2 py-2 text-sm font-medium rounded-md {{ request()->routeIs('roles.*') ? 'bg-primary text-primary-foreground' : 'text-muted-foreground hover:bg-accent hover:text-accent-foreground' }}">
-                                <svg class="mr-3 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-                                </svg>
+                            <a href="{{ route('roles.index') }}" 
+                               @click="isMobile && (sidebarOpen = false)"
+                               class="group flex items-center px-3 py-2 text-sm font-medium rounded-md transition-all duration-200 {{ request()->routeIs('roles.*') ? 'bg-primary text-white' : 'text-muted-foreground hover:bg-accent/70 hover:text-accent-foreground hover:translate-x-1' }}">
+                                <div class="flex items-center justify-center w-5 h-5 rounded {{ request()->routeIs('roles.*') ? 'bg-white/20' : 'bg-accent/30 group-hover:bg-accent/50' }} transition-colors mr-2">
+                                    <svg class="h-3 w-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                                    </svg>
+                                </div>
                                 {{ __('navigation.roles_permissions') }}
                             </a>
                         </div>
@@ -76,10 +109,14 @@
                     <!-- Regular User Section -->
                     @can('view users')
                     <div class="space-y-1">
-                        <a href="{{ route('users.index') }}" class="group flex items-center px-2 py-2 text-sm font-medium rounded-md {{ request()->routeIs('users.*') ? 'bg-primary text-primary-foreground' : 'text-muted-foreground hover:bg-accent hover:text-accent-foreground' }}">
-                            <svg class="mr-3 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z" />
-                            </svg>
+                        <a href="{{ route('users.index') }}" 
+                           @click="isMobile && (sidebarOpen = false)"
+                           class="group flex items-center px-3 py-2 text-sm font-medium rounded-md transition-all duration-200 {{ request()->routeIs('users.*') ? 'bg-primary text-white' : 'text-muted-foreground hover:bg-accent/70 hover:text-accent-foreground hover:translate-x-1' }}">
+                            <div class="flex items-center justify-center w-5 h-5 rounded {{ request()->routeIs('users.*') ? 'bg-white/20' : 'bg-accent/30 group-hover:bg-accent/50' }} transition-colors mr-2">
+                                <svg class="h-3 w-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z" />
+                                </svg>
+                            </div>
                             {{ __('navigation.users') }}
                         </a>
                     </div>
@@ -92,30 +129,42 @@
                             <h3 class="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Personal</h3>
                         </div>
                         
-                        <a href="{{ route('notifications.index') }}" class="group flex items-center px-2 py-2 text-sm font-medium rounded-md {{ request()->routeIs('notifications.*') ? 'bg-primary text-primary-foreground' : 'text-muted-foreground hover:bg-accent hover:text-accent-foreground' }}">
-                            <svg class="mr-3 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0" />
-                            </svg>
-                            {{ __('Notifications') }}
+                        <a href="{{ route('notifications.index') }}" 
+                           @click="isMobile && (sidebarOpen = false)"
+                           class="group flex items-center px-3 py-2 text-sm font-medium rounded-md transition-all duration-200 {{ request()->routeIs('notifications.*') ? 'bg-primary text-white' : 'text-muted-foreground hover:bg-accent/70 hover:text-accent-foreground hover:translate-x-1' }}">
+                            <div class="flex items-center justify-center w-5 h-5 rounded {{ request()->routeIs('notifications.*') ? 'bg-white/20' : 'bg-accent/30 group-hover:bg-accent/50' }} transition-colors mr-2">
+                                <svg class="h-3 w-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0" />
+                                </svg>
+                            </div>
+                            <span class="flex-1">{{ __('Notifications') }}</span>
                             @if(auth()->user()->unreadNotifications->count() > 0)
-                                <span class="ml-auto inline-flex items-center justify-center px-2 py-1 text-xs font-bold leading-none text-white bg-red-600 rounded-full">
-                                    {{ auth()->user()->unreadNotifications->count() }}
+                                <span class="inline-flex items-center justify-center w-5 h-5 text-xs font-bold text-white bg-red-500 rounded-full animate-pulse">
+                                    {{ auth()->user()->unreadNotifications->count() > 9 ? '9+' : auth()->user()->unreadNotifications->count() }}
                                 </span>
                             @endif
                         </a>
                         
-                        <a href="{{ route('profile.edit') }}" class="group flex items-center px-2 py-2 text-sm font-medium rounded-md {{ request()->routeIs('profile.*') ? 'bg-primary text-primary-foreground' : 'text-muted-foreground hover:bg-accent hover:text-accent-foreground' }}">
-                            <svg class="mr-3 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                            </svg>
+                        <a href="{{ route('profile.edit') }}" 
+                           @click="isMobile && (sidebarOpen = false)"
+                           class="group flex items-center px-3 py-2 text-sm font-medium rounded-md transition-all duration-200 {{ request()->routeIs('profile.*') ? 'bg-primary text-white' : 'text-muted-foreground hover:bg-accent/70 hover:text-accent-foreground hover:translate-x-1' }}">
+                            <div class="flex items-center justify-center w-5 h-5 rounded {{ request()->routeIs('profile.*') ? 'bg-white/20' : 'bg-accent/30 group-hover:bg-accent/50' }} transition-colors mr-2">
+                                <svg class="h-3 w-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                                </svg>
+                            </div>
                             {{ __('navigation.profile') }}
                         </a>
                         
-                        <a href="{{ route('settings.index') }}" class="group flex items-center px-2 py-2 text-sm font-medium rounded-md {{ request()->routeIs('settings.*') ? 'bg-primary text-primary-foreground' : 'text-muted-foreground hover:bg-accent hover:text-accent-foreground' }}">
-                            <svg class="mr-3 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                            </svg>
+                        <a href="{{ route('settings.index') }}" 
+                           @click="isMobile && (sidebarOpen = false)"
+                           class="group flex items-center px-3 py-2 text-sm font-medium rounded-md transition-all duration-200 {{ request()->routeIs('settings.*') ? 'bg-primary text-white' : 'text-muted-foreground hover:bg-accent/70 hover:text-accent-foreground hover:translate-x-1' }}">
+                            <div class="flex items-center justify-center w-5 h-5 rounded {{ request()->routeIs('settings.*') ? 'bg-white/20' : 'bg-accent/30 group-hover:bg-accent/50' }} transition-colors mr-2">
+                                <svg class="h-3 w-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                </svg>
+                            </div>
                             {{ __('navigation.settings') }}
                         </a>
                     </div>
@@ -137,34 +186,50 @@
                         </button>
                         
                         <div x-show="open" x-transition class="ml-6 space-y-1">
-                            <a href="{{ route('admin.settings') }}" class="group flex items-center px-2 py-2 text-sm font-medium rounded-md {{ request()->routeIs('admin.settings*') ? 'bg-primary text-primary-foreground' : 'text-muted-foreground hover:bg-accent hover:text-accent-foreground' }}">
-                                <svg class="mr-3 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4" />
-                                </svg>
+                            <a href="{{ route('admin.settings') }}" 
+                               @click="isMobile && (sidebarOpen = false)"
+                               class="group flex items-center px-3 py-2 text-sm font-medium rounded-md transition-all duration-200 {{ request()->routeIs('admin.settings*') ? 'bg-primary text-white' : 'text-muted-foreground hover:bg-accent/70 hover:text-accent-foreground hover:translate-x-1' }}">
+                                <div class="flex items-center justify-center w-5 h-5 rounded {{ request()->routeIs('admin.settings*') ? 'bg-white/20' : 'bg-accent/30 group-hover:bg-accent/50' }} transition-colors mr-2">
+                                    <svg class="h-3 w-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4" />
+                                    </svg>
+                                </div>
                                 App Settings
                             </a>
                             
-                            <a href="{{ route('theme-presets.index') }}" class="group flex items-center px-2 py-2 text-sm font-medium rounded-md {{ request()->routeIs('theme-presets.*') ? 'bg-primary text-primary-foreground' : 'text-muted-foreground hover:bg-accent hover:text-accent-foreground' }}">
-                                <svg class="mr-3 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zM21 5a2 2 0 00-2-2h-4a2 2 0 00-2 2v12a4 4 0 004 4 4 4 0 004-4V5z" />
-                                </svg>
+                            <a href="{{ route('theme-presets.index') }}" 
+                               @click="isMobile && (sidebarOpen = false)"
+                               class="group flex items-center px-3 py-2 text-sm font-medium rounded-md transition-all duration-200 {{ request()->routeIs('theme-presets.*') ? 'bg-primary text-white' : 'text-muted-foreground hover:bg-accent/70 hover:text-accent-foreground hover:translate-x-1' }}">
+                                <div class="flex items-center justify-center w-5 h-5 rounded {{ request()->routeIs('theme-presets.*') ? 'bg-white/20' : 'bg-accent/30 group-hover:bg-accent/50' }} transition-colors mr-2">
+                                    <svg class="h-3 w-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zM21 5a2 2 0 00-2-2h-4a2 2 0 00-2 2v12a4 4 0 004 4 4 4 0 004-4V5z" />
+                                    </svg>
+                                </div>
                                 Theme Presets
                             </a>
                         </div>
                     </div>
                     
                     <div class="space-y-1">
-                        <a href="{{ route('activity-logs.index') }}" class="group flex items-center px-2 py-2 text-sm font-medium rounded-md {{ request()->routeIs('activity-logs.*') ? 'bg-primary text-primary-foreground' : 'text-muted-foreground hover:bg-accent hover:text-accent-foreground' }}">
-                            <svg class="mr-3 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
-                            </svg>
+                        <a href="{{ route('activity-logs.index') }}" 
+                           @click="isMobile && (sidebarOpen = false)"
+                           class="group flex items-center px-3 py-2 text-sm font-medium rounded-md transition-all duration-200 {{ request()->routeIs('activity-logs.*') ? 'bg-primary text-white' : 'text-muted-foreground hover:bg-accent/70 hover:text-accent-foreground hover:translate-x-1' }}">
+                            <div class="flex items-center justify-center w-5 h-5 rounded {{ request()->routeIs('activity-logs.*') ? 'bg-white/20' : 'bg-accent/30 group-hover:bg-accent/50' }} transition-colors mr-2">
+                                <svg class="h-3 w-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+                                </svg>
+                            </div>
                             {{ __('navigation.activity_logs') }}
                         </a>
                         
-                        <a href="{{ route('components.index') }}" class="group flex items-center px-2 py-2 text-sm font-medium rounded-md {{ request()->routeIs('components.*') ? 'bg-primary text-primary-foreground' : 'text-muted-foreground hover:bg-accent hover:text-accent-foreground' }}">
-                            <svg class="mr-3 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
-                            </svg>
+                        <a href="{{ route('components.index') }}" 
+                           @click="isMobile && (sidebarOpen = false)"
+                           class="group flex items-center px-3 py-2 text-sm font-medium rounded-md transition-all duration-200 {{ request()->routeIs('components.*') ? 'bg-primary text-white' : 'text-muted-foreground hover:bg-accent/70 hover:text-accent-foreground hover:translate-x-1' }}">
+                            <div class="flex items-center justify-center w-5 h-5 rounded {{ request()->routeIs('components.*') ? 'bg-white/20' : 'bg-accent/30 group-hover:bg-accent/50' }} transition-colors mr-2">
+                                <svg class="h-3 w-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+                                </svg>
+                            </div>
                             {{ __('navigation.components') }}
                         </a>
                     </div>
@@ -223,41 +288,52 @@
     <!-- Main content -->
     <div class="flex flex-col flex-1 overflow-hidden">
         <!-- Top bar -->
-        <header class="bg-background border-b px-4 py-3 flex items-center justify-between">
-            <div class="flex items-center">
+        <header class="sticky top-0 z-30 bg-background/80 backdrop-blur-xl border-b border-border/50 px-4 py-3 flex items-center justify-between shadow-sm">
+            <div class="flex items-center space-x-3">
                 <!-- Mobile menu button -->
-                <button class="md:hidden p-2 rounded-md text-muted-foreground hover:bg-accent">
+                <button @click="sidebarOpen = !sidebarOpen" 
+                        class="md:hidden p-2.5 rounded-xl text-muted-foreground hover:bg-accent/70 hover:text-accent-foreground transition-all duration-200 hover:scale-105 active:scale-95">
                     <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
                     </svg>
                 </button>
+                
+                <!-- Mobile Logo -->
+                <div class="md:hidden flex items-center">
+                    @if($appSettings['logo'])
+                        <img src="{{ asset('storage/' . $appSettings['logo']) }}" alt="{{ $appSettings['name'] }}" class="h-7 w-7 object-contain">
+                    @else
+                        <x-application-logo class="h-7 w-7" />
+                    @endif
+                    <span class="ml-2 text-lg font-bold text-foreground">{{ $appSettings['name'] }}</span>
+                </div>
             </div>
             
-            <div class="flex items-center space-x-4">
+            <div class="flex items-center space-x-2 sm:space-x-4">
                 <!-- Command Palette Trigger -->
                 <button 
                     @click="$dispatch('toggle-command-palette')"
-                    class="flex items-center space-x-2 px-3 py-1.5 text-sm text-muted-foreground hover:text-foreground hover:bg-accent rounded-md transition-colors"
+                    class="flex items-center space-x-2 px-2 sm:px-3 py-1.5 text-sm text-muted-foreground hover:text-foreground hover:bg-accent/70 rounded-lg transition-all duration-200 hover:scale-105"
                     title="Open command palette (Ctrl+K)"
                 >
                     <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v14a2 2 0 002 2z" />
                     </svg>
-                    <span class="hidden sm:inline">Press</span>
-                    <kbd class="hidden sm:inline-flex items-center rounded border bg-muted px-1.5 py-0.5 text-xs font-mono">Ctrl+K</kbd>
+                    <span class="hidden lg:inline">Press</span>
+                    <kbd class="hidden lg:inline-flex items-center rounded border bg-muted px-1.5 py-0.5 text-xs font-mono">Ctrl+K</kbd>
                 </button>
                 
                 <!-- Notifications -->
                 @auth
                 <x-dropdown align="right" width="w-80">
                     <x-slot name="trigger">
-                        <button class="relative p-2 rounded-md text-muted-foreground hover:bg-accent">
+                        <button class="relative p-2.5 rounded-xl text-muted-foreground hover:bg-accent/70 hover:text-accent-foreground transition-all duration-200 hover:scale-105">
                             <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0" />
                             </svg>
                             @if(auth()->user()->unreadNotifications->count() > 0)
-                                <span class="absolute -top-1 -right-1 h-4 w-4 bg-red-500 text-white text-xs rounded-full flex items-center justify-center">
-                                    {{ auth()->user()->unreadNotifications->count() }}
+                                <span class="absolute -top-1 -right-1 h-5 w-5 bg-gradient-to-r from-red-500 to-red-600 text-white text-xs rounded-full flex items-center justify-center animate-pulse shadow-lg">
+                                    {{ auth()->user()->unreadNotifications->count() > 9 ? '9+' : auth()->user()->unreadNotifications->count() }}
                                 </span>
                             @endif
                         </button>
@@ -330,14 +406,50 @@
                 </x-dropdown>
                 @endauth
                 
-                <x-ui.theme-toggle />
-                <x-ui.lang-switcher />
+                <div class="hidden sm:flex items-center space-x-2">
+                    <x-ui.theme-toggle />
+                    <x-ui.lang-switcher />
+                </div>
+                
+                <!-- Mobile Actions Menu -->
+                <div class="sm:hidden" x-data="{ open: false }" @click.outside="open = false">
+                    <button @click="open = !open" class="p-2.5 rounded-xl text-muted-foreground hover:bg-accent/70 hover:text-accent-foreground transition-all duration-200">
+                        <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 5v.01M12 12v.01M12 19v.01M12 6a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2zm0 7a1 1 0 110-2 1 1 0 010 2z" />
+                        </svg>
+                    </button>
+                    <div x-show="open" 
+                         x-transition:enter="transition ease-out duration-200"
+                         x-transition:enter-start="opacity-0 scale-95"
+                         x-transition:enter-end="opacity-100 scale-100"
+                         x-transition:leave="transition ease-in duration-150"
+                         x-transition:leave-start="opacity-100 scale-100"
+                         x-transition:leave-end="opacity-0 scale-95"
+                         class="absolute right-4 top-16 w-48 bg-card/95 backdrop-blur-xl rounded-xl shadow-2xl border border-border/50 py-2 z-50"
+                         style="display: none;">
+                        <div class="px-3 py-2 border-b border-border/50">
+                            <p class="text-xs font-medium text-muted-foreground uppercase tracking-wider">Settings</p>
+                        </div>
+                        <div class="p-2 space-y-1">
+                            <div class="flex items-center justify-between px-3 py-2">
+                                <span class="text-sm font-medium">Theme</span>
+                                <x-ui.theme-toggle />
+                            </div>
+                            <div class="flex items-center justify-between px-3 py-2">
+                                <span class="text-sm font-medium">Language</span>
+                                <x-ui.lang-switcher />
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </header>
 
         <!-- Page content -->
-        <main class="flex-1 overflow-y-auto p-6">
-            {{ $slot }}
+        <main class="flex-1 overflow-y-auto p-4 sm:p-6">
+            <div class="max-w-7xl mx-auto">
+                {{ $slot }}
+            </div>
         </main>
     </div>
     
@@ -345,4 +457,12 @@
     <div x-data="{ open: false }" @toggle-command-palette.window="open = !open">
         <x-ui.command-palette x-show="open" @close="open = false" />
     </div>
+    
+    <!-- Mobile Bottom Navigation -->
+    @auth
+        <x-ui.mobile-nav />
+    @endauth
+    
+    <!-- Toast Notifications -->
+    <x-ui.toast-container />
 </div>

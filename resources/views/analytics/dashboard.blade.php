@@ -37,7 +37,7 @@
                             <p class="text-sm font-medium text-muted-foreground">Total Users</p>
                             <div class="flex items-center">
                                 <p class="text-2xl font-bold">{{ number_format($metrics['total_users']['value']) }}</p>
-                                <span class="ml-2 text-sm {{ $metrics['total_users']['trend'] === 'up' ? 'text-green-600' : 'text-red-600' }}">
+                                <span class="ml-2 text-sm" style="color: {{ $metrics['total_users']['trend'] === 'up' ? '#059669' : '#dc2626' }}">
                                     {{ $metrics['total_users']['trend'] === 'up' ? '+' : '' }}{{ $metrics['total_users']['change'] }}%
                                 </span>
                             </div>
@@ -59,7 +59,7 @@
                             <p class="text-sm font-medium text-muted-foreground">Active Users</p>
                             <div class="flex items-center">
                                 <p class="text-2xl font-bold">{{ number_format($metrics['active_users']['value']) }}</p>
-                                <span class="ml-2 text-sm text-green-600">
+                                <span class="ml-2 text-sm" style="color: #059669;">
                                     {{ $metrics['active_users']['percentage'] }}%
                                 </span>
                             </div>

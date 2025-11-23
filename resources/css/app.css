@@ -2,6 +2,262 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Mobile-First Enhancements */
+@layer base {
+  /* Smooth scrolling for better mobile experience */
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+  
+  /* Better touch targets for mobile */
+  button, [role="button"], input[type="submit"], input[type="button"] {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  /* Improved focus states for accessibility */
+  *:focus-visible {
+    outline: 2px solid hsl(var(--primary));
+    outline-offset: 2px;
+  }
+}
+
+@layer components {
+  /* Mobile-optimized animations */
+  .animate-fade-in {
+    animation: fadeIn 0.5s ease-out;
+  }
+  
+  .animate-slide-up {
+    animation: slideUp 0.3s ease-out;
+  }
+  
+  .animate-scale-in {
+    animation: scaleIn 0.2s ease-out;
+  }
+  
+  .animate-bounce-subtle {
+    animation: bounceSubtle 0.6s ease-out;
+  }
+  
+  /* Hover effects with reduced motion support */
+  .hover-lift {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  
+  .hover-lift:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px -8px rgba(0, 0, 0, 0.1);
+  }
+  
+  @media (prefers-reduced-motion: reduce) {
+    .hover-lift:hover {
+      transform: none;
+    }
+    
+    .animate-fade-in,
+    .animate-slide-up,
+    .animate-scale-in,
+    .animate-bounce-subtle {
+      animation: none;
+    }
+  }
+  
+  /* Mobile-friendly card styles */
+  .card-mobile {
+    @apply bg-card rounded-xl border border-border/50 shadow-sm;
+    backdrop-filter: blur(8px);
+  }
+  
+  .card-mobile:hover {
+    @apply shadow-lg border-border;
+    transform: translateY(-1px);
+  }
+  
+  /* Improved button styles */
+  .btn-primary {
+    @apply bg-gradient-to-r from-primary to-primary/90 text-primary-foreground;
+    @apply hover:from-primary/90 hover:to-primary/80;
+    @apply active:scale-95 transition-all duration-200;
+    @apply shadow-lg shadow-primary/25;
+  }
+  
+  .btn-secondary {
+    @apply bg-secondary/10 text-secondary border border-secondary/20;
+    @apply hover:bg-secondary/20 hover:border-secondary/30;
+    @apply active:scale-95 transition-all duration-200;
+  }
+  
+  /* Mobile navigation enhancements */
+  .nav-item {
+    @apply flex items-center px-3 py-2.5 rounded-lg transition-all duration-200;
+    @apply hover:bg-accent/70 hover:text-accent-foreground;
+    @apply active:scale-95;
+  }
+  
+  .nav-item.active {
+    @apply bg-gradient-to-r from-primary to-primary/80 text-primary-foreground;
+    @apply shadow-lg shadow-primary/25;
+  }
+  
+  /* Loading states */
+  .loading-skeleton {
+    @apply bg-gradient-to-r from-muted via-muted/50 to-muted;
+    background-size: 200% 100%;
+    animation: loading 1.5s infinite;
+  }
+  
+  /* Toast notifications */
+  .toast-enter {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  
+  .toast-enter-active {
+    transform: translateX(0);
+    opacity: 1;
+    transition: all 0.3s ease-out;
+  }
+  
+  .toast-exit {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  
+  .toast-exit-active {
+    transform: translateX(100%);
+    opacity: 0;
+    transition: all 0.2s ease-in;
+  }
+}
+
+@layer utilities {
+  /* Mobile-specific utilities */
+  .touch-manipulation {
+    touch-action: manipulation;
+  }
+  
+  .safe-area-inset {
+    padding-left: env(safe-area-inset-left);
+    padding-right: env(safe-area-inset-right);
+  }
+  
+  .safe-area-top {
+    padding-top: env(safe-area-inset-top);
+  }
+  
+  .safe-area-bottom {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+  
+  /* Improved text rendering */
+  .text-render-optimized {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+  
+  /* Glass morphism effect */
+  .glass {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+  
+  .glass-dark {
+    background: rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+}
+
+/* Keyframe animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    transform: scale(0.95);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes bounceSubtle {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-4px);
+  }
+  60% {
+    transform: translateY(-2px);
+  }
+}
+
+@keyframes loading {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* Mobile-specific media queries */
+@media (max-width: 640px) {
+  .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  
+  /* Larger touch targets on mobile */
+  button, [role="button"] {
+    min-height: 48px;
+    padding: 0.75rem 1rem;
+  }
+  
+  /* Better spacing on mobile */
+  .space-y-mobile > * + * {
+    margin-top: 1rem;
+  }
+  
+  .space-x-mobile > * + * {
+    margin-left: 0.75rem;
+  }
+}
+
+/* Dark mode enhancements */
+@media (prefers-color-scheme: dark) {
+  .glass {
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -23,7 +279,14 @@
     --border: 214.3 31.8% 91.4%;
     --input: 214.3 31.8% 91.4%;
     --ring: 222.2 84% 4.9%;
-    --radius: 0.5rem;
+    --radius: 0.75rem;
+    
+    /* Enhanced mobile-friendly variables */
+    --mobile-header-height: 4rem;
+    --mobile-nav-height: 3.5rem;
+    --mobile-safe-area: env(safe-area-inset-bottom, 0px);
+    --animation-speed: 0.2s;
+    --animation-curve: cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   .dark {
@@ -53,7 +316,28 @@
   * {
     @apply border-border;
   }
+  
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground text-render-optimized;
+    min-height: 100vh;
+    min-height: 100dvh; /* Dynamic viewport height for mobile */
+  }
+  
+  /* Improved mobile viewport handling */
+  html {
+    height: 100%;
+    height: 100dvh;
+  }
+  
+  /* Better mobile input handling */
+  input, textarea, select {
+    @apply touch-manipulation;
+  }
+  
+  /* Smooth transitions for theme switching */
+  * {
+    transition: background-color var(--animation-speed) var(--animation-curve),
+                border-color var(--animation-speed) var(--animation-curve),
+                color var(--animation-speed) var(--animation-curve);
   }
 }

@@ -2,25 +2,75 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}" dir="{{ app()->getLocale() === 'ar' ? 'rtl' : 'ltr' }}" class="{{ auth()->check() && auth()->user()->dark_mode ? 'dark' : '' }}">
     <head>
         <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, user-scalable=yes, viewport-fit=cover">
         <meta name="csrf-token" content="{{ csrf_token() }}">
+        <meta name="description" content="{{ $appSettings['description'] ?? 'The Ultimate Laravel 11 Starter Kit with Enterprise Features and Modern UI' }}">
+        <meta name="keywords" content="laravel, starter kit, admin panel, dashboard, php, tailwind css">
+        <meta name="author" content="{{ $appSettings['author'] ?? 'ShadBladeKit' }}">
+        <meta name="robots" content="index, follow">
+        
+        <!-- Mobile Optimizations -->
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="default">
+        <meta name="apple-mobile-web-app-title" content="{{ $appSettings['name'] ?? config('app.name', 'Laravel') }}">
+        <meta name="format-detection" content="telephone=no">
+        <meta name="msapplication-tap-highlight" content="no">
+        
+        <!-- PWA Manifest -->
+        <link rel="manifest" href="{{ asset('manifest.json') }}">
+        
+        <!-- Theme Colors -->
+        <meta name="theme-color" content="{{ $appSettings['primary_color'] ?? '#3b82f6' }}">
+        <meta name="msapplication-navbutton-color" content="{{ $appSettings['primary_color'] ?? '#3b82f6' }}">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+        
+        <!-- Open Graph -->
+        <meta property="og:type" content="website">
+        <meta property="og:title" content="{{ $appSettings['name'] ?? config('app.name', 'Laravel') }}">
+        <meta property="og:description" content="{{ $appSettings['description'] ?? 'The Ultimate Laravel 11 Starter Kit' }}">
+        <meta property="og:url" content="{{ url()->current() }}">
+        <meta property="og:site_name" content="{{ $appSettings['name'] ?? config('app.name', 'Laravel') }}">
+        @if($appSettings['logo'])
+            <meta property="og:image" content="{{ asset('storage/' . $appSettings['logo']) }}">
+        @endif
+        
+        <!-- Twitter Card -->
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:title" content="{{ $appSettings['name'] ?? config('app.name', 'Laravel') }}">
+        <meta name="twitter:description" content="{{ $appSettings['description'] ?? 'The Ultimate Laravel 11 Starter Kit' }}">
+        @if($appSettings['logo'])
+            <meta name="twitter:image" content="{{ asset('storage/' . $appSettings['logo']) }}">
+        @endif
 
         <title>{{ $appSettings['name'] ?? config('app.name', 'Laravel') }}</title>
         
-        <!-- Favicon -->
-        @if($appSettings['logo'])
+        <!-- Favicons -->
+        @if($appSettings['favicon'])
             <link rel="icon" type="image/x-icon" href="{{ asset('storage/' . $appSettings['favicon']) }}">
+            <link rel="apple-touch-icon" href="{{ asset('storage/' . $appSettings['favicon']) }}">
         @else
             <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
+            <link rel="apple-touch-icon" href="{{ asset('favicon.ico') }}">
         @endif
+        
+
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+        
+
+        
+        <!-- DNS Prefetch -->
+        <link rel="dns-prefetch" href="//fonts.bunny.net">
+        <link rel="dns-prefetch" href="//cdn.jsdelivr.net">
 
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
         <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+        
+
         
         <!-- Custom App Colors -->
         <style>
@@ -36,55 +86,35 @@
             }
             
             /* Background Colors */
-            html { background-color: var(--bg-light) !important; }
-            html.dark { background-color: var(--bg-dark) !important; }
-            body { background-color: var(--bg-light) !important; }
-            .dark body { background-color: var(--bg-dark) !important; }
+            html { background-color: var(--bg-light); }
+            html.dark { background-color: var(--bg-dark); }
+            body { background-color: var(--bg-light); }
+            .dark body { background-color: var(--bg-dark); }
             
-            /* Override Tailwind background classes */
-            .bg-gray-50, .bg-white, .bg-background { background-color: var(--bg-light) !important; }
-            .dark .bg-gray-900, .dark .bg-gray-800, .dark .bg-background { background-color: var(--bg-dark) !important; }
-            .bg-card { background-color: var(--bg-light) !important; }
-            .dark .bg-card { background-color: var(--bg-dark) !important; }
+            /* Theme Colors */
+            .bg-primary { background-color: var(--primary); }
+            .text-primary { color: var(--primary); }
+            .border-primary { border-color: var(--primary); }
+            .text-primary-foreground { color: white; }
             
-            /* Primary Colors */
-            .bg-primary { background-color: var(--primary) !important; }
-            .text-primary { color: var(--primary) !important; }
-            .border-primary { border-color: var(--primary) !important; }
-            .bg-primary\/90 { background-color: color-mix(in srgb, var(--primary) 90%, transparent) !important; }
-            .bg-primary\/10 { background-color: color-mix(in srgb, var(--primary) 10%, transparent) !important; }
-            .hover\:bg-primary\/90:hover { background-color: color-mix(in srgb, var(--primary) 90%, transparent) !important; }
-            .text-primary-foreground { color: white !important; }
+            .bg-secondary { background-color: var(--secondary); }
+            .text-secondary { color: var(--secondary); }
+            .border-secondary { border-color: var(--secondary); }
             
-            /* Secondary Colors */
-            .bg-secondary { background-color: var(--secondary) !important; }
-            .text-secondary { color: var(--secondary) !important; }
-            .border-secondary { border-color: var(--secondary) !important; }
+            .bg-accent { background-color: var(--accent); }
+            .text-accent { color: var(--accent); }
+            .border-accent { border-color: var(--accent); }
             
-            /* Accent Colors */
-            .bg-accent { background-color: var(--accent) !important; }
-            .text-accent { color: var(--accent) !important; }
-            .border-accent { border-color: var(--accent) !important; }
+            /* Button gradient classes */
+            .from-primary { --tw-gradient-from: var(--primary); }
+            .to-primary\/90 { --tw-gradient-to: color-mix(in srgb, var(--primary) 90%, transparent); }
+            .hover\:from-primary\/90:hover { --tw-gradient-from: color-mix(in srgb, var(--primary) 90%, transparent); }
+            .hover\:to-primary\/80:hover { --tw-gradient-to: color-mix(in srgb, var(--primary) 80%, transparent); }
+            .shadow-primary\/25 { --tw-shadow-color: color-mix(in srgb, var(--primary) 25%, transparent); }
+            .hover\:shadow-primary\/30:hover { --tw-shadow-color: color-mix(in srgb, var(--primary) 30%, transparent); }
+
             
-            /* Success Colors */
-            .bg-green-500, .bg-green-600, .text-green-600 { background-color: var(--success) !important; color: var(--success) !important; }
-            .bg-green-100 { background-color: color-mix(in srgb, var(--success) 10%, transparent) !important; }
-            
-            /* Warning Colors */
-            .bg-yellow-500, .bg-orange-600, .text-yellow-600, .text-orange-600 { background-color: var(--warning) !important; color: var(--warning) !important; }
-            .bg-yellow-100, .bg-orange-100 { background-color: color-mix(in srgb, var(--warning) 10%, transparent) !important; }
-            
-            /* Danger Colors */
-            .bg-red-500, .bg-red-600, .text-red-600, .text-red-500 { background-color: var(--danger) !important; color: var(--danger) !important; }
-            .bg-red-100 { background-color: color-mix(in srgb, var(--danger) 10%, transparent) !important; }
-            
-            /* Blue Colors (Primary Override) */
-            .bg-blue-600, .text-blue-600, .bg-blue-100 { background-color: var(--primary) !important; color: var(--primary) !important; }
-            .bg-blue-100 { background-color: color-mix(in srgb, var(--primary) 10%, transparent) !important; }
-            
-            /* Purple Colors (Secondary Override) */
-            .bg-purple-600, .text-purple-600, .bg-purple-100 { background-color: var(--secondary) !important; color: var(--secondary) !important; }
-            .bg-purple-100 { background-color: color-mix(in srgb, var(--secondary) 10%, transparent) !important; }
+
         </style>
     </head>
     <body class="font-sans antialiased text-foreground">

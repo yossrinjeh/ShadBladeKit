@@ -16,7 +16,7 @@ class NotificationController extends Controller
 
     public function test()
     {
-        auth()->user()->notify(new WelcomeNotification('Test notification sent successfully!'));
+        auth()->user()->notify(new WelcomeNotification(__('ui.test_notification_message')));
         
         return back()->with('status', 'notification-sent');
     }

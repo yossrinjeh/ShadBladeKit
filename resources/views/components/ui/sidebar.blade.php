@@ -61,7 +61,7 @@
                                 <svg class="mr-3 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z" />
                                 </svg>
-                                <span>User Management</span>
+                                <span>{{ __('navigation.user_management') }}</span>
                             </div>
                             <svg class="h-4 w-4 transition-transform" :class="{ 'rotate-180': open }" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
@@ -98,7 +98,7 @@
                     <!-- Content Management -->
                     <div class="space-y-1">
                         <div class="px-2 py-1">
-                            <h3 class="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Content</h3>
+                            <h3 class="text-xs font-semibold text-muted-foreground uppercase tracking-wider">{{ __('navigation.content') }}</h3>
                         </div>
                         
                         
@@ -126,7 +126,7 @@
                     <!-- Personal Section -->
                     <div class="space-y-1">
                         <div class="px-2 py-1">
-                            <h3 class="text-xs font-semibold text-muted-foreground uppercase tracking-wider">Personal</h3>
+                            <h3 class="text-xs font-semibold text-muted-foreground uppercase tracking-wider">{{ __('navigation.personal') }}</h3>
                         </div>
                         
                         <a href="{{ route('notifications.index') }}" 
@@ -137,7 +137,7 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0" />
                                 </svg>
                             </div>
-                            <span class="flex-1">{{ __('Notifications') }}</span>
+                            <span class="flex-1">{{ __('navigation.notifications') }}</span>
                             @if(auth()->user()->unreadNotifications->count() > 0)
                                 <span class="inline-flex items-center justify-center w-5 h-5 text-xs font-bold text-white bg-red-500 rounded-full animate-pulse">
                                     {{ auth()->user()->unreadNotifications->count() > 9 ? '9+' : auth()->user()->unreadNotifications->count() }}
@@ -178,7 +178,7 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                                 </svg>
-                                <span>Administration</span>
+                                <span>{{ __('navigation.administration') }}</span>
                             </div>
                             <svg class="h-4 w-4 transition-transform" :class="{ 'rotate-180': open }" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
@@ -194,7 +194,18 @@
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4" />
                                     </svg>
                                 </div>
-                                App Settings
+                                {{ __('navigation.app_settings') }}
+                            </a>
+                            
+                            <a href="{{ route('translations.index') }}" 
+                               @click="isMobile && (sidebarOpen = false)"
+                               class="group flex items-center px-3 py-2 text-sm font-medium rounded-md transition-all duration-200 {{ request()->routeIs('translations.*') ? 'bg-primary text-white' : 'text-muted-foreground hover:bg-accent/70 hover:text-accent-foreground hover:translate-x-1' }}">
+                                <div class="flex items-center justify-center w-5 h-5 rounded {{ request()->routeIs('translations.*') ? 'bg-white/20' : 'bg-accent/30 group-hover:bg-accent/50' }} transition-colors mr-2">
+                                    <svg class="h-3 w-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5h12M9 3v2m1.048 9.5A18.022 18.022 0 016.412 9m6.088 9h7M11 21l5-10 5 10M12.751 5C11.783 10.77 8.07 15.61 3 18.129" />
+                                    </svg>
+                                </div>
+                                {{ __('navigation.translations') }}
                             </a>
                             
                             <a href="{{ route('theme-presets.index') }}" 
@@ -205,7 +216,7 @@
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zM21 5a2 2 0 00-2-2h-4a2 2 0 00-2 2v12a4 4 0 004 4 4 4 0 004-4V5z" />
                                     </svg>
                                 </div>
-                                Theme Presets
+                                {{ __('navigation.theme_presets') }}
                             </a>
                         </div>
                     </div>
@@ -314,12 +325,12 @@
                 <button 
                     @click="$dispatch('toggle-command-palette')"
                     class="flex items-center space-x-2 px-2 sm:px-3 py-1.5 text-sm text-muted-foreground hover:text-foreground hover:bg-accent/70 rounded-lg transition-all duration-200 hover:scale-105"
-                    title="Open command palette (Ctrl+K)"
+                    title="{{ __('navigation.open_command_palette') }}"
                 >
                     <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v14a2 2 0 002 2z" />
                     </svg>
-                    <span class="hidden lg:inline">Press</span>
+                    <span class="hidden lg:inline">{{ __('navigation.press') }}</span>
                     <kbd class="hidden lg:inline-flex items-center rounded border bg-muted px-1.5 py-0.5 text-xs font-mono">Ctrl+K</kbd>
                 </button>
                 
@@ -344,10 +355,10 @@
                             <div class="sticky top-0 bg-card border-b px-4 py-3 flex items-center justify-between min-w-0">
                                 <div class="flex items-center space-x-2 flex-shrink-0">
                                     <div class="w-2 h-2 bg-primary rounded-full"></div>
-                                    <h3 class="text-sm font-semibold whitespace-nowrap">Notifications</h3>
+                                    <h3 class="text-sm font-semibold whitespace-nowrap">{{ __('navigation.notifications') }}</h3>
                                 </div>
                                 <a href="{{ route('notifications.index') }}" class="text-xs font-medium text-primary hover:text-primary/80 px-2 py-1 rounded hover:bg-primary/10 transition-colors whitespace-nowrap flex-shrink-0">
-                                    View All
+                                    {{ __('navigation.view_all') }}
                                 </a>
                             </div>
                             
@@ -396,8 +407,8 @@
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4"/>
                                             </svg>
                                         </div>
-                                        <p class="text-sm text-muted-foreground">No notifications yet</p>
-                                        <p class="text-xs text-muted-foreground mt-1">We'll notify you when something happens</p>
+                                        <p class="text-sm text-muted-foreground">{{ __('navigation.no_notifications_yet') }}</p>
+                                        <p class="text-xs text-muted-foreground mt-1">{{ __('navigation.notify_when_happens') }}</p>
                                     </div>
                                 @endforelse
                             </div>
@@ -428,15 +439,15 @@
                          class="absolute right-4 top-16 w-48 bg-card/95 backdrop-blur-xl rounded-xl shadow-2xl border border-border/50 py-2 z-50"
                          style="display: none;">
                         <div class="px-3 py-2 border-b border-border/50">
-                            <p class="text-xs font-medium text-muted-foreground uppercase tracking-wider">Settings</p>
+                            <p class="text-xs font-medium text-muted-foreground uppercase tracking-wider">{{ __('ui.settings') }}</p>
                         </div>
                         <div class="p-2 space-y-1">
                             <div class="flex items-center justify-between px-3 py-2">
-                                <span class="text-sm font-medium">Theme</span>
+                                <span class="text-sm font-medium">{{ __('navigation.theme') }}</span>
                                 <x-ui.theme-toggle />
                             </div>
                             <div class="flex items-center justify-between px-3 py-2">
-                                <span class="text-sm font-medium">Language</span>
+                                <span class="text-sm font-medium">{{ __('navigation.language') }}</span>
                                 <x-ui.lang-switcher />
                             </div>
                         </div>

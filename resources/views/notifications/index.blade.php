@@ -2,13 +2,13 @@
     <x-slot name="header">
         <div class="flex justify-between items-center">
             <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-                {{ __('Notifications') }}
+                {{ __('ui.notifications') }}
             </h2>
             @if($notifications->where('read_at', null)->count() > 0)
                 <form method="POST" action="{{ route('notifications.read-all') }}">
                     @csrf
                     <x-ui.button type="submit" variant="outline" size="sm">
-                        {{ __('Mark All Read') }}
+                        {{ __('ui.mark_all_read') }}
                     </x-ui.button>
                 </form>
             @endif
@@ -44,7 +44,7 @@
                                                         <form method="POST" action="{{ route('notifications.read', $notification->id) }}" class="inline">
                                                             @csrf
                                                             <x-ui.button type="submit" variant="ghost" size="sm">
-                                                                {{ __('Mark Read') }}
+                                                                {{ __('ui.mark_read') }}
                                                             </x-ui.button>
                                                         </form>
                                                     @endif
@@ -74,8 +74,8 @@
                             <svg class="mx-auto h-12 w-12 text-gray-400 dark:text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-5 5-5-5h5v-12"/>
                             </svg>
-                            <h3 class="mt-2 text-sm font-medium text-gray-900 dark:text-gray-100">{{ __('No notifications') }}</h3>
-                            <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">{{ __('You have no notifications at this time.') }}</p>
+                            <h3 class="mt-2 text-sm font-medium text-gray-900 dark:text-gray-100">{{ __('ui.no_notifications') }}</h3>
+                            <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">{{ __('ui.no_notifications_message') }}</p>
                         </div>
                     @endif
                 </div>

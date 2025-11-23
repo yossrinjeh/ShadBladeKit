@@ -14,7 +14,7 @@ class WelcomeNotification extends Notification
     /**
      * Create a new notification instance.
      */
-    public function __construct(public string $message = 'Welcome to the application!')
+    public function __construct(public string $message = null)
     {
     }
 
@@ -26,11 +26,11 @@ class WelcomeNotification extends Notification
     public function toArray(object $notifiable): array
     {
         return [
-            'title' => 'Welcome!',
-            'message' => $this->message,
+            'title' => __('ui.welcome_notification_title'),
+            'message' => $this->message ?? __('ui.welcome_notification_message'),
             'type' => 'info',
             'action_url' => route('dashboard'),
-            'action_text' => 'Go to Dashboard'
+            'action_text' => __('ui.go_to_dashboard')
         ];
     }
 }

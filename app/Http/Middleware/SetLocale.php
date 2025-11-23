@@ -19,7 +19,14 @@ class SetLocale
         
         if (in_array($locale, ['en', 'fr', 'es', 'ar'])) {
             app()->setLocale($locale);
+        } else {
+            // Fallback to English if invalid locale
+            app()->setLocale('en');
+            session()->put('locale', 'en');
         }
+        
+        // Ensure fallback locale is always English
+        app()->setFallbackLocale('en');
         
         return $next($request);
     }

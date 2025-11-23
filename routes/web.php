@@ -72,6 +72,12 @@ Route::middleware('auth')->group(function () {
         Route::get('/admin/settings', [App\Http\Controllers\AdminSettingsController::class, 'index'])->name('admin.settings');
         Route::patch('/admin/settings', [App\Http\Controllers\AdminSettingsController::class, 'update'])->name('admin.settings.update');
         
+        // Translations
+        Route::get('/translations', [App\Http\Controllers\TranslationController::class, 'index'])->name('translations.index');
+        Route::post('/translations', [App\Http\Controllers\TranslationController::class, 'update'])->name('translations.update');
+        Route::post('/translations/ai-translate', [App\Http\Controllers\TranslationController::class, 'translateWithAI'])->name('translations.ai-translate');
+        Route::post('/translations/ai-translate-all', [App\Http\Controllers\TranslationController::class, 'translateAllFiles'])->name('translations.ai-translate-all');
+        
         // Theme Presets
         Route::get('/theme-presets', [App\Http\Controllers\ThemePresetController::class, 'index'])->name('theme-presets.index');
         Route::patch('/theme-presets/{preset}/activate', [App\Http\Controllers\ThemePresetController::class, 'activate'])->name('theme-presets.activate');

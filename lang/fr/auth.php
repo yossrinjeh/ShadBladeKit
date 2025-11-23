@@ -1,20 +1,33 @@
 <?php
 
-return [
-
-    /*
-    |--------------------------------------------------------------------------
-    | Authentication Language Lines
-    |--------------------------------------------------------------------------
-    |
-    | The following language lines are used during authentication for various
-    | messages that we need to display to the user. You are free to modify
-    | these language lines according to your application's requirements.
-    |
-    */
-
-    'failed' => 'These credentials do not match our records.',
-    'password' => 'The provided password is incorrect.',
-    'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
-
-];
+return array (
+  'login_title' => 'Se connecter à votre compte',
+  'login_subtitle' => 'Ravi de vous revoir ! Veuillez saisir vos informations.',
+  'register_title' => 'Créer votre compte',
+  'register_subtitle' => 'Commencez dès aujourd\'hui avec votre compte gratuit.',
+  'already_registered' => 'Déjà inscrit(e) ?',
+  'not_registered' => 'Vous n\'avez pas de compte ?',
+  'sign_up' => 'S\'inscrire',
+  'forgot_password_title' => 'Mot de passe oublié',
+  'forgot_password_subtitle' => 'Pas de problème. Indiquez-nous simplement votre adresse e-mail et nous vous enverrons un lien de réinitialisation du mot de passe.',
+  'reset_password_title' => 'Réinitialiser le mot de passe',
+  'email_password_reset_link' => 'Envoyer un lien de réinitialisation du mot de passe par e-mail',
+  'back_to_login' => 'Retour à la connexion',
+  'verify_email_title' => 'Vérifiez votre e-mail',
+  'verify_email_message' => 'Merci de vous être inscrit ! Avant de commencer, veuillez vérifier votre adresse e-mail en cliquant sur le lien que nous venons de vous envoyer. Si vous n\'avez pas reçu l\'e-mail, nous serons ravis de vous en envoyer un autre.',
+  'verification_link_sent' => 'Un nouveau lien de vérification a été envoyé à l\'adresse e-mail que vous avez fournie lors de l\'inscription.',
+  'resend_verification_email' => 'Renvoyer l\'e-mail de vérification',
+  'two_factor_challenge' => 'Authentification à deux facteurs',
+  'two_factor_code' => 'Veuillez confirmer l\'accès à votre compte en saisissant le code d\'authentification fourni par votre application d\'authentification.',
+  'two_factor_recovery_code' => 'Veuillez confirmer l\'accès à votre compte en saisissant l\'un de vos codes de récupération d\'urgence.',
+  'use_recovery_code' => 'Utiliser un code de récupération',
+  'use_authentication_code' => 'Utiliser un code d\'authentification',
+  'failed' => 'Ces identifiants ne correspondent pas à nos enregistrements.',
+  'password' => 'Le mot de passe fourni est incorrect.',
+  'throttle' => 'Trop de tentatives de connexion. Veuillez réessayer dans :seconds secondes.',
+  'login_success' => 'Ravi de vous revoir !',
+  'logout_success' => 'Vous avez été déconnecté(e) avec succès.',
+  'registration_success' => 'Inscription effectuée avec succès !',
+  'password_reset_success' => 'Votre mot de passe a été réinitialisé avec succès.',
+  'email_verified' => 'Votre e-mail a été vérifié avec succès.',
+);

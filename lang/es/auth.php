@@ -1,20 +1,33 @@
 <?php
 
-return [
-
-    /*
-    |--------------------------------------------------------------------------
-    | Authentication Language Lines
-    |--------------------------------------------------------------------------
-    |
-    | The following language lines are used during authentication for various
-    | messages that we need to display to the user. You are free to modify
-    | these language lines according to your application's requirements.
-    |
-    */
-
-    'failed' => 'These credentials do not match our records.',
-    'password' => 'The provided password is incorrect.',
-    'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
-
-];
+return array (
+  'login_title' => 'Sign in to your account',
+  'login_subtitle' => 'Welcome back! Please enter your details.',
+  'register_title' => 'Create your account',
+  'register_subtitle' => 'Get started with your free account today.',
+  'already_registered' => 'Already registered?',
+  'not_registered' => 'Don\'t have an account?',
+  'sign_up' => 'Sign up',
+  'forgot_password_title' => 'Forgot Password',
+  'forgot_password_subtitle' => 'No problem. Just let us know your email address and we will email you a password reset link.',
+  'reset_password_title' => 'Reset Password',
+  'email_password_reset_link' => 'Email Password Reset Link',
+  'back_to_login' => 'Back to Login',
+  'verify_email_title' => 'Verify Your Email',
+  'verify_email_message' => 'Thanks for signing up! Before getting started, could you verify your email address by clicking on the link we just emailed to you? If you didn\'t receive the email, we will gladly send you another.',
+  'verification_link_sent' => 'A new verification link has been sent to the email address you provided during registration.',
+  'resend_verification_email' => 'Resend Verification Email',
+  'two_factor_challenge' => 'Two-Factor Authentication',
+  'two_factor_code' => 'Please confirm access to your account by entering the authentication code provided by your authenticator application.',
+  'two_factor_recovery_code' => 'Please confirm access to your account by entering one of your emergency recovery codes.',
+  'use_recovery_code' => 'Use a recovery code',
+  'use_authentication_code' => 'Use an authentication code',
+  'failed' => 'Estas credenciales no coinciden con nuestros registros.',
+  'password' => 'La contraseña proporcionada es incorrecta.',
+  'throttle' => 'Demasiados intentos de inicio de sesión. Por favor, inténtelo de nuevo en :seconds segundos.',
+  'login_success' => 'Welcome back!',
+  'logout_success' => 'You have been logged out successfully.',
+  'registration_success' => 'Registration completed successfully!',
+  'password_reset_success' => 'Your password has been reset successfully.',
+  'email_verified' => 'Your email has been verified successfully.',
+);

@@ -34,7 +34,7 @@
                     @keydown.arrow-up.prevent="selectPrevious()"
                     @keydown.enter.prevent="executeSelected()"
                     type="text" 
-                    placeholder="Type a command or search..."
+                    placeholder="{{ __('navigation.search_placeholder') }}"
                     class="w-full border-0 bg-transparent py-4 pl-4 pr-4 text-sm focus:outline-none focus:ring-0"
                 />
             </div>
@@ -67,15 +67,15 @@
                 </template>
                 
                 <div x-show="filteredItems.length === 0 && query" class="px-3 py-8 text-center text-sm text-muted-foreground">
-                    No results found for "<span x-text="query"></span>"
+                    {{ __('navigation.no_results') }} "<span x-text="query"></span>"
                 </div>
             </div>
             
             <!-- Footer -->
             <div class="border-t px-4 py-2 text-xs text-muted-foreground">
                 <div class="flex items-center justify-between">
-                    <span>Navigate with ↑↓ arrows</span>
-                    <span>Press <kbd class="rounded bg-muted px-1">Enter</kbd> to select</span>
+                    <span>{{ __('navigation.navigate_arrows') }}</span>
+                    <span>{{ __('navigation.press_enter') }} <kbd class="rounded bg-muted px-1">Enter</kbd></span>
                 </div>
             </div>
         </div>
@@ -91,13 +91,13 @@ function commandPalette() {
         filteredItems: [],
         
         items: [
-            { title: 'Dashboard', description: 'Go to dashboard', type: 'page', url: '/dashboard', shortcut: 'Ctrl+D' },
-            { title: 'Users', description: 'Manage users', type: 'page', url: '/users', shortcut: 'Ctrl+U' },
-            { title: 'Settings', description: 'Application settings', type: 'setting', url: '/settings', shortcut: 'Ctrl+,' },
-            { title: 'Profile', description: 'Edit your profile', type: 'user', url: '/profile', shortcut: 'Ctrl+P' },
-            { title: 'Create User', description: 'Add a new user', type: 'action', action: 'createUser' },
-            { title: 'Toggle Theme', description: 'Switch between light and dark mode', type: 'action', action: 'toggleTheme', shortcut: 'Ctrl+T' },
-            { title: 'Logout', description: 'Sign out of your account', type: 'action', action: 'logout' }
+            { title: '{{ __('navigation.dashboard') }}', description: '{{ __('navigation.go_to_dashboard') }}', type: 'page', url: '/dashboard', shortcut: 'Ctrl+D' },
+            { title: '{{ __('navigation.users') }}', description: '{{ __('navigation.manage_users') }}', type: 'page', url: '/users', shortcut: 'Ctrl+U' },
+            { title: '{{ __('navigation.settings') }}', description: '{{ __('navigation.application_settings') }}', type: 'setting', url: '/settings', shortcut: 'Ctrl+,' },
+            { title: '{{ __('navigation.profile') }}', description: '{{ __('navigation.edit_your_profile') }}', type: 'user', url: '/profile', shortcut: 'Ctrl+P' },
+            { title: '{{ __('ui.create_user') }}', description: '{{ __('navigation.add_new_user') }}', type: 'action', action: 'createUser' },
+            { title: '{{ __('ui.theme') }}', description: '{{ __('navigation.toggle_theme_desc') }}', type: 'action', action: 'toggleTheme', shortcut: 'Ctrl+T' },
+            { title: '{{ __('ui.logout') }}', description: '{{ __('navigation.sign_out_account') }}', type: 'action', action: 'logout' }
         ],
         
         init() {

@@ -1,20 +1,33 @@
 <?php
 
-return [
-
-    /*
-    |--------------------------------------------------------------------------
-    | Authentication Language Lines
-    |--------------------------------------------------------------------------
-    |
-    | The following language lines are used during authentication for various
-    | messages that we need to display to the user. You are free to modify
-    | these language lines according to your application's requirements.
-    |
-    */
-
-    'failed' => 'These credentials do not match our records.',
-    'password' => 'The provided password is incorrect.',
-    'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
-
-];
+return array (
+  'login_title' => 'تسجيل الدخول إلى حسابك',
+  'login_subtitle' => 'مرحباً بعودتك! يرجى إدخال التفاصيل الخاصة بك.',
+  'register_title' => 'إنشاء حسابك',
+  'register_subtitle' => 'ابدأ بحسابك المجاني اليوم.',
+  'already_registered' => 'هل أنت مسجل بالفعل؟',
+  'not_registered' => 'ليس لديك حساب؟',
+  'sign_up' => 'اشتراك',
+  'forgot_password_title' => 'نسيت كلمة المرور',
+  'forgot_password_subtitle' => 'لا مشكلة. فقط أخبرنا بعنوان بريدك الإلكتروني وسنرسل لك رابط إعادة تعيين كلمة المرور عبر البريد الإلكتروني.',
+  'reset_password_title' => 'إعادة تعيين كلمة المرور',
+  'email_password_reset_link' => 'إرسال رابط إعادة تعيين كلمة المرور عبر البريد الإلكتروني',
+  'back_to_login' => 'العودة إلى تسجيل الدخول',
+  'verify_email_title' => 'تحقق من بريدك الإلكتروني',
+  'verify_email_message' => 'شكراً لتسجيلك! قبل البدء، هل يمكنك التحقق من عنوان بريدك الإلكتروني بالنقر فوق الرابط الذي أرسلناه إليك عبر البريد الإلكتروني؟ إذا لم تتلق البريد الإلكتروني، فسيسعدنا أن نرسل لك بريداً آخر.',
+  'verification_link_sent' => 'تم إرسال رابط تحقق جديد إلى عنوان البريد الإلكتروني الذي قدمته أثناء التسجيل.',
+  'resend_verification_email' => 'إعادة إرسال بريد التحقق',
+  'two_factor_challenge' => 'المصادقة الثنائية',
+  'two_factor_code' => 'يرجى تأكيد الوصول إلى حسابك عن طريق إدخال رمز المصادقة الذي يوفره تطبيق المصادقة الخاص بك.',
+  'two_factor_recovery_code' => 'يرجى تأكيد الوصول إلى حسابك عن طريق إدخال أحد رموز الاسترداد الاحتياطية الخاصة بك.',
+  'use_recovery_code' => 'استخدم رمز استرداد',
+  'use_authentication_code' => 'استخدم رمز المصادقة',
+  'failed' => 'بيانات الاعتماد هذه لا تتطابق مع سجلاتنا.',
+  'password' => 'كلمة المرور المقدمة غير صحيحة.',
+  'throttle' => 'عدد كبير جداً من محاولات تسجيل الدخول. يرجى المحاولة مرة أخرى بعد :seconds ثانية.',
+  'login_success' => 'مرحباً بعودتك!',
+  'logout_success' => 'تم تسجيل خروجك بنجاح.',
+  'registration_success' => 'اكتمل التسجيل بنجاح!',
+  'password_reset_success' => 'تمت إعادة تعيين كلمة المرور الخاصة بك بنجاح.',
+  'email_verified' => 'تم التحقق من بريدك الإلكتروني بنجاح.',
+);

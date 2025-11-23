@@ -37,7 +37,7 @@
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
             </svg>
-            <span class="text-[10px]">Locked</span>
+            <span class="text-[10px]">{{ __('navigation.locked') }}</span>
         </div>
         @endcan
 
@@ -57,7 +57,7 @@
                     <div class="absolute -top-1 -right-1 w-2 h-2 bg-primary rounded-full animate-pulse"></div>
                 @endif
             </div>
-            <span class="text-[10px]">Alerts</span>
+            <span class="text-[10px]">{{ __('navigation.alerts') }}</span>
         </a>
 
         <!-- Profile -->
@@ -77,7 +77,7 @@
                     <div class="absolute -top-1 -right-1 w-2 h-2 bg-primary rounded-full animate-pulse"></div>
                 @endif
             </div>
-            <span class="text-[10px]">Profile</span>
+            <span class="text-[10px]">{{ __('navigation.profile') }}</span>
         </a>
 
         <!-- More Menu -->
@@ -89,7 +89,7 @@
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
                     </svg>
                 </div>
-                <span class="text-[10px]">More</span>
+                <span class="text-[10px]">{{ __('navigation.more') }}</span>
             </button>
 
             <!-- More Menu Dropdown -->
@@ -104,7 +104,7 @@
                  style="display: none;">
                 
                 <div class="px-4 py-2 border-b border-border/50">
-                    <p class="text-xs font-medium text-muted-foreground uppercase tracking-wider">Quick Actions</p>
+                    <p class="text-xs font-medium text-muted-foreground uppercase tracking-wider">{{ __('navigation.quick_actions') }}</p>
                 </div>
 
                 <div class="p-2 space-y-1">
@@ -125,7 +125,7 @@
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4"/>
                         </svg>
-                        <span class="text-sm font-medium">Admin Settings</span>
+                        <span class="text-sm font-medium">{{ __('navigation.admin_settings') }}</span>
                     </a>
 
                     <a href="{{ route('activity-logs.index') }}" 

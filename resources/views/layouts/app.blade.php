@@ -68,6 +68,7 @@
 
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
+        <link rel="stylesheet" href="{{ asset('resources/css/rtl.css') }}">
         <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
         
 
@@ -112,8 +113,12 @@
             .hover\:to-primary\/80:hover { --tw-gradient-to: color-mix(in srgb, var(--primary) 80%, transparent); }
             .shadow-primary\/25 { --tw-shadow-color: color-mix(in srgb, var(--primary) 25%, transparent); }
             .hover\:shadow-primary\/30:hover { --tw-shadow-color: color-mix(in srgb, var(--primary) 30%, transparent); }
-
             
+            /* RTL Support */
+            [dir="rtl"] .hover\:translate-x-1:hover { transform: translateX(-0.25rem); }
+            [dir="rtl"] .space-x-2 > :not([hidden]) ~ :not([hidden]) { --tw-space-x-reverse: 1; }
+            [dir="rtl"] .space-x-3 > :not([hidden]) ~ :not([hidden]) { --tw-space-x-reverse: 1; }
+            [dir="rtl"] .space-x-4 > :not([hidden]) ~ :not([hidden]) { --tw-space-x-reverse: 1; }
 
         </style>
     </head>

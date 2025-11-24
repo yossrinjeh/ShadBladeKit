@@ -41,4 +41,14 @@ return [
     'registration_success' => 'Registration completed successfully!',
     'password_reset_success' => 'Your password has been reset successfully.',
     'email_verified' => 'Your email has been verified successfully.',
+    
+    // Password Reset Email
+    'reset_password_subject' => 'Reset Your Password',
+    'reset_password_greeting' => 'Hello :name,',
+    'reset_password_message' => 'You are receiving this email because we received a password reset request for your account.',
+    'reset_password_button' => 'Reset Password',
+    'reset_password_expire' => 'This password reset link will expire in 60 minutes.',
+    'reset_password_no_action' => 'If you did not request a password reset, no further action is required.',
+    'reset_password_trouble' => 'If you\'re having trouble clicking the "Reset Password" button, copy and paste the URL below into your web browser:',
+    'all_rights_reserved' => 'All rights reserved.',
 ];

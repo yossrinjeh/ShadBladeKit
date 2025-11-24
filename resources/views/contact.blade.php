@@ -47,26 +47,26 @@
 
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div>
-                                <x-input-label for="name" :value="__('ui.name')" />
-                                <x-text-input id="name" type="text" name="name" :value="old('name')" required autofocus class="mt-1 block w-full" />
+                                <label for="name" class="block text-sm font-bold text-gray-900 dark:text-white mb-2">{{ __('ui.name') }}</label>
+                                <input id="name" type="text" name="name" value="{{ old('name') }}" required autofocus class="mt-1 block w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm" />
                                 <x-input-error :messages="$errors->get('name')" class="mt-2" />
                             </div>
 
                             <div>
-                                <x-input-label for="email" :value="__('ui.email')" />
-                                <x-text-input id="email" type="email" name="email" :value="old('email')" required class="mt-1 block w-full" />
+                                <label for="email" class="block text-sm font-bold text-gray-900 dark:text-white mb-2">{{ __('ui.email') }}</label>
+                                <input id="email" type="email" name="email" value="{{ old('email') }}" required class="mt-1 block w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm" />
                                 <x-input-error :messages="$errors->get('email')" class="mt-2" />
                             </div>
                         </div>
 
                         <div>
-                            <x-input-label for="subject" :value="__('ui.subject')" />
-                            <x-text-input id="subject" type="text" name="subject" :value="old('subject')" required class="mt-1 block w-full" />
+                            <label for="subject" class="block text-sm font-bold text-gray-900 dark:text-white mb-2">{{ __('ui.subject') }}</label>
+                            <input id="subject" type="text" name="subject" value="{{ old('subject') }}" required class="mt-1 block w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm" />
                             <x-input-error :messages="$errors->get('subject')" class="mt-2" />
                         </div>
 
                         <div>
-                            <x-input-label for="message" :value="__('ui.message')" />
+                            <label for="message" class="block text-sm font-bold text-gray-900 dark:text-white mb-2">{{ __('ui.message') }}</label>
                             <textarea id="message" name="message" rows="6" class="mt-1 block w-full border-gray-300 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 focus:border-indigo-500 dark:focus:border-indigo-600 focus:ring-indigo-500 dark:focus:ring-indigo-600 rounded-md shadow-sm" required placeholder="{{ __('ui.message') }}...">{{ old('message') }}</textarea>
                             <x-input-error :messages="$errors->get('message')" class="mt-2" />
                         </div>

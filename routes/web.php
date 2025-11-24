@@ -11,6 +11,11 @@ Route::get('/', function () {
 Route::get('/contact', [App\Http\Controllers\ContactController::class, 'show'])->name('contact');
 Route::post('/contact', [App\Http\Controllers\ContactController::class, 'send'])->name('contact.send');
 
+// Demo Route
+Route::get('/demo', function () {
+    return view('demo');
+})->name('demo');
+
 Route::get('locale/{locale}', function ($locale) {
     if (in_array($locale, ['en', 'fr', 'es', 'ar'])) {
         session()->put('locale', $locale);

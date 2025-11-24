@@ -2,7 +2,7 @@
     <x-slot name="title">ShadBladeKit v1 - The Ultimate Laravel Starter Kit</x-slot>
 
     <!-- Navigation -->
-    <nav class="fixed top-0 w-full bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-b border-gray-200 dark:border-gray-700 z-50">
+    <nav class="fixed top-0 w-full bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-b border-gray-200 dark:border-gray-700 z-50" x-data="{ mobileMenuOpen: false }">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-16">
                 <div class="flex items-center">
@@ -11,9 +11,21 @@
                     @else
                         <x-application-logo class="h-8 w-8" />
                     @endif
-                    <span class="ml-2 text-xl font-bold">{{ $appSettings['name'] }}</span>
+                    <span class="ml-2 text-xl font-bold hidden sm:block">{{ $appSettings['name'] }}</span>
                 </div>
-                <div class="flex items-center space-x-4">
+                
+                <!-- Mobile menu button -->
+                <div class="md:hidden">
+                    <button @click="mobileMenuOpen = !mobileMenuOpen" class="p-2 rounded-md text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path x-show="!mobileMenuOpen" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                            <path x-show="mobileMenuOpen" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                    </button>
+                </div>
+                
+                <!-- Desktop menu -->
+                <div class="hidden md:flex items-center space-x-4">
                     <!-- Language Switcher -->
                     <div class="relative" x-data="{ open: false }" @click.outside="open = false">
                         <button @click="open = !open" class="flex items-center text-sm text-gray-700 dark:text-gray-300 hover:text-blue-600">
@@ -55,6 +67,42 @@
                     @endauth
                 </div>
             </div>
+            
+            <!-- Mobile menu -->
+            <div x-show="mobileMenuOpen" x-transition class="md:hidden py-4 border-t border-gray-200 dark:border-gray-700">
+                <div class="space-y-4">
+                    <!-- Mobile Language Switcher -->
+                    <div class="space-y-2">
+                        <div class="text-sm font-medium text-gray-700 dark:text-gray-300">{{ __('ui.language') }}</div>
+                        <div class="grid grid-cols-2 gap-2">
+                            <a href="{{ route('locale.switch', 'en') }}" class="flex items-center px-3 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md">🇺🇸 English</a>
+                            <a href="{{ route('locale.switch', 'fr') }}" class="flex items-center px-3 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md">🇫🇷 Français</a>
+                            <a href="{{ route('locale.switch', 'es') }}" class="flex items-center px-3 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md">🇪🇸 Español</a>
+                            <a href="{{ route('locale.switch', 'ar') }}" class="flex items-center px-3 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md">🇸🇦 العربية</a>
+                        </div>
+                    </div>
+                    
+                    <!-- Mobile Dark Mode Toggle -->
+                    <button @click="darkMode = !darkMode; localStorage.setItem('darkMode', darkMode)" class="flex items-center w-full px-3 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md">
+                        <svg x-show="!darkMode" class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path>
+                        </svg>
+                        <svg x-show="darkMode" class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
+                        </svg>
+                        <span x-text="darkMode ? '{{ __('ui.light_mode') }}' : '{{ __('ui.dark_mode') }}'"></span>
+                    </button>
+                    
+                    <a href="{{ route('contact') }}" class="block px-3 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md">{{ __('ui.contact_us') }}</a>
+                    
+                    @auth
+                        <a href="{{ route('dashboard') }}" class="block px-3 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md">{{ __('welcome.dashboard') }}</a>
+                    @else
+                        <a href="{{ route('login') }}" class="block px-3 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md">{{ __('welcome.login') }}</a>
+                        <a href="{{ route('register') }}" class="block bg-blue-600 text-white px-3 py-2 rounded-lg text-sm hover:bg-blue-700 text-center">{{ __('welcome.get_started') }}</a>
+                    @endauth
+                </div>
+            </div>
         </div>
     </nav>
 
@@ -67,10 +115,10 @@
                     <span class="text-blue-600">v1</span>
                 </h1>
                 <p class="text-2xl md:text-3xl font-semibold text-gray-700 dark:text-gray-300 mb-4">
-                    The Ultimate Laravel Starter Kit
+                    {{ __('welcome.the_ultimate_laravel_starter') }}
                 </p>
                 <p class="text-lg text-gray-600 dark:text-gray-400 mb-12 max-w-4xl mx-auto">
-                    CRUD Generator • AI-Powered Multi-Language • Command Palette • Analytics Dashboard • Theming & RTL Support
+                    {{ __('welcome.hero_description', ['app' => 'Laravel']) }}
                 </p>
                 
                 <div class="flex flex-col sm:flex-row gap-4 justify-center mb-12">
@@ -78,13 +126,13 @@
                         <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h1m4 0h1m-6 4h8m-9-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
-                        Try Demo →
+                        {{ __('welcome.try_demo') }} →
                     </a>
                     <a href="https://github.com/yossrinjeh/ShadBladeKit" class="border-2 border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 px-8 py-4 rounded-lg text-lg font-semibold hover:bg-gray-50 dark:hover:bg-gray-800 transition flex items-center justify-center">
                         <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
                             <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
                         </svg>
-                        View on GitHub →
+                        {{ __('welcome.view_on_github') }} →
                     </a>
                 </div>
 
@@ -106,8 +154,8 @@
                                         </svg>
                                     </div>
                                 </div>
-                                <p class="text-gray-600 dark:text-gray-300 font-medium">Interactive Dashboard Preview</p>
-                                <p class="text-sm text-gray-500 dark:text-gray-400">Try the demo below to explore features</p>
+                                <p class="text-gray-600 dark:text-gray-300 font-medium">{{ __('welcome.interactive_dashboard_preview') }}</p>
+                                <p class="text-sm text-gray-500 dark:text-gray-400">{{ __('welcome.try_demo_below') }}</p>
                             </div>
                         </div>
                     </div>
@@ -120,8 +168,8 @@
     <section class="py-20 bg-white dark:bg-gray-900">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
-                <h2 class="text-4xl font-bold text-gray-900 dark:text-white mb-4">Powerful Features</h2>
-                <p class="text-xl text-gray-600 dark:text-gray-300">Everything you need to build modern Laravel applications</p>
+                <h2 class="text-4xl font-bold text-gray-900 dark:text-white mb-4">{{ __('welcome.powerful_features') }}</h2>
+                <p class="text-xl text-gray-600 dark:text-gray-300">{{ __('welcome.everything_you_need') }}</p>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -132,8 +180,8 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
                         </svg>
                     </div>
-                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-4">CRUD Generator</h3>
-                    <p class="text-gray-600 dark:text-gray-300 mb-4">Generate models, controllers, views, routes, and translations in one click.</p>
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-4">{{ __('welcome.crud_generator') }}</h3>
+                    <p class="text-gray-600 dark:text-gray-300 mb-4">{{ __('welcome.crud_generator_desc') }}</p>
                     <div class="bg-gray-900 rounded-lg p-3 text-sm font-mono text-green-400">
                         php artisan create:crud Post
                     </div>
@@ -146,8 +194,8 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
                     </div>
-                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-4">AI Multi-Language System</h3>
-                    <p class="text-gray-600 dark:text-gray-300 mb-4">Translate your app content instantly. Review & approve AI translations with 1 click.</p>
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-4">{{ __('welcome.ai_multilang_system') }}</h3>
+                    <p class="text-gray-600 dark:text-gray-300 mb-4">{{ __('welcome.ai_multilang_desc') }}</p>
                     <div class="flex space-x-2">
                         <span class="px-2 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 rounded text-xs">EN</span>
                         <span class="px-2 py-1 bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 rounded text-xs">FR</span>
@@ -163,8 +211,8 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v14a2 2 0 002 2z" />
                         </svg>
                     </div>
-                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-4">Command Palette</h3>
-                    <p class="text-gray-600 dark:text-gray-300 mb-4">Navigate your app like a pro. Ctrl+K to access pages, users, and settings instantly.</p>
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-4">{{ __('welcome.command_palette') }}</h3>
+                    <p class="text-gray-600 dark:text-gray-300 mb-4">{{ __('welcome.command_palette_desc') }}</p>
                     <div class="bg-gray-900 rounded-lg p-3 text-sm font-mono text-gray-300">
                         <span class="text-blue-400">⌘K</span> Quick Navigation
                     </div>
@@ -177,8 +225,8 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
                         </svg>
                     </div>
-                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-4">Analytics Dashboard</h3>
-                    <p class="text-gray-600 dark:text-gray-300 mb-4">Track KPIs and user activity with modern widgets.</p>
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-4">{{ __('welcome.analytics_dashboard') }}</h3>
+                    <p class="text-gray-600 dark:text-gray-300 mb-4">{{ __('welcome.analytics_desc') }}</p>
                     <div class="grid grid-cols-2 gap-2">
                         <div class="bg-blue-100 dark:bg-blue-900 p-2 rounded text-center">
                             <div class="text-lg font-bold text-blue-800 dark:text-blue-200">24</div>
@@ -198,8 +246,8 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h4" />
                         </svg>
                     </div>
-                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-4">Theming & RTL Support</h3>
-                    <p class="text-gray-600 dark:text-gray-300 mb-4">Switch light/dark mode or enable RTL for multilingual apps.</p>
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-4">{{ __('welcome.theming_rtl_support') }}</h3>
+                    <p class="text-gray-600 dark:text-gray-300 mb-4">{{ __('welcome.theming_rtl_desc') }}</p>
                     <div class="flex items-center space-x-2">
                         <div class="w-6 h-6 bg-white border-2 border-gray-300 rounded"></div>
                         <div class="w-6 h-6 bg-gray-900 rounded"></div>
@@ -214,29 +262,29 @@
     <section id="demo" class="py-20 bg-gray-50 dark:bg-gray-800">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
-                <h2 class="text-4xl font-bold text-gray-900 dark:text-white mb-4">Try It Live</h2>
-                <p class="text-xl text-gray-600 dark:text-gray-300">Experience ShadBladeKit features in action</p>
+                <h2 class="text-4xl font-bold text-gray-900 dark:text-white mb-4">{{ __('welcome.try_it_live') }}</h2>
+                <p class="text-xl text-gray-600 dark:text-gray-300">{{ __('welcome.experience_features') }}</p>
             </div>
 
             <!-- Demo Login -->
             <div class="max-w-md mx-auto mb-12">
                 <div class="bg-white dark:bg-gray-900 p-8 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700">
-                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-6 text-center">Demo Account</h3>
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-6 text-center">{{ __('welcome.demo_account') }}</h3>
                     <form method="POST" action="{{ route('login') }}" class="space-y-4">
                         @csrf
                         <div>
-                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Email</label>
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">{{ __('ui.email') }}</label>
                             <input type="email" name="email" value="admin@example.com" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white" required>
                         </div>
                         <div>
-                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Password</label>
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">{{ __('ui.password') }}</label>
                             <input type="password" name="password" value="password" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-900 dark:text-white" required>
                         </div>
                         <button type="submit" class="w-full bg-blue-600 text-white py-3 rounded-md font-semibold hover:bg-blue-700 transition flex items-center justify-center">
                             <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1" />
                             </svg>
-                            Enter Demo Dashboard
+                            {{ __('welcome.enter_demo_dashboard') }}
                         </button>
                     </form>
                 </div>
@@ -250,8 +298,8 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4" />
                         </svg>
                     </div>
-                    <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-2">Try CRUD Generator</h3>
-                    <p class="text-gray-600 dark:text-gray-300">Generate a complete CRUD in seconds</p>
+                    <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-2">{{ __('welcome.try_crud_generator') }}</h3>
+                    <p class="text-gray-600 dark:text-gray-300">{{ __('welcome.generate_crud_seconds') }}</p>
                 </button>
 
                 <button class="bg-white dark:bg-gray-900 p-6 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700 hover:shadow-xl transition text-left">
@@ -260,8 +308,8 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
                         </svg>
                     </div>
-                    <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-2">Try AI Translation</h3>
-                    <p class="text-gray-600 dark:text-gray-300">Translate content with AI assistance</p>
+                    <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-2">{{ __('welcome.try_ai_translation') }}</h3>
+                    <p class="text-gray-600 dark:text-gray-300">{{ __('welcome.translate_with_ai') }}</p>
                 </button>
 
                 <button class="bg-white dark:bg-gray-900 p-6 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700 hover:shadow-xl transition text-left">
@@ -270,8 +318,8 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                         </svg>
                     </div>
-                    <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-2">Explore Command Palette</h3>
-                    <p class="text-gray-600 dark:text-gray-300">Press Ctrl+K for quick navigation</p>
+                    <h3 class="text-lg font-bold text-gray-900 dark:text-white mb-2">{{ __('welcome.explore_command_palette') }}</h3>
+                    <p class="text-gray-600 dark:text-gray-300">{{ __('welcome.press_ctrl_k') }}</p>
                 </button>
             </div>
         </div>
@@ -281,8 +329,8 @@
     <section class="py-20 bg-white dark:bg-gray-900">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
-                <h2 class="text-4xl font-bold text-gray-900 dark:text-white mb-4">Live Sample Data</h2>
-                <p class="text-xl text-gray-600 dark:text-gray-300">See how your dashboard looks with real data</p>
+                <h2 class="text-4xl font-bold text-gray-900 dark:text-white mb-4">{{ __('welcome.live_sample_data') }}</h2>
+                <p class="text-xl text-gray-600 dark:text-gray-300">{{ __('welcome.dashboard_real_data') }}</p>
             </div>
 
             <!-- KPI Cards -->
@@ -290,7 +338,7 @@
                 <div class="bg-blue-50 dark:bg-blue-900/20 p-6 rounded-xl border border-blue-200 dark:border-blue-800">
                     <div class="flex items-center justify-between">
                         <div>
-                            <p class="text-blue-600 dark:text-blue-400 text-sm font-medium">Total Users</p>
+                            <p class="text-blue-600 dark:text-blue-400 text-sm font-medium">{{ __('ui.total_users') }}</p>
                             <p class="text-3xl font-bold text-blue-900 dark:text-blue-100">24</p>
                         </div>
                         <div class="w-12 h-12 bg-blue-100 dark:bg-blue-800 rounded-lg flex items-center justify-center">
@@ -304,7 +352,7 @@
                 <div class="bg-green-50 dark:bg-green-900/20 p-6 rounded-xl border border-green-200 dark:border-green-800">
                     <div class="flex items-center justify-between">
                         <div>
-                            <p class="text-green-600 dark:text-green-400 text-sm font-medium">Active Roles</p>
+                            <p class="text-green-600 dark:text-green-400 text-sm font-medium">{{ __('welcome.active_roles') }}</p>
                             <p class="text-3xl font-bold text-green-900 dark:text-green-100">5</p>
                         </div>
                         <div class="w-12 h-12 bg-green-100 dark:bg-green-800 rounded-lg flex items-center justify-center">
@@ -318,7 +366,7 @@
                 <div class="bg-purple-50 dark:bg-purple-900/20 p-6 rounded-xl border border-purple-200 dark:border-purple-800">
                     <div class="flex items-center justify-between">
                         <div>
-                            <p class="text-purple-600 dark:text-purple-400 text-sm font-medium">Total Posts</p>
+                            <p class="text-purple-600 dark:text-purple-400 text-sm font-medium">{{ __('welcome.total_posts') }}</p>
                             <p class="text-3xl font-bold text-purple-900 dark:text-purple-100">12</p>
                         </div>
                         <div class="w-12 h-12 bg-purple-100 dark:bg-purple-800 rounded-lg flex items-center justify-center">
@@ -332,7 +380,7 @@
                 <div class="bg-orange-50 dark:bg-orange-900/20 p-6 rounded-xl border border-orange-200 dark:border-orange-800">
                     <div class="flex items-center justify-between">
                         <div>
-                            <p class="text-orange-600 dark:text-orange-400 text-sm font-medium">Pending Tasks</p>
+                            <p class="text-orange-600 dark:text-orange-400 text-sm font-medium">{{ __('welcome.pending_tasks') }}</p>
                             <p class="text-3xl font-bold text-orange-900 dark:text-orange-100">3</p>
                         </div>
                         <div class="w-12 h-12 bg-orange-100 dark:bg-orange-800 rounded-lg flex items-center justify-center">

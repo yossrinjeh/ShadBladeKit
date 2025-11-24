@@ -45,6 +45,8 @@
                         </svg>
                     </button>
                     
+                    <a href="{{ route('contact') }}" class="text-sm text-gray-700 dark:text-gray-300 hover:text-blue-600">{{ __('ui.contact_us') }}</a>
+                    
                     @auth
                         <a href="{{ route('dashboard') }}" class="text-sm text-gray-700 dark:text-gray-300 hover:text-blue-600">{{ __('welcome.dashboard') }}</a>
                     @else

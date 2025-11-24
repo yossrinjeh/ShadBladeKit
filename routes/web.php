@@ -7,6 +7,10 @@ Route::get('/', function () {
     return auth()->check() ? redirect()->route('dashboard') : view('welcome');
 })->name('welcome');
 
+// Contact Routes
+Route::get('/contact', [App\Http\Controllers\ContactController::class, 'show'])->name('contact');
+Route::post('/contact', [App\Http\Controllers\ContactController::class, 'send'])->name('contact.send');
+
 Route::get('locale/{locale}', function ($locale) {
     if (in_array($locale, ['en', 'fr', 'es', 'ar'])) {
         session()->put('locale', $locale);

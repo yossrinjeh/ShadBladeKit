@@ -295,5 +295,17 @@ return [
     'try_again' => 'Try Again',
     'no_permissions_assigned' => 'No permissions assigned',
     'crud_generator' => 'CRUD Generator',
-    'crud_generator' => 'CRUD Generator',
+    
+    // Contact
+    'contact_us' => 'Contact Us',
+    'contact_description' => 'Get in touch with us. We\'d love to hear from you.',
+    'subject' => 'Subject',
+    'message' => 'Message',
+    'send_message' => 'Send Message',
+    'message_sent_success' => 'Your message has been sent successfully! We\'ll get back to you soon.',
+    'back_to_dashboard' => 'Back to Dashboard',
+    'response_time' => 'Response Time',
+    'within_24_hours' => 'Within 24 hours',
+    'support' => 'Support',
+    'technical_help' => 'Technical Help & Questions',
 ];

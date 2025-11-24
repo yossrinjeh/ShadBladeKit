@@ -42,7 +42,7 @@ class ProfileController extends Controller
             ])
             ->log('Profile updated');
 
-        return Redirect::route('profile.edit')->with('status', 'profile-updated');
+        return redirect(route('profile.edit') . '#profile-information')->with('status', 'profile-updated');
     }
 
     /**
@@ -56,13 +56,13 @@ class ProfileController extends Controller
 
         try {
             if (!$request->hasFile('avatar')) {
-                return Redirect::route('profile.edit')->withErrors(['avatar' => 'No file uploaded']);
+                return redirect(route('profile.edit') . '#avatar')->withErrors(['avatar' => 'No file uploaded']);
             }
             
             $file = $request->file('avatar');
             
             if (!$file->isValid()) {
-                return Redirect::route('profile.edit')->withErrors(['avatar' => 'Invalid file']);
+                return redirect(route('profile.edit') . '#avatar')->withErrors(['avatar' => 'Invalid file']);
             }
             
             $user = $request->user();
@@ -89,10 +89,10 @@ class ProfileController extends Controller
                 ])
                 ->log('Avatar updated');
             
-            return Redirect::route('profile.edit')->with('status', 'avatar-updated');
+            return redirect(route('profile.edit') . '#avatar')->with('status', 'avatar-updated');
             
         } catch (\Exception $e) {
-            return Redirect::route('profile.edit')->withErrors(['avatar' => 'Upload failed: ' . $e->getMessage()]);
+            return redirect(route('profile.edit') . '#avatar')->withErrors(['avatar' => 'Upload failed: ' . $e->getMessage()]);
         }
     }
 
@@ -118,7 +118,7 @@ class ProfileController extends Controller
             ])
             ->log('Language changed');
         
-        return Redirect::route('profile.edit')->with('status', 'language-updated');
+        return redirect(route('profile.edit') . '#preferences')->with('status', 'language-updated');
     }
 
     /**
@@ -143,7 +143,7 @@ class ProfileController extends Controller
             return response()->json(['success' => true, 'dark_mode' => $darkMode]);
         }
         
-        return Redirect::route('profile.edit')->with('status', 'theme-updated');
+        return redirect(route('profile.edit') . '#preferences')->with('status', 'theme-updated');
     }
 
     /**
@@ -160,7 +160,7 @@ class ProfileController extends Controller
         
         $request->user()->update(['notification_settings' => $settings]);
         
-        return Redirect::route('profile.edit')->with('status', 'notifications-updated');
+        return redirect(route('profile.edit') . '#notifications')->with('status', 'notifications-updated');
     }
 
     /**

@@ -21,7 +21,7 @@ class TwoFactorController extends Controller
         $user = $request->user();
         
         if ($user->hasTwoFactorEnabled()) {
-            return back()->with('error', '2FA is already enabled');
+            return redirect(route('profile.edit') . '#two-factor')->with('error', '2FA is already enabled');
         }
         
         $secret = $this->google2fa->generateSecretKey();
@@ -36,7 +36,7 @@ class TwoFactorController extends Controller
             $secret
         );
         
-        return back()->with([
+        return redirect(route('profile.edit') . '#two-factor')->with([
             'two_factor_secret' => $secret,
             'two_factor_qr_code' => $qrCodeUrl,
             'status' => '2fa-setup-ready'
@@ -52,17 +52,17 @@ class TwoFactorController extends Controller
         $user = $request->user();
         
         if (!$user->two_factor_secret) {
-            return back()->with('error', 'No 2FA secret found. Please start the setup process again.');
+            return redirect(route('profile.edit') . '#two-factor')->with('error', 'No 2FA secret found. Please start the setup process again.');
         }
         
         if ($user->two_factor_confirmed_at) {
-            return back()->with('error', '2FA is already enabled for your account.');
+            return redirect(route('profile.edit') . '#two-factor')->with('error', '2FA is already enabled for your account.');
         }
         
         $valid = $this->google2fa->verifyKey($user->two_factor_secret, $request->code);
         
         if (!$valid) {
-            return back()->with('error', 'Invalid verification code');
+            return redirect(route('profile.edit') . '#two-factor')->with('error', 'Invalid verification code');
         }
         
         // Generate recovery codes
@@ -75,7 +75,7 @@ class TwoFactorController extends Controller
         $user->two_factor_recovery_codes = $recoveryCodes->toArray();
         $user->save();
         
-        return back()->with([
+        return redirect(route('profile.edit') . '#two-factor')->with([
             'status' => '2fa-enabled',
             'recovery_codes' => $recoveryCodes
         ]);
@@ -87,19 +87,19 @@ class TwoFactorController extends Controller
             'current_password' => 'required'
         ]);
         if (!Hash::check($request->current_password, $request->user()->password)) {
-            return back()->with('error', 'Invalid password');
+            return redirect(route('profile.edit') . '#two-factor')->with('error', 'Invalid password');
         }
         if (!$request->user()->hasTwoFactorEnabled()) {
-            return back()->with('error', '2FA is not enabled');
+            return redirect(route('profile.edit') . '#two-factor')->with('error', '2FA is not enabled');
         }
         if (!$request->user()->two_factor_confirmed_at) {
-            return back()->with('error', '2FA is not confirmed');
+            return redirect(route('profile.edit') . '#two-factor')->with('error', '2FA is not confirmed');
         }
         if (!$request->user()->two_factor_secret) {
-            return back()->with('error', 'No 2FA secret found. Please start the setup process again.');
+            return redirect(route('profile.edit') . '#two-factor')->with('error', 'No 2FA secret found. Please start the setup process again.');
         }
         if (!$request->user()->two_factor_recovery_codes) {
-            return back()->with('error', 'No recovery codes found. Please start the setup process again.');
+            return redirect(route('profile.edit') . '#two-factor')->with('error', 'No recovery codes found. Please start the setup process again.');
         }
    
         $user = $request->user();
@@ -108,7 +108,7 @@ class TwoFactorController extends Controller
             'two_factor_recovery_codes' => null,
             'two_factor_confirmed_at' => null,
         ])->save();
-        return back()->with('status', '2fa-disabled');
+        return redirect(route('profile.edit') . '#two-factor')->with('status', '2fa-disabled');
     }
     
     public function regenerateRecoveryCodes(Request $request)
@@ -116,7 +116,7 @@ class TwoFactorController extends Controller
         $user = $request->user();
         
         if (!$user->hasTwoFactorEnabled()) {
-            return back()->with('error', '2FA is not enabled');
+            return redirect(route('profile.edit') . '#two-factor')->with('error', '2FA is not enabled');
         }
         
         $recoveryCodes = Collection::times(8, function () {
@@ -125,7 +125,7 @@ class TwoFactorController extends Controller
         
         $user->update(['two_factor_recovery_codes' => $recoveryCodes->toArray()]);
         
-        return back()->with([
+        return redirect(route('profile.edit') . '#two-factor')->with([
             'status' => 'recovery-codes-regenerated',
             'recovery_codes' => $recoveryCodes
         ]);

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use PragmaRX\Google2FA\Google2FA;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Hash;
 
 class TwoFactorController extends Controller
 {
@@ -83,17 +84,30 @@ class TwoFactorController extends Controller
     public function disable(Request $request)
     {
         $request->validate([
-            'password' => 'required|current_password'
+            'current_password' => 'required'
         ]);
-        
+        if (!Hash::check($request->current_password, $request->user()->password)) {
+            return back()->with('error', 'Invalid password');
+        }
+        if (!$request->user()->hasTwoFactorEnabled()) {
+            return back()->with('error', '2FA is not enabled');
+        }
+        if (!$request->user()->two_factor_confirmed_at) {
+            return back()->with('error', '2FA is not confirmed');
+        }
+        if (!$request->user()->two_factor_secret) {
+            return back()->with('error', 'No 2FA secret found. Please start the setup process again.');
+        }
+        if (!$request->user()->two_factor_recovery_codes) {
+            return back()->with('error', 'No recovery codes found. Please start the setup process again.');
+        }
+   
         $user = $request->user();
-        
-        $user->update([
+        $user->forceFill([
             'two_factor_secret' => null,
             'two_factor_recovery_codes' => null,
-            'two_factor_confirmed_at' => null
-        ]);
-        
+            'two_factor_confirmed_at' => null,
+        ])->save();
         return back()->with('status', '2fa-disabled');
     }
     

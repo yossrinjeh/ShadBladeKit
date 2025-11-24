@@ -118,7 +118,7 @@
                 @csrf
                 <div>
                     <label class="block text-sm font-medium mb-1">{{ __('ui.password') }}</label>
-                    <x-ui.input type="password" name="password" required />
+                    <x-ui.input type="password" name="current_password" required />
                 </div>
                 <div class="flex justify-end space-x-2">
                     <x-ui.button type="button" variant="outline" onclick="closeDisable2FAModal()">{{ __('ui.cancel') }}</x-ui.button>

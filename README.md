@@ -19,6 +19,29 @@
 
 ---
 
+# 📋 Table of Contents
+
+- [🎯 Overview](#-overview)
+- [🎮 Live Demo](#-live-demo)
+- [✨ Features](#-features)
+  - [🔐 Authentication & Security](#-authentication--security)
+  - [👥 User Management](#-user-management)
+  - [🎨 Modern UI/UX](#-modern-uiux-shadcn-inspired)
+  - [🌍 Multilingual & Translation Management](#-multilingual--translation-management)
+  - [📊 Analytics Dashboard](#-analytics-dashboard)
+  - [⚡ CRUD Generator](#-crud-generator)
+- [📸 Screenshots](#-screenshots)
+- [🛠️ Tech Stack](#️-tech-stack)
+- [🚀 Installation](#-installation)
+- [🔑 Default Credentials](#-default-credentials)
+- [📁 Project Structure](#-project-structure)
+- [🗺️ Roadmap](#️-roadmap)
+- [🤝 Contributing](#-contributing)
+- [👨💻 Author](#-author)
+- [⭐ Support the Project](#-support-the-project)
+
+---
+
 # 🎯 Overview
 
 **ShadBladeKit** is a premium-quality Laravel 11 starter kit built to eliminate boilerplate and boost productivity.  
@@ -86,14 +109,6 @@ Perfect for:
 - **Fully Responsive**: Mobile-first design
 - **Command Palette**: Ctrl+K quick navigation
 
-## 🌐 Translation Management System
-- **AI-Powered Translation**: Gemini 2.0 Flash integration
-- **Admin Interface**: Complete translation management
-- **Auto-Sync System**: Missing key detection
-- **File-Based Storage**: High-performance translations
-- **4 Languages**: EN, FR, ES, AR with RTL support
-- **Intelligent Fallbacks**: English fallback system
-
 ## 🌍 Multilingual & Translation Management
 - **4 Languages**: English, French, Spanish, Arabic (RTL)
 - **AI-Powered Translation**: Gemini 2.0 Flash API integration
@@ -102,6 +117,7 @@ Perfect for:
 - **100% RTL Support**: Full right-to-left layout support
 - **File-Based System**: High-performance translation storage
 - **Auto-detected & switchable**: Smart language detection
+- **Intelligent Fallbacks**: English fallback system
 
 ## 📊 Analytics Dashboard
 - KPI Widgets

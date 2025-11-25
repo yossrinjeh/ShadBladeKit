@@ -131,17 +131,31 @@ php artisan create:crud Post
 
 ---
 
-# 📸 Screenshots (Add yours here)
-
-> These are empty placeholders so you can insert real screenshots later.
+# 📸 Screenshots
 
 | Dashboard | User Management |
 |----------|------------------|
-| `screenshot_dashboard_here` | `screenshot_users_here` |
+| ![Dashboard](https://shadbladekit.yosridev.com/storage/captures/dash.PNG) | ![Roles Management](https://shadbladekit.yosridev.com/storage/captures/roles.PNG) |
 
 | Theme System | Command Palette |
 |--------------|------------------|
-| `screenshot_themes_here` | `screenshot_palette_here` |
+| ![Theme Presets](https://shadbladekit.yosridev.com/storage/captures/thems.PNG) | ![Command Palette](https://shadbladekit.yosridev.com/storage/captures/palette.PNG) |
+
+| Custom Theming | Translation Management |
+|----------------|------------------------|
+| ![Custom Colors](https://shadbladekit.yosridev.com/storage/captures/custom.PNG) | ![AI Translation](https://shadbladekit.yosridev.com/storage/captures/translate.PNG) |
+
+| Welcome Page | Settings Panel |
+|--------------|----------------|
+| ![Home Page](https://shadbladekit.yosridev.com/storage/captures/home.PNG) | ![Settings](https://shadbladekit.yosridev.com/storage/captures/sett.PNG) |
+
+| Activity Logs | UI Components |
+|---------------|---------------|
+| ![Activity Logs](https://shadbladekit.yosridev.com/storage/captures/log.PNG) | ![Components](https://shadbladekit.yosridev.com/storage/captures/comp.PNG) |
+
+| RTL Support | Add Role |
+|-------------|----------|
+| ![RTL Layout](https://shadbladekit.yosridev.com/storage/captures/rtl.PNG) | ![Add Role](https://shadbladekit.yosridev.com/storage/captures/add%20role.PNG) |
 
 ---
 

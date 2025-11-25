@@ -1,9 +1,10 @@
 {
     "$schema": "https://getcomposer.org/schema.json",
-    "name": "laravel/laravel",
+    "name": "yossrinjeh/shadbladekit",
     "type": "project",
-    "description": "The skeleton application for the Laravel framework.",
-    "keywords": ["laravel", "framework"],
+    "description": "The Ultimate Laravel 11 Starter Kit — Enterprise Features, Modern UI, and Developer Superpowers",
+    "keywords": ["laravel", "starter-kit", "crud-generator", "shadcn", "blade", "rtl", "multilingual"],
+    "version": "1.0.0",
     "license": "MIT",
     "require": {
         "php": "^8.2",

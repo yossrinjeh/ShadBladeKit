@@ -7,7 +7,9 @@
 </p>
 
 <p align="center">
-  <a href="https://github.com/yossrinjeh/ShadBladeKit/blob/master/LICENSE"><img src="https://img.shields.io/badge/License-MIT-green?style=for-the-badge" /></a>
+  <a href="https://github.com/yossrinjeh/ShadBladeKit/blob/master/LICENSE"><img src="https://img.shields.io/badge/License-MIT-green?style=for-the-badge" 
+  style="high:30px;"
+  /></a>
   <a href="https://github.com/yossrinjeh/ShadBladeKit/stargazers"><img src="https://img.shields.io/github/stars/yossrinjeh/ShadBladeKit?logo=github" /></a>
   <a href="https://github.com/yossrinjeh/ShadBladeKit/releases"><img src="https://img.shields.io/github/v/release/yossrinjeh/ShadBladeKit?logo=github" /></a>
   <a href="https://laravel.com/"><img src="https://img.shields.io/badge/Laravel-11-FF2D20?logo=laravel" /></a>

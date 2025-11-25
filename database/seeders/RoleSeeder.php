@@ -43,11 +43,18 @@ class RoleSeeder extends Seeder
         $userRole->givePermissionTo(['view users', 'view analytics', 'view components']);
 
         // Assign admin role to test user
-        $testUser = User::where('email', 'test@example.com')->first();
+        $testUser = User::where('email', 'admin@example.com')->first();
         if ($testUser) {
             $testUser->assignRole('admin');
             
             // Send welcome notification if no notifications exist
+            if ($testUser->notifications()->count() === 0) {
+                $testUser->notify(new \App\Notifications\WelcomeNotification('Welcome to Laravel Modern Starter Kit!'));
+            }
+        }
+        $testUser = User::where('email', 'user@example.com')->first();
+        if ($testUser) {
+            $testUser->assignRole('user');
             if ($testUser->notifications()->count() === 0) {
                 $testUser->notify(new \App\Notifications\WelcomeNotification('Welcome to Laravel Modern Starter Kit!'));
             }

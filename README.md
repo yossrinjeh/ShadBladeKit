@@ -13,6 +13,14 @@
   <a href="https://shadbladekit.yosridev.com"><img src="https://shadbladekit.yosridev.com/storage/logos/1763837666_692206e2da5c3.png"style="height:28px;width:70px;"  /></a>
 </p>
 
+<p align="center">
+  <a href="https://github.com/yossrinjeh/ShadBladeKit/blob/main/LICENSE"><img src="https://img.shields.io/github/license/yossrinjeh/ShadBladeKit" /></a>
+  <a href="https://github.com/yossrinjeh/ShadBladeKit/stargazers"><img src="https://img.shields.io/github/stars/yossrinjeh/ShadBladeKit?logo=github" /></a>
+  <a href="https://github.com/yossrinjeh/ShadBladeKit/releases"><img src="https://img.shields.io/github/v/release/yossrinjeh/ShadBladeKit?logo=github" /></a>
+  <a href="https://www.php.net/"><img src="https://img.shields.io/badge/PHP-8.3%2B-777BB4?logo=php" /></a>
+  <a href="https://github.com/yossrinjeh/ShadBladeKit/commits/main"><img src="https://img.shields.io/github/last-commit/yossrinjeh/ShadBladeKit?logo=git" /></a>
+</p>
+
 ---
 
 # 🎯 Overview

@@ -8,7 +8,7 @@
 
 <p align="center">
   <a href="https://github.com/yossrinjeh/ShadBladeKit/blob/master/LICENSE"><img src="https://img.shields.io/badge/License-MIT-green?style=for-the-badge" 
-  style="high:30px;"
+  style="height:20px;"
   /></a>
   <a href="https://github.com/yossrinjeh/ShadBladeKit/stargazers"><img src="https://img.shields.io/github/stars/yossrinjeh/ShadBladeKit?logo=github" /></a>
   <a href="https://github.com/yossrinjeh/ShadBladeKit/releases"><img src="https://img.shields.io/github/v/release/yossrinjeh/ShadBladeKit?logo=github" /></a>

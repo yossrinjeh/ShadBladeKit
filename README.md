@@ -262,7 +262,7 @@ ShadBladeKit/
 # 👨‍💻 Author
 
 **Yossri Njeh**  
-Email: **yossri.njeh@example.com**  
+Email: **contact@yosridev.com**  
 GitHub: https://github.com/yossrinjeh
 
 ---

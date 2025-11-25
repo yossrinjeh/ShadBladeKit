@@ -125,20 +125,6 @@ php artisan create:crud Post
 
 ---
 
-# 🛠️ Tech Stack
-
-- Laravel 11  
-- PHP 8.3+  
-- Blade  
-- Tailwind CSS  
-- Alpine.js  
-- Vite  
-- MySQL / PostgreSQL  
-- Chart.js  
-- Spatie Permissions  
-
----
-
 # 📸 Screenshots
 
 | Dashboard | User Management |
@@ -164,6 +150,20 @@ php artisan create:crud Post
 | RTL Support | Add Role |
 |-------------|----------|
 | ![RTL Layout](https://shadbladekit.yosridev.com/storage/captures/rtl.PNG) | ![Add Role](https://shadbladekit.yosridev.com/storage/captures/add%20role.PNG) |
+
+---
+
+# 🛠️ Tech Stack
+
+- Laravel 11  
+- PHP 8.3+  
+- Blade  
+- Tailwind CSS  
+- Alpine.js  
+- Vite  
+- MySQL / PostgreSQL  
+- Chart.js  
+- Spatie Permissions  
 
 ---
 

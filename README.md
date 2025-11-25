@@ -43,6 +43,14 @@ Perfect for:
 
 👉 **https://shadbladekit.yosridev.com**
 
+## ⚡ CRUD Generator in Action
+
+<p align="center">
+  <img src="https://shadbladekit.yosridev.com/storage/captures/ezgif-6d5cd9f8392749c7.gif" alt="CRUD Generator Demo" width="800">
+</p>
+
+> **One Command = Complete Feature** - Watch how `php artisan create:crud Post` generates everything you need!
+
 ---
 
 # ✨ Features

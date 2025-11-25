@@ -136,27 +136,28 @@
                     </a>
                 </div>
 
-                <!-- Animated Dashboard Preview -->
+                <!-- CRUD Generator Video Demo -->
                 <div class="relative max-w-4xl mx-auto">
                     <div class="bg-white dark:bg-gray-800 rounded-xl shadow-2xl overflow-hidden border border-gray-200 dark:border-gray-700">
                         <div class="bg-gray-50 dark:bg-gray-700 px-4 py-3 flex items-center space-x-2">
                             <div class="w-3 h-3 bg-red-500 rounded-full"></div>
                             <div class="w-3 h-3 bg-yellow-500 rounded-full"></div>
                             <div class="w-3 h-3 bg-green-500 rounded-full"></div>
-                            <div class="ml-4 text-sm text-gray-600 dark:text-gray-400">ShadBladeKit Dashboard</div>
+                            <div class="ml-4 text-sm text-gray-600 dark:text-gray-400">{{ __('welcome.crud_generator_demo') }}</div>
                         </div>
-                        <div class="p-6 bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-800 dark:to-gray-900 h-64 flex items-center justify-center">
-                            <div class="text-center">
-                                <div class="animate-pulse">
-                                    <div class="w-16 h-16 bg-blue-600 rounded-lg mx-auto mb-4 flex items-center justify-center">
-                                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
-                                        </svg>
-                                    </div>
-                                </div>
-                                <p class="text-gray-600 dark:text-gray-300 font-medium">{{ __('welcome.interactive_dashboard_preview') }}</p>
-                                <p class="text-sm text-gray-500 dark:text-gray-400">{{ __('welcome.try_demo_below') }}</p>
-                            </div>
+                        <div class="relative">
+                            <video 
+                                class="w-full h-auto" 
+                                controls 
+                                poster="{{ asset('storage/Post.PNG') }}"
+                                preload="metadata"
+                            >
+                                <source src="{{ asset('storage/CRUD.mp4') }}" type="video/mp4">
+                                <p class="p-6 text-center text-gray-600 dark:text-gray-300">
+                                    {{ __('welcome.video_not_supported') }}
+                                    <a href="{{ asset('storage/CRUD.mp4') }}" class="text-blue-600 hover:underline">{{ __('welcome.download_video') }}</a>
+                                </p>
+                            </video>
                         </div>
                     </div>
                 </div>

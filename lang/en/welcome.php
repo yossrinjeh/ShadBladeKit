@@ -236,4 +236,7 @@ return [
     'active_roles' => 'Active Roles',
     'total_posts' => 'Total Posts',
     'pending_tasks' => 'Pending Tasks',
+    'crud_generator_demo' => 'CRUD Generator Demo',
+    'video_not_supported' => 'Your browser does not support the video tag.',
+    'download_video' => 'Download video',
 ];

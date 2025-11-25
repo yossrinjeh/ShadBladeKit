@@ -94,18 +94,18 @@
                             </a>
                         </div>
                     </div>
+                    @endif
 
                     <!-- Content Management -->
                     <div class="space-y-1">
                         <div class="px-2 py-1">
                             <h3 class="text-xs font-semibold text-muted-foreground uppercase tracking-wider">{{ __('navigation.content') }}</h3>
                         </div>
-                        
-                        
-                        
+                      
                         {{-- Add more navigation items here --}}
                     </div>
-                    @else
+                    
+                    @if(!auth()->user()->hasRole('admin'))
                     <!-- Regular User Section -->
                     @can('view users')
                     <div class="space-y-1">
